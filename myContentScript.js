@@ -80,7 +80,6 @@ try {
                 var repoName;
                 var fileInRepo;
                 var fileName;
-                // my selector
                 authorName = document.getElementsByClassName("author")[0].innerText;
                 repoName = document.querySelector(".mr-2.flex-self-stretch").innerText;
                 fileInRepo = document.querySelector(".final-path");
@@ -92,14 +91,32 @@ try {
                 text = document.querySelector("#article-title").innerText;
             } else if (isThatSite(site, "zhuanlan.zhihu.com")) {
                 var authorName;
-                // my selector
                 authorName = document.getElementsByClassName("AuthorInfo-head")[0].innerText;
                 text = elem.innerText + (elem.innerText != "" && authorName != "" ? ' - ' : '') + authorName;
+            } else if (isThatSite(site, "space.bilibili.com")) {
+                var userName;
+                userName = document.querySelector("#h-name").innerText;
+                text = userName;
             } else if (isThatSite(site, "bilibili.com") && isThatPath(location.pathname, '/video')) {
                 var authorName;
-                // my selector
                 authorName = document.querySelector(".username").innerText;
                 text = elem.lastChild.innerText + (elem.innerText != "" ? ' - ' : '') + authorName;
+            } else if (isThatSite(site, "weread.qq.com")) {
+                var bookName;
+                var authorName;
+                bookName = document.getElementsByClassName("bookInfo_right_header_title")[0].innerText;
+                authorName = document.getElementsByClassName("bookInfo_author link")[0].innerText;
+                text = bookName + (bookName != "" && authorName != "" ? ' - ' : '') + authorName;
+            } else if (isThatSite(site, "book.douban.com")  && isThatPath(location.pathname, '/subject')) {
+                var bookName;
+                var authorName;
+                bookName = elem.innerText;
+                authorName = document.querySelector("#info > span:nth-child(1) > a").innerText;
+                text = bookName + (bookName != "" && authorName != "" ? ' - ' : '') + authorName;
+            } else if (isThatSite(site, "runoob.com")) {
+                var tutorialName;
+                tutorialName = document.getElementsByTagName('h1')[1].innerText;
+                text = tutorialName;
             }
             else
                 text = elem.innerText;
@@ -135,10 +152,17 @@ try {
             {'site': 'github.com', 'name': 'Github'}, 
             {'site': 'v2ex.com', 'name': 'V2EX'}, 
             {'site': 'ruanyifeng.com', 'name': '阮一峰的网络日志'}, 
+            {'site': 'space.bilibili.com', 'name': 'Bilibili User Space'}, 
             {'site': 'bilibili.com', 'name': 'Bilibili'}, 
-            {'site': 'sspai.com', 'name': '少数派'}, 
             {'site': 'oracle.com', 'name': 'Oracle'}, 
+            {'site': 'sspai.com', 'name': '少数派'}, 
             {'site': 'zhihu.com', 'name': '知乎'}, 
+            {'site': 'weread.qq.com', 'name': '微信读书'}, 
+            {'site': 'douban.com', 'name': '豆瓣'}, 
+            {'site': 'runoob.com', 'name': '菜鸟教程'}, 
+            {'site': 'cppreference.com', 'name': 'cppreference'}, 
+            {'site': 'cplusplus.com', 'name': 'cplusplus'}, 
+            {'site': 'microsoft.com', 'name': 'Microsoft'}, 
             {'site': 'developer.mozilla.org', 'name': 'MDN web docs'}
             ];
         var result = knownSiteList.find(element => {
@@ -150,6 +174,7 @@ try {
     }
 
     function recognizeSiteByTitle() {
+        return "";
         var title = document.title;
         var loweredTitle = title.toLowerCase();
         var knownSiteNameList = [
