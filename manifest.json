@@ -1,0 +1,20 @@
+{
+  "manifest_version": 3,
+  "name": "Copy As Markdown Link",
+  "description": "Copy As Markdown Link Description",
+  "version": "1.0",
+  "permissions": ["clipboardWrite", "activeTab", "scripting", "notifications"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": "icon.png"
+  }, 
+  "background": {
+    "service_worker": "myServiceWorker.js"
+  }, 
+  "commands": {
+    "copyAsMarkdownLink": {
+      "suggested_key": "Alt+3", 
+      "description": "copyAsMarkdownLink"
+    }
+  }
+}

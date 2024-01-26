@@ -1,0 +1,29 @@
+{
+    "manifest_version": 3,
+    "name": "Copy As Markdown Link",
+    "description": "Copy As Markdown Link Description",
+    "version": "1.0",
+    "__action_comment__": "the toolbar icon config", 
+    "action": {
+      "default_popup": "popup.html",
+      "default_icon": "icon.png"
+    }, 
+    "__background_comment__": "call the service worker on start up", 
+    "background": {
+      "service_worker": "myServiceWorker.js"
+    }, 
+    "__content_scripts_comment__": "call the content script on open a new link", 
+    "content_scripts": [
+      {
+        "matches": ["<all_urls>"], 
+        "js": ["myContentScript.js"]
+      }
+    ], 
+    "__commands_comment__": "send command event when keydown", 
+    "commands": {
+      "copyAsMarkdownLink": {
+        "suggested_key": "Alt+C", 
+        "description": "copyAsMarkdownLink"
+      }
+    }
+}
