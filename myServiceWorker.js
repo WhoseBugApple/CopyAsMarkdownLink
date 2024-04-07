@@ -7,9 +7,15 @@ try {
             if (command == "copyAsMarkdownLink") {
                 if (tab != undefined && tab.id != undefined) {
                     console.log(command);
-                    chrome.scripting.executeScript({target: {tabId: tab.id}, files: ['myContentScript.js']});
+                    chrome.scripting.executeScript({target: {tabId: tab.id}, files: ['copyAsMarkdownLink.js']});
                 }
             }
+            //else if (command == "copyAsMarkdownLinkAlsoJumpToText") {
+            //    if (tab != undefined && tab.id != undefined) {
+            //        console.log(command);
+            //        chrome.scripting.executeScript({target: {tabId: tab.id}, files: ['copyAsMarkdownLinkAlsoJumpToText.js']});
+            //    }
+            //}
         } catch (e) {console.log('failed to execute content script'); console.log(e); return;}
     });
     console.log('content script is listening');

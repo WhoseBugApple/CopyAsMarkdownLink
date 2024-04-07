@@ -16,5 +16,18 @@
       "suggested_key": "Alt+3", 
       "description": "copyAsMarkdownLink"
     }
-  }
+    //,
+    //"copyAsMarkdownLinkAlsoJumpToText": {
+    //  "suggested_key": "Alt+2", 
+    //  "description": "copyAsMarkdownLinkAlsoJumpToText"
+    //}
+  }, 
+  "web_accessible_resources": [
+    {
+      "resources": [
+      	"data.json"
+      ],
+      "matches": ["<all_urls>"]
+    }
+  ]
 }
