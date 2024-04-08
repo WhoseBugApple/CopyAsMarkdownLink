@@ -128,7 +128,7 @@ async function main() {
                             (fileName != "" ? ' - ' : "") + 
                             repoName + ' - ' + authorName;
                 } else if (isThatSite(site, "sspai.com")) {
-                    text = document.querySelector("#article-title").innerText;
+                    text = document.querySelector(".title").innerText;
                 } else if (isThatSite(site, "zhuanlan.zhihu.com")) {
                     var authorName;
                     authorName = document.getElementsByClassName("AuthorInfo-head")[0].innerText;
