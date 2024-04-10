@@ -214,8 +214,8 @@ async function main() {
             var site;
             site = await identifySiteByURL();
             if ( site != "" ) return site;
-            site = identifySiteByTitle();
-            if ( site != "" ) return site;
+            // site = identifySiteByTitle();
+            // if ( site != "" ) return site;
             return "";
         }
 
@@ -234,7 +234,6 @@ async function main() {
         }
 
         function identifySiteByTitle() {
-            return "";
             var title = document.title;
             var loweredTitle = title.toLowerCase();
             var knownSiteNameList = [
