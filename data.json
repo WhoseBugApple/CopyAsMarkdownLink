@@ -51,6 +51,7 @@
 	    {"site": "www.cnblogs.com", "name": "博客园"}, 
 	    {"site": "mp.weixin.qq.com", "name": "微信"}, 
 	    {"site": "www.huashijie.art", "name": "画世界"}, 
+	    {"site": "twitter.com", "name": "Twitter"}, 
 	    {"site": "web.dev", "name": "web.dev"}
 	]
 }
