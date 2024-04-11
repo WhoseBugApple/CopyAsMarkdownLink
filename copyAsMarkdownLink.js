@@ -138,25 +138,34 @@ async function main() {
                     userName = document.querySelector("#h-name").innerText;
                     text = userName;
                 } else if (isThatSite(site, "bilibili.com") && isThatPath(location.pathname, '/video')) {
-                    var isError = false;
-                    try {
+	                var title = document.querySelector(".video-title").innerText;
+	                try {
                         var authorName;
-                        authorName = document.querySelector(".username").innerText;
-                        text = elem.lastChild.innerText + (elem.lastChild.innerText != "" ? ' - ' : '') + authorName;
+                        authorName = document.querySelector(".up-name").innerText;
+                        text = title + 
+                            ((title != "" && authorName != "") ? ' - ' : '') + 
+                            authorName;
                     } catch (e) {
-                        isError = true;
-                    }
-                    if (isError) {
-                        isError = false;
                         try {
-                            var authorName;
-                            authorName = document.querySelector(".up-name").innerText;
-                            text = elem.innerText + 
-                                ((elem.innerText != "" && authorName != "") ? ' - ' : '') + 
-                                authorName;
-                        } catch (e) {
-                            isError = true;
-                        }
+	                        var authorNames = '';
+	                        document.querySelectorAll(".container .staff-name").forEach(each => {
+								var name = each.innerText;
+		                        if (authorNames != '') authorNames += ' & ';
+		                        authorNames += name;
+	                        });
+	                        text = title + 
+	                            ((title != "" && authorNames != "") ? ' - ' : '') + 
+	                            authorNames;
+	                    } catch (e) {
+		                    // is this outdate? 
+                      		// try {
+		                    //    var authorName;
+		                    //    authorName = document.querySelector(".username").innerText;
+		                    //    text = title + (title != "" ? ' - ' : '') + authorName;
+		                    //} catch (e) {
+		                        
+		                    //}
+	                    }
                     }
                 } else if (isThatSite(site, "weread.qq.com")) {
                     var bookName;
