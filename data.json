@@ -52,6 +52,7 @@
 	    {"site": "mp.weixin.qq.com", "name": "微信"}, 
 	    {"site": "www.huashijie.art", "name": "画世界"}, 
 	    {"site": "twitter.com", "name": "Twitter"}, 
+	    {"site": "web.archive.org", "name": "Wayback Machine"}, 
 	    {"site": "web.dev", "name": "web.dev"}
 	]
 }
