@@ -53,6 +53,7 @@
 	    {"site": "www.huashijie.art", "name": "画世界"}, 
 	    {"site": "twitter.com", "name": "Twitter"}, 
 	    {"site": "web.archive.org", "name": "Wayback Machine"}, 
+	    {"site": "gamer.com.tw", "name": "巴哈姆特"}, 
 	    {"site": "web.dev", "name": "web.dev"}
 	]
 }
