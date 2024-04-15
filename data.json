@@ -54,6 +54,7 @@
 	    {"site": "twitter.com", "name": "Twitter"}, 
 	    {"site": "web.archive.org", "name": "Wayback Machine"}, 
 	    {"site": "gamer.com.tw", "name": "巴哈姆特"}, 
+	    {"site": "www.3blue1brown.com", "name": "3Blue1Brown"}, 
 	    {"site": "web.dev", "name": "web.dev"}
 	]
 }
