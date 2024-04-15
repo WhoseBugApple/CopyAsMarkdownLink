@@ -110,6 +110,8 @@ async function main() {
                 	// [XPath - MDN web docs](https://developer.mozilla.org/en-US/docs/Web/XPath)
                 	// [Document: evaluate() method - MDN web docs](https://developer.mozilla.org/en-US/docs/Web/API/Document/evaluate)
                     text = document.evaluate("text()", document.querySelector("#firstHeading"), null, XPathResult.STRING_TYPE).stringValue;
+                    if (text == "") 
+                    	text = document.querySelector("#firstHeading").firstChild.innerText;
                 else if (isThatSite(site, "google.com")) {
                     // my selector
                     text = document.getElementsByTagName("input")[0].value;
