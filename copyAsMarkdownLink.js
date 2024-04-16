@@ -261,6 +261,8 @@ async function main() {
         function getURL() {
             if (isThatSite(site, "bilibili.com") && isThatPath(location.pathname, '/video'))
                 return location.origin + location.pathname;
+            if (isThatSite(site, "space.bilibili.com"))
+                return location.origin + location.pathname;
             return location.href;
         }
     } catch (e) {
