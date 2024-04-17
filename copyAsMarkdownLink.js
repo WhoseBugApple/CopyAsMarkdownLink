@@ -260,10 +260,62 @@ async function main() {
 
         function getURL() {
             if (isThatSite(site, "bilibili.com") && isThatPath(location.pathname, '/video'))
-                return location.origin + location.pathname;
+            	var res = '';
+            	res += location.origin + location.pathname;
+            	// try find p=... in params, assign to pBody if p exist
+            	var params = location.search;
+            	var pBody = findParamInParams('p', params);
+            	if (pBody != '')
+            		res += '?' + pBody;
+                return res;
             if (isThatSite(site, "space.bilibili.com"))
                 return location.origin + location.pathname;
             return location.href;
+        }
+
+		// find p in ?p=13&d=14, return 'p=13'
+		// NOT found, return ''
+		function findParamInParams(param, params) {
+			if (params.length == 0) return '';  // NOT found
+			if (params[0] != '?') {
+				params = '?' + params;
+			}
+			var paramAndEqualMark = param.endsWith('=') ? param : param + '=';
+	        var cursor = 0;
+        	while(true) {
+            	if (cursor >= params.length) return '';  // NOT found
+            	var curChar = params[cursor];
+            	if (curChar != '?' && curChar != '&') 
+            		throw new Error('URL params format error, expect start mark, but NOT');
+            	var startMark = curChar;
+            	var bodyStartIndex = cursor + 1;
+            	var bodyEndIndex = getIndexOfEndExclusiveFromString(params, bodyStartIndex, '&');
+            	var bodyLen = bodyEndIndex - bodyStartIndex;
+            	if (bodyLen >= paramAndEqualMark.length + 1) {
+	            	var bodySection = params.substr(bodyStartIndex, paramAndEqualMark.length);
+	            	if (bodySection == paramAndEqualMark) {
+		            	return params.substr(bodyStartIndex, bodyLen);  // found
+	            	}
+            	}
+            	if (bodyEndIndex <= cursor) 
+            		throw new Error('expect cursor increment, but NOT');
+            	cursor = bodyEndIndex;
+        	}
+        }
+
+        function getIndexOfEndExclusiveFromString(str, startIndex, endChar) {
+	        var endIndexExclusive = str.length;
+	        var cursor = startIndex;
+	        while(true) {
+		        if (cursor >= str.length) break;
+		        var cur = str[cursor];
+		        if (cur == endChar) {
+			        endIndexExclusive = cursor;
+			        break;
+		        }
+		        cursor++;
+	        }
+	        return endIndexExclusive;
         }
     } catch (e) {
         console.log('content script error\n', e); 
