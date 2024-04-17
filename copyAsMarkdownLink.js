@@ -259,8 +259,8 @@ async function main() {
         }
 
         function getURL() {
-            if (isThatSite(site, "bilibili.com") && isThatPath(location.pathname, '/video'))
-            	var res = '';
+            if (isThatSite(site, "bilibili.com") && isThatPath(location.pathname, '/video')) {
+	            var res = '';
             	res += location.origin + location.pathname;
             	// try find p=... in params, assign to pBody if p exist
             	var params = location.search;
@@ -268,6 +268,7 @@ async function main() {
             	if (pBody != '')
             		res += '?' + pBody;
                 return res;
+            }
             if (isThatSite(site, "space.bilibili.com"))
                 return location.origin + location.pathname;
             return location.href;
