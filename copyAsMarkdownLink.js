@@ -72,12 +72,32 @@ async function main() {
             text = text.replace(/([\u2700-\u27BF]|[\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2011-\u26FF]|\uD83E[\uDD10-\uDDFF])/g, '');
             // remove Zero-Width Char
             text = text.replace(/[\u200B-\u200D\uFEFF]/g, '');
+            // remove [ ]
+            text = text.replace(/[\[\]]/g, ' ');
             // remove new line
-            text = text.replace(/(\r\n)|(\n)/g, '  ');
+            // text = text.replace(/(\r\n)|(\n)/g, " \\n ");
+            text = text.replace(/(\r\n)|(\n)/g, " ~ ");
+            // n space to 1 space
+            text = text.replace(/ +/g, " ");
             // remove leading and following whitespace
             text = text.trim();
             return text;
         }
+
+		// e.g. input | output \|
+		function toDisplayTextToSourceText(toDisplayText) {
+			var sourceText = "";
+			var i = 0;
+			var charsNeedBackslash = "\\|_*~#$%^&()<>";
+			for (; i<toDisplayText.length; i++) {
+				var c = toDisplayText.charAt(i);
+				var sourC = "";
+				if (charsNeedBackslash.includes(c)) sourC = '\\' + c;
+				else sourC = c;
+				sourceText += sourC;
+			}
+			return sourceText;
+		}
 
         function getSelectionText() {
             var text = "";
@@ -93,6 +113,7 @@ async function main() {
                 if (autoChoosed != "") text = autoChoosed;
             }
             text = removeGarbageCharacter(text);
+            text = toDisplayTextToSourceText(text);
             return text;
         }
 
