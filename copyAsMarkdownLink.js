@@ -69,7 +69,7 @@ async function main() {
         function removeGarbageCharacter(text) {
             if (text == undefined) return "";
             // remove emoji
-            text = text.replace(/([\u2700-\u27BF]|[\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2011-\u26FF]|\uD83E[\uDD10-\uDDFF])/g, ' ');
+            text = text.replace(/([\u2700-\u27BF]|[\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2011-\u26FF]|\uD83E[\uDD10-\uDDFF])/g, ' ? ');
             // remove Zero-Width Char
             text = text.replace(/[\u200B-\u200D\uFEFF]/g, '');
             // remove [ ]
