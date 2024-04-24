@@ -71,7 +71,7 @@ async function main() {
             // remove link symbol emoji the char of unicode codepoint 128279 0x1F517 UTF16 BE D83D DD17
             text = text.replace(/\uD83D\uDD17/g, '');
             // remove emoji
-            text = text.replace(/([\u2700-\u27BF]|[\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2011-\u26FF]|\uD83E[\uDD10-\uDDFF])/g, ' ? ');
+            text = text.replace(/[\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2580-\u27BF]|\uD83E[\uDD10-\uDDFF]/g, ' ? ');
             // remove Zero-Width Char
             text = text.replace(/[\u200B-\u200D\uFEFF]/g, '');
             // remove [ ]
