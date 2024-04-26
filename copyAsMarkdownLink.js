@@ -232,6 +232,12 @@ async function main() {
                         var authorText = document.querySelector("#developers_list").innerText;
                         text = titleText + ' - ' + authorText;
                     } catch (e) {}
+                } else if (isThatSite(site, "keylol.com")) {
+                    try {
+                        var titleText = document.querySelector("#thread_subject").innerText;
+                        var authorText = document.querySelector(".authi").innerText;
+                        text = titleText + ' - ' + authorText;
+                    } catch (e) {}
                 }
                 else
                     text = elem.innerText;
