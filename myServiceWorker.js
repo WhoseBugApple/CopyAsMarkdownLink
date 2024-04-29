@@ -20,28 +20,43 @@ try {
     });
     console.log('content script is listening');
 
-    // chrome.runtime.onMessage.addListener(
-    //     function(request, sender, sendResponse) {
-    //         if (sender.tab) {
-    //             // from content script
+    chrome.runtime.onMessage.addListener(
+        function(request, sender, sendResponse) {
+            if (sender.tab) {
+            	// from content script
 
-    //             if (request == "copy success") {
-    //                 showCopySuccessNotice();
-    //             }
-    //         } else {
-    //             // from service worker (the extension)
-    //         }
-    //     }
-    // );
+				var okMark = "copy success";
+				var badMark = "copy fail:";
+                if (request == okMark) {
+                	showCopySuccessNotice().then(id => {setTimeout(() => {chrome.notifications.clear(id)}, 1500);});
+                } else if (request.startsWith(badMark)) {
+                	showCopyFailNotice(request.substr(badMark.length)).then(id => {setTimeout(() => {chrome.notifications.clear(id)}, 10000);});
+                }
+             } else {
+                 // from service worker (the extension)
+             }
+         }
+     );
 
-    // async function showCopySuccessNotice() {
-    //     await chrome.notifications.create('success to copy as markdownlink', {
-    //         "type": "basic", 
-    //         "title": "Copy Success", 
-    //         "message": "success to copy as markdownlink", 
-    //         "iconUrl": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAIAAACRXR/mAAAACXBIWXMAABJ0AAASdAHeZh94AAAAEXRFWHRTb2Z0d2FyZQBTbmlwYXN0ZV0Xzt0AAAOASURBVFiF7ZhLTBNBGMc/jccOd7r37tYED2x3CZhAeRhNfIEBAw02JiYYxMTEGy/FxPiImphYCjXByENI1IiKBxMBe/FAd3vuLmdmep/pfT1MssFtcR+Actj/qdnZ+ebXb6b/75sesywLjp6O/2+A2gqx/CjE8qMQy49CLD8KsfzoiGKd2M9kTAghZcPcppTV1SFJjEWj9UI0+t+wFpaWP3/9Zhhm9ZAkiZ3tyfTgAEIoMNaxAI1NQStevzEEAKIY6+pIAoCSSGi6zoc0vQgACKH0YGpkeCgglxVIWwV9B+OaQ5TSTHZWbW6NNzSOTdynlAaIHxDLVTsYd/f2xxsae/oGApB5xXr05NlWQfcVmlI6On6P5+xQsNY3fsYbGkfH7/mNTinlOctkZw8eq/Ps+XhDY6lk7PVCqWTsddR2MFabW9WWNl9b6W6nq1/WCCl3X7ogSaJjCBNy/cbQyVPylaupM+cuNp1OTs+8drwjRKPpaynG2MLSsvcfortBdJ27QEj5x/c1h09ubObHJqcYY0pCFqL1mJQNw2SViqrIb+f+gGOMNZ1OSpL46b1XMnc7JaSsJGQHE2NsbHIKocj8XM7OImPs8dPnguB0eYSQkpA1vYgJ8VgDXLC4jwvResfzTDbHGHv18sXunUUIPXr4oGYcVZE1vYhx2SOWy9nCpAwA1QkwzG2+mJc1ds2qUayCYPFAkug87Jpe9FXylEQCABhjB4PF18aEVC0je18DAHjF9P5NXLB4nqoJJDEGANMzOe9kUCvrAbEEoR4AClrR8fz2rZsoEpmeeb34bsV+yBgbn5yqybq+mbejeZFX39r6lXdswcZmfmziPqtUJEmMizFMSMnY5jY2/6aGb4libPXDCniTu8v3XL4IANUe3dmR/PRxpaM9aRjm6pe1glYEyxoZHnIw2XN5Z+ZVruWJUsqL2l5Vz70mtrSpza2+aqKnUp3JzgbrnCilPX0Dh9VBWJZld07eySilt+/cDdYRecWyO6eevoG/7KatHYx5nrp7+w+xO7V2dZtqS1smm9trMUppJptTW9p4noL18r5vPtMzuYXFZVapAICqyLyqqIrMvU3Tdf4BRSLpa6mR4Zu+gtsKciHjPd36Zt40t6tH+S0tPZj61/dEW5gQjMuGaTLGEEKSKArCwdyq94V1eDqif42EWH4UYvlRiOVHIZYf/QaFm43rUj/iNQAAAABJRU5ErkJggg=="
-    //     });
-    // }
+    async function showCopySuccessNotice() {
+        return await chrome.notifications.create(null, {
+            "type": "basic", 
+            "title": "Copy OK", 
+            "message": "Copy OK", 
+            "iconUrl": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAhCAIAAAA3RD4GAAAACXBIWXMAABJ0AAASdAHeZh94AAAAEXRFWHRTb2Z0d2FyZQBTbmlwYXN0ZV0Xzt0AAANJSURBVEiJ1ZZNTBNBFMcfxGOHO917d2uCB7a7BkygfBhJ/AIDRhpoTEwwiImJN0E+TIwfURMTS6EkGEXFRI2IeDARsBcPdLfn7nJmpveZ3tfDkG2Z7m7rByb+T03nzfu9mdn3n2lwHAcOU42Hmv1fAI7UE4QJIaRo2buUsqYmpMiRcLhZCof/AmDl9eqnz18sy64eUhS5pyueHBlGCAVkaAg45JyRv3xlDABkOdLbHQcALRYzTJMPGWYeABBCyZHExPiYL8EJ1E7O3MPYc4hSmkov6m0d0ZbWyduzlFLPsBqAmtrDuH/wUrSldWBo2JMhAu49eLSTM3+JQSm9NTXD11EDsLn1PdrSemtq5pcAnMHXkUovBgF6Tp2OtrQWCpZfokLB8juSPYz1tg69vVPYqHKjra1vEFLsP3dGUWThQ8CEXL4ydvSYeuFi4mTf2eMn4vMLS0KMFA4nRxOMsZXXq96faW/fGUKK375uCB20tZ2dnJ5jjGkxVQo3Y1K0LJuVSrqmvlg+gGGMHT8RVxT547syo9xohBS1mCpkZ4xNTs8hFHq5nHFXxhi7//CxJImdjBDSYqph5jEhbp59AO9VKdwszEmlM4yxZ0+fVO4bQuje3TvgJV1TDTOPcdEF7J8BJkUAqC7Ksnf5NM90frLssrU0Vv6lyOLxGmY+2GoEabEYADDGRADPggmpmqBWRtcUd6rKmvYBvPbqXIocAYD5hUz9DDi4E/sASWoGgJyRF0KvX7uKQqH5haVXb966fzLGpqbnPKmb21k3G5fYBzs/ssKmb21nJ2/PslJJUeSoHMGEFKxd3hYvn3v0gSxH1t6Xqyl38sD5swAg9CEA9HTHP354290Vtyx7bX0jZ+TBcSbGx4Ts7lx+c5RVaVjcTPzcprYXtXfqbR2CFx0wu1R6McDZA0QpHRgaru2mjuO4zl4/g1J6/cZNP58XAa6zDwwNB+yVqz2Mee39g5fqutGcihtKb+9MpTN+S6GUptIZvb2T1+4X5vuqmF/IrLxaZaUSAOiayj1A11TeK4Zp8h8oFEqOJibGr3omgeBnC789Nreztr1bPcrfMsmRxO+/i1xhQjAuWrbNGEMIKbIsSfW+7OoC/In+/9f1T/y6c8c550FJAAAAAElFTkSuQmCC", 
+            "silent": true
+        });
+    }
+
+    async function showCopyFailNotice(message) {
+        return await chrome.notifications.create(null, {
+            "type": "basic", 
+            "title": "Copy FAIL", 
+            "message": message, 
+            "iconUrl": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAhCAIAAAA3RD4GAAAACXBIWXMAABJ0AAASdAHeZh94AAAAEXRFWHRTb2Z0d2FyZQBTbmlwYXN0ZV0Xzt0AAANJSURBVEiJ1ZZNTBNBFMcfxGOHO917d2uCB7a7BkygfBhJ/AIDRhpoTEwwiImJN0E+TIwfURMTS6EkGEXFRI2IeDARsBcPdLfn7nJmpveZ3tfDkG2Z7m7rByb+T03nzfu9mdn3n2lwHAcOU42Hmv1fAI7UE4QJIaRo2buUsqYmpMiRcLhZCof/AmDl9eqnz18sy64eUhS5pyueHBlGCAVkaAg45JyRv3xlDABkOdLbHQcALRYzTJMPGWYeABBCyZHExPiYL8EJ1E7O3MPYc4hSmkov6m0d0ZbWyduzlFLPsBqAmtrDuH/wUrSldWBo2JMhAu49eLSTM3+JQSm9NTXD11EDsLn1PdrSemtq5pcAnMHXkUovBgF6Tp2OtrQWCpZfokLB8juSPYz1tg69vVPYqHKjra1vEFLsP3dGUWThQ8CEXL4ydvSYeuFi4mTf2eMn4vMLS0KMFA4nRxOMsZXXq96faW/fGUKK375uCB20tZ2dnJ5jjGkxVQo3Y1K0LJuVSrqmvlg+gGGMHT8RVxT547syo9xohBS1mCpkZ4xNTs8hFHq5nHFXxhi7//CxJImdjBDSYqph5jEhbp59AO9VKdwszEmlM4yxZ0+fVO4bQuje3TvgJV1TDTOPcdEF7J8BJkUAqC7Ksnf5NM90frLssrU0Vv6lyOLxGmY+2GoEabEYADDGRADPggmpmqBWRtcUd6rKmvYBvPbqXIocAYD5hUz9DDi4E/sASWoGgJyRF0KvX7uKQqH5haVXb966fzLGpqbnPKmb21k3G5fYBzs/ssKmb21nJ2/PslJJUeSoHMGEFKxd3hYvn3v0gSxH1t6Xqyl38sD5swAg9CEA9HTHP354290Vtyx7bX0jZ+TBcSbGx4Ts7lx+c5RVaVjcTPzcprYXtXfqbR2CFx0wu1R6McDZA0QpHRgaru2mjuO4zl4/g1J6/cZNP58XAa6zDwwNB+yVqz2Mee39g5fqutGcihtKb+9MpTN+S6GUptIZvb2T1+4X5vuqmF/IrLxaZaUSAOiayj1A11TeK4Zp8h8oFEqOJibGr3omgeBnC789Nreztr1bPcrfMsmRxO+/i1xhQjAuWrbNGEMIKbIsSfW+7OoC/In+/9f1T/y6c8c550FJAAAAAElFTkSuQmCC", 
+            "silent": true
+        });
+    }
 } catch (e) {console.log('failed to execute service worker\n', e);}
 
 // chrome.commands.onCommand.addListener((command) => {

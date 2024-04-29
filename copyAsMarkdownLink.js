@@ -11,12 +11,40 @@
 main();
 
 async function main() {
+	try {
+		console.log("CopyAsMarkdownLink: start");
+	    await idle();
+	    await waitLoad();
+		await afterLoad();
+        const response = await chrome.runtime.sendMessage("copy success");
+	} catch (e) {
+		console.log("CopyAsMarkdownLink: error thrown: ");
+		console.log(e);
+		const response = await chrome.runtime.sendMessage("copy fail:" + e.toString());
+	} finally {
+		console.log("CopyAsMarkdownLink: end");
+	}
+}
+
+// await me to immediately return a async function
+async function idle() {}
+
+function waitLoad() {
+	return new Promise(
+		(resolve, reject) => {
+			if (document.readyState === "loading") {
+				document.addEventListener("DOMContentLoaded", resolve);
+				setTimeout(reject, 3000, "timeout");
+			} else {
+				resolve();
+			}
+		}
+	);
+}
+
+async function afterLoad() {
     try {
-        await idle();
-
-        // console.log("my content script is running");
-
-        // infos
+	    // infos
         var site = location.hostname.toLowerCase();
         if (site.endsWith('/')) site = site.substring(0, site.length-1);
 
@@ -34,15 +62,9 @@ async function main() {
         // only HTTPS could use this API
         // check is HTTPS with window.isSecureContext
         await navigator.clipboard.writeText(toCopy);
-        
-        // tell service worker I'm finished
-        // const response = await chrome.runtime.sendMessage("copy success");
 
 
 
-
-        // await me to immediately return a async function
-        async function idle() {}
 
         function isThatSite(theSite, isThatSite) {
             if (theSite.length >= isThatSite.length)
@@ -348,6 +370,7 @@ async function main() {
 	        return endIndexExclusive;
         }
     } catch (e) {
-        console.log('content script error\n', e); 
+        // console.log('content script error\n', e); 
+        throw e;
     }
 }
