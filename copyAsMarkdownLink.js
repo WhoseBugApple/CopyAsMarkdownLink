@@ -11,6 +11,47 @@
 main();
 
 async function main() {
+	await main_noTimeLimit();
+}
+
+async function main_timeLimited() {
+	try {
+		console.log("CopyAsMarkdownLink: start");
+		await copy_timeLimited();
+		const response = await chrome.runtime.sendMessage("copy success");
+	} catch (e) {
+		console.log("CopyAsMarkdownLink: error thrown: ");
+		console.log(e);
+		const response = await chrome.runtime.sendMessage("copy fail:" + e.toString());
+	} finally {
+		console.log("CopyAsMarkdownLink: end");
+	}
+}
+
+function copy_timeLimited() {
+	return new Promise(
+		(resolve, reject) => {
+			try {
+				setTimeout(reject, 3000, "timeout");
+				idle().then(
+					() => {
+						waitLoad().then(
+							() => {
+								afterLoad().then(
+									resolve
+								).catch(reject);
+							}
+						).catch(reject);
+					}
+				).catch(reject);
+			} catch (e) {
+				reject(e);
+			}
+		}
+	);
+}
+
+async function main_noTimeLimit() {
 	try {
 		console.log("CopyAsMarkdownLink: start");
 	    await idle();
@@ -100,11 +141,11 @@ async function afterLoad() {
             text = text.replace(/[\[\]]/g, ' ');
             // handle new line
             // remove new line at head
-            text = text.replace(/^(?:(?:(?:\r\n)|(?:\n))|[ \t])*(?:(?:\r\n)|(?:\n))(?:(?:(?:\r\n)|(?:\n))|[ \t])*/g, "");
+            text = text.replace(/^[ \t]*(?:(?:\r\n)|(?:\n))(?:(?:(?:\r\n)|(?:\n))|[ \t])*/g, "");
             // remove new line at tail
-            text = text.replace(/(?:(?:(?:\r\n)|(?:\n))|[ \t])*(?:(?:\r\n)|(?:\n))(?:(?:(?:\r\n)|(?:\n))|[ \t])*$/g, "");
+            text = text.replace(/[ \t]*(?:(?:\r\n)|(?:\n))(?:(?:(?:\r\n)|(?:\n))|[ \t])*$/g, "");
             // replace remain new line to ~
-            text = text.replace(/(?:(?:(?:\r\n)|(?:\n))|[ \t])*(?:(?:\r\n)|(?:\n))(?:(?:(?:\r\n)|(?:\n))|[ \t])*/g, " ~ ");
+            text = text.replace(/[ \t]*(?:(?:\r\n)|(?:\n))(?:(?:(?:\r\n)|(?:\n))|[ \t])*/g, " ~ ");
             // n space to 1 space
             text = text.replace(/[ \t]+/g, " ");
             // remove leading and following whitespace
