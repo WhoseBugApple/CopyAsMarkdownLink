@@ -98,11 +98,15 @@ async function afterLoad() {
             text = text.replace(/[\u200B-\u200D\uFEFF]/g, '');
             // remove [ ]
             text = text.replace(/[\[\]]/g, ' ');
-            // remove new line
-            // text = text.replace(/(\r\n)|(\n)/g, " \\n ");
-            text = text.replace(/((\r\n)|(\n))+/g, " ~ ");
+            // handle new line
+            // remove new line at head
+            text = text.replace(/^(?:(?:(?:\r\n)|(?:\n))|[ \t])*(?:(?:\r\n)|(?:\n))(?:(?:(?:\r\n)|(?:\n))|[ \t])*/g, "");
+            // remove new line at tail
+            text = text.replace(/(?:(?:(?:\r\n)|(?:\n))|[ \t])*(?:(?:\r\n)|(?:\n))(?:(?:(?:\r\n)|(?:\n))|[ \t])*$/g, "");
+            // replace remain new line to ~
+            text = text.replace(/(?:(?:(?:\r\n)|(?:\n))|[ \t])*(?:(?:\r\n)|(?:\n))(?:(?:(?:\r\n)|(?:\n))|[ \t])*/g, " ~ ");
             // n space to 1 space
-            text = text.replace(/ +/g, " ");
+            text = text.replace(/[ \t]+/g, " ");
             // remove leading and following whitespace
             text = text.trim();
             return text;
