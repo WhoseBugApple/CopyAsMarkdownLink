@@ -236,7 +236,7 @@ async function afterLoad() {
 	                var title = document.querySelector(".video-title").innerText;
 	                try {
                         var authorName;
-                        authorName = document.querySelector(".up-name").innerText;
+                        authorName = document.querySelector(".up-info-container .up-name").innerText;
                         text = title + 
                             ((title != "" && authorName != "") ? ' - ' : '') + 
                             authorName;
