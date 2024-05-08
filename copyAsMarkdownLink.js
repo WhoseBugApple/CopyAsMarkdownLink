@@ -305,9 +305,18 @@ async function afterLoad() {
                         var authorText = document.querySelector(".authi").innerText;
                         text = titleText + ' - ' + authorText;
                     } catch (e) {}
+                } else if (isThatSite(site, "twitter.com")) {
+                    try {
+	                    var timesInArticle = document.querySelector("article").querySelectorAll("time");
+	                    var time = timesInArticle[timesInArticle.length-1];
+	                    var timeText = time.innerText;
+                        var authorText = document.querySelector("article span").innerText;
+                        text = timeText + ' - ' + authorText;
+                    } catch (e) {}
+                } 
+                else {
+	                text = elem.innerText;
                 }
-                else
-                    text = elem.innerText;
             } catch (e) {console.log('content script autoChooseText() error\n', e);}
             
             if (text == undefined || text == "") return "";
