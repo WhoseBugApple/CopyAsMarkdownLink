@@ -363,15 +363,23 @@ async function afterLoad() {
             	var pBody = findParamInParams('p', params);
             	if (pBody != '')
             		res += '?' + pBody;
+            	res = urlEncodeRoundBrackets(res);
                 return res;
+            } else if (isThatSite(site, "bilibili.com")) {
+	            var res = location.origin + location.pathname + removeParamInParams("spm_id_from", location.search);
+	            res = urlEncodeRoundBrackets(res);
+	            return res;
+            } else {
+	            var res = location.href;
+            	res = urlEncodeRoundBrackets(res);
+            	return res;
             }
-            if (isThatSite(site, "space.bilibili.com"))
-                return location.origin + location.pathname;
-            return location.href;
         }
 
 		// find p in ?p=13&d=14, return 'p=13'
 		// NOT found, return ''
+		// only first match is returned
+		// case sensitive
 		function findParamInParams(param, params) {
 			if (params.length == 0) return '';  // NOT found
 			if (params[0] != '?') {
@@ -389,8 +397,8 @@ async function afterLoad() {
             	var bodyEndIndex = getIndexOfEndExclusiveFromString(params, bodyStartIndex, '&');
             	var bodyLen = bodyEndIndex - bodyStartIndex;
             	if (bodyLen >= paramAndEqualMark.length + 1) {
-	            	var bodySection = params.substr(bodyStartIndex, paramAndEqualMark.length);
-	            	if (bodySection == paramAndEqualMark) {
+	            	var partOfBody = params.substr(bodyStartIndex, paramAndEqualMark.length);
+	            	if (partOfBody == paramAndEqualMark) {
 		            	return params.substr(bodyStartIndex, bodyLen);  // found
 	            	}
             	}
@@ -399,6 +407,70 @@ async function afterLoad() {
             	cursor = bodyEndIndex;
         	}
         }
+
+		// remove that param, if multiple match, remove all matched, return result
+		// case sensitive
+		function removeParamInParams(param, params) {
+			if (params.length == 0) return '';  // NOT found
+			if (params[0] != '?') {
+				params = '?' + params;
+			}
+			var paramAndEqualMark = param.endsWith('=') ? param : param + '=';
+	        var cursor = 0;
+	        var result = '';
+        	while(true) {
+	        	// 1. check if there is more work to do
+	        	// 2. try locate the param
+	        	// 3. found OR reach the end
+	        	// 4. improve result, according to this loop
+	        	// 5. continue next loop
+	        	
+            	if (cursor >= params.length) break;  // no more work
+
+				var partOfResultStartIndex = cursor;
+				var partOfResultEndIndex;
+            	while(true) {
+	            	if (cursor >= params.length) {
+		            	partOfResultEndIndex = params.length;
+		            	break;
+	            	}
+	            	
+	            	var curChar = params[cursor];
+	            	if (curChar != '?' && curChar != '&') 
+	            		throw new Error('URL params format error, expect start mark, but NOT');
+	            	var startMark = curChar;
+	            	var startIndex = cursor;
+	            	var bodyStartIndex = startIndex + 1;
+	            	var bodyEndIndex = getIndexOfEndExclusiveFromString(params, bodyStartIndex, '&');
+	            	if (bodyEndIndex <= cursor) 
+	            		throw new Error('expect cursor increment, but NOT');
+	            	var bodyLen = bodyEndIndex - bodyStartIndex;
+	            	
+	            	var partOfBody = params.substr(bodyStartIndex, paramAndEqualMark.length);
+	            	if (partOfBody == paramAndEqualMark) {
+						partOfResultEndIndex = startIndex;
+		            	cursor = bodyEndIndex;
+		            	break;
+	            	}
+	            	
+	            	cursor = bodyEndIndex;
+            	}
+
+            	var partOfResultLength = partOfResultEndIndex - partOfResultStartIndex;
+            	result += params.substr(partOfResultStartIndex, partOfResultLength);
+        	}
+        	
+        	if (result.length > 0) {
+	        	if (result[0] == '&') result = '?' + result.substr(1);
+        	}
+        	return result;
+        }
+
+		function urlEncodeRoundBrackets(url) {
+			url = url.replace(/\(/g, '%28');
+        	url = url.replace(/\)/g, '%29');
+        	return url;
+		}
 
         function getIndexOfEndExclusiveFromString(str, startIndex, endChar) {
 	        var endIndexExclusive = str.length;
