@@ -187,103 +187,78 @@ async function afterLoad() {
         }
 
         function autoChooseText() {
-            var elems = document.getElementsByTagName('h1');
-            var elem = "";
-            if (elems != undefined && elems.length != 0) elem = elems[0];
+            var h1 = document.querySelector("h1");
+            var h1Text = "";
+            if (h1) h1Text = h1.innertText;
             
             // set text
             // lower case site needed
             var text;
             try {
-                if (isThatSite(site, "zh.wikipedia.org"))
-                	// XPATH
+                if (isThatSite(site, "zh.wikipedia.org")) {
+					var titleText;
+					if (!titleText || titleText == "") titleText = document.querySelector("#firstHeading")?.firstChild?.innerText;
+					if (!titleText || titleText == "") titleText = document.querySelector("#firstHeading")?.querySelector("span")?.innerText;
+					// XPATH
                 	// [XPath - MDN web docs](https://developer.mozilla.org/en-US/docs/Web/XPath)
                 	// [Document: evaluate() method - MDN web docs](https://developer.mozilla.org/en-US/docs/Web/API/Document/evaluate)
-                    text = document.evaluate("text()", document.querySelector("#firstHeading"), null, XPathResult.STRING_TYPE).stringValue;
-                    if (text == "") 
-                    	text = document.querySelector("#firstHeading").firstChild.innerText;
-                else if (isThatSite(site, "google.com")) {
+					if (!titleText || titleText == "") titleText = document.evaluate("text()", document.querySelector("#firstHeading"), null, XPathResult.STRING_TYPE)?.stringValue;
+					if (!titleText) titleText = "";
+                    text = titleText;
+                } else if (isThatSite(site, "google.com") && isThatPath(location.pathname, '/search')) {
                     // my selector
-                    text = document.getElementsByTagName("input")[0].value;
+                    text = document.querySelector("textarea").value;
                     // generate by Dev Tool -> Elements -> Popup -> Copy -> Copy JSPath
                     // text = document.querySelector("#tsf > div:nth-child(1) > div.A8SBwf > div.RNNXgb > div > div.a4bIc > input").value;
                 } else if (isThatSite(site, "github.com")) {
-                    var authorName;
-                    var repoName;
-                    var fileInRepo;
-                    var fileName;
-                    
-                    authorName = document.querySelector(".AppHeader-context-full ul").querySelector("li>a");
-                    if (authorName) authorName = authorName.innerText;
-                    repoName = document.querySelector(".AppHeader-context-full ul").querySelector("li+li>a");
-                    if (repoName) repoName = repoName.innerText;
-                    fileInRepo = document.querySelector("#file-name-id");
-                    fileName = (fileInRepo && fileInRepo.innerText) ? fileInRepo.innerText : "";
-                    text = fileName + 
-                            (fileName != "" ? ' - ' : "") + 
-                            repoName + ' - ' + authorName;
+	                var fileName;
+	                if (!fileName || fileName == "") fileName = document.querySelector("#file-name-id")?.innerText;
+	                if (!fileName || fileName == "") fileName = document.querySelector("#file-name-id-wide")?.innerText;
+                    if (!fileName || fileName == "") fileName = "";
+                    var repoName = document.querySelector(".AppHeader-context-full ul").querySelector("li+li>a").innerText;
+                    var authorName = document.querySelector(".AppHeader-context-full ul").querySelector("li>a").innerText;
+                    text = connectText(connectText(fileName, repoName), authorName);
                 } else if (isThatSite(site, "sspai.com")) {
                     text = document.querySelector(".title").innerText;
                 } else if (isThatSite(site, "zhuanlan.zhihu.com")) {
-                    var authorName;
-                    authorName = document.getElementsByClassName("AuthorInfo-head")[0].innerText;
-                    text = elem.innerText + (elem.innerText != "" && authorName != "" ? ' - ' : '') + authorName;
+                    var authorName = document.getElementsByClassName("AuthorInfo-head")[0].innerText;
+                    text = connectText(h1Text, authorName);
                 } else if (isThatSite(site, "space.bilibili.com")) {
-                    var userName;
-                    userName = document.querySelector("#h-name").innerText;
+                    var userName = document.querySelector("#h-name").innerText;
                     text = userName;
                 } else if (isThatSite(site, "bilibili.com") && isThatPath(location.pathname, '/video')) {
-	                var title = document.querySelector(".video-title").innerText;
+	                var titleText = document.querySelector(".video-title").innerText;
 	                try {
-                        var authorName;
-                        authorName = document.querySelector(".up-info-container .up-name").innerText;
-                        text = title + 
-                            ((title != "" && authorName != "") ? ' - ' : '') + 
-                            authorName;
+                        var authorText = document.querySelector(".up-info-container .up-name").innerText;
+                        text = connectText(titleText, authorText);
                     } catch (e) {
                         try {
-	                        var authorNames = '';
+	                        var authorTexts = '';
 	                        document.querySelectorAll(".container .staff-name").forEach(each => {
 								var name = each.innerText;
-		                        if (authorNames != '') authorNames += ' & ';
-		                        authorNames += name;
+		                        if (authorTexts != '') authorTexts += ' & ';
+		                        authorTexts += name;
 	                        });
-	                        text = title + 
-	                            ((title != "" && authorNames != "") ? ' - ' : '') + 
-	                            authorNames;
+	                        text = connectText(titleText, authorTexts);
 	                    } catch (e) {
-		                    // is this outdate? 
-                      		// try {
-		                    //    var authorName;
-		                    //    authorName = document.querySelector(".username").innerText;
-		                    //    text = title + (title != "" ? ' - ' : '') + authorName;
-		                    //} catch (e) {
-		                        
-		                    //}
+		                    // ...
 	                    }
                     }
                 } else if (isThatSite(site, "weread.qq.com")) {
-                    var bookName;
-                    var authorName;
-                    bookName = document.getElementsByClassName("bookInfo_right_header_title")[0].innerText;
-                    authorName = document.getElementsByClassName("bookInfo_author link")[0].innerText;
-                    text = bookName + (bookName != "" && authorName != "" ? ' - ' : '') + authorName;
+                    var bookName = document.getElementsByClassName("bookInfo_right_header_title")[0].innerText;
+                    var authorName = document.getElementsByClassName("bookInfo_author link")[0].innerText;
+                    text = connectText(bookName, authorName);
                 } else if (isThatSite(site, "book.douban.com")  && isThatPath(location.pathname, '/subject')) {
-                    var bookName;
-                    var authorName;
-                    bookName = elem.innerText;
-                    authorName = document.querySelector("#info > span:nth-child(1) > a").innerText;
-                    text = bookName + (bookName != "" && authorName != "" ? ' - ' : '') + authorName;
+                    var bookName = h1Text;
+                    var authorName = document.querySelector("#info > span:nth-child(1) > a").innerText;
+                    text = connectText(bookName, authorName);
                 } else if (isThatSite(site, "runoob.com")) {
-                    var tutorialName;
-                    tutorialName = document.getElementsByTagName('h1')[1].innerText;
+                    var tutorialName = document.getElementsByTagName('h1')[1].innerText;
                     text = tutorialName;
                 } else if (isThatSite(site, "youtube.com")) {
-                    var vidioName;
-                    var authorName;
-                    vidioName = document.querySelector("#title > h1").innerText;
-                    authorName = document.querySelector("#text > a").innerText;
-                    text = vidioName + ' - ' + authorName;
+                    var vidioName = document.querySelector("#title > h1").innerText;
+                    var authorName = document.querySelector("#text > a").innerText;
+                    text = connectText(vidioName, authorName);
                 } else if (isThatSite(site, "news.ycombinator.com")) {
                     var titleText = document.querySelector(".titleline").innerText;
                     text = titleText;
@@ -291,19 +266,19 @@ async function afterLoad() {
                     try {
                         var titleText = document.querySelector("h1").innerText;
                         var authorText = document.querySelector("aside h2").innerText;
-                        text = titleText + ' - ' + authorText;
+                        text = connectText(titleText, authorText);
                     } catch (e) {}
                 } else if (isThatSite(site, "store.steampowered.com")) {
                     try {
                         var titleText = document.querySelector("#appHubAppName").innerText;
                         var authorText = document.querySelector("#developers_list").innerText;
-                        text = titleText + ' - ' + authorText;
+                        text = connectText(titleText, authorText);
                     } catch (e) {}
                 } else if (isThatSite(site, "keylol.com")) {
                     try {
                         var titleText = document.querySelector("#thread_subject").innerText;
                         var authorText = document.querySelector(".authi").innerText;
-                        text = titleText + ' - ' + authorText;
+                        text = connectText(titleText, authorText);
                     } catch (e) {}
                 } else if (isThatSite(site, "twitter.com")) {
                     try {
@@ -311,17 +286,23 @@ async function afterLoad() {
 	                    var time = timesInArticle[timesInArticle.length-1];
 	                    var timeText = time.innerText;
                         var authorText = document.querySelector("article span").innerText;
-                        text = timeText + ' - ' + authorText;
+                        text = connectText(timeText, authorText);
                     } catch (e) {}
                 } 
                 else {
-	                text = elem.innerText;
+	                text = h1Text;
                 }
             } catch (e) {console.log('content script autoChooseText() error\n', e);}
             
-            if (text == undefined || text == "") return "";
+            if (!text) text = "";
             return text;
         }
+
+		function connectText(text1, text2) {
+			return	text1 == "" ? text2 : 
+					text2 == "" ? text1 : 
+					text1 + ' - ' + text2;
+		}
 
         async function getSuffix() {
             var recognizedSite = await identifySite();
