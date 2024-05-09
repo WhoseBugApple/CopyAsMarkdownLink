@@ -189,7 +189,7 @@ async function afterLoad() {
         function autoChooseText() {
             var h1 = document.querySelector("h1");
             var h1Text = "";
-            if (h1) h1Text = h1.innertText;
+            if (h1) h1Text = h1.innerText;
             
             // set text
             // lower case site needed
@@ -293,7 +293,7 @@ async function afterLoad() {
 	                text = h1Text;
                 }
             } catch (e) {console.log('content script autoChooseText() error\n', e);}
-            
+
             if (!text) text = "";
             return text;
         }
