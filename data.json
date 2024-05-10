@@ -60,6 +60,7 @@
 	    {"site": "www.moehui.com", "name": "萌绘"}, 
 	    {"site": "keylol.com", "name": "Keylol"}, 
 	    {"site": "vndb.org", "name": "VNDB"}, 
+	    {"site": "bbs.saraba1st.com", "name": "STAGE1"}, 
 	    {"site": "web.dev", "name": "web.dev"}
 	]
 }
