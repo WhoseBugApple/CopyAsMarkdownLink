@@ -221,8 +221,12 @@ async function afterLoad() {
                 } else if (isThatSite(site, "sspai.com")) {
                     text = document.querySelector(".title").innerText;
                 } else if (isThatSite(site, "zhuanlan.zhihu.com")) {
-                    var authorName = document.getElementsByClassName("AuthorInfo-head")[0].innerText;
-                    text = connectText(h1Text, authorName);
+                    var authorText = document.getElementsByClassName("AuthorInfo-head")[0].innerText;
+                    text = connectText(h1Text, authorText);
+                } else if (isThatSite(site, "daily.zhihu.com")) {
+	                var titleText = document.querySelector(".DailyHeader-title").innerText;
+	                var authorText = document.querySelector(".ZhihuDaily-Author").innerText;
+                    text = connectText(titleText, authorText);
                 } else if (isThatSite(site, "space.bilibili.com")) {
                     var userName = document.querySelector("#h-name").innerText;
                     text = userName;
