@@ -61,6 +61,7 @@
 	    {"site": "keylol.com", "name": "Keylol"}, 
 	    {"site": "vndb.org", "name": "VNDB"}, 
 	    {"site": "bbs.saraba1st.com", "name": "STAGE1"}, 
+	    {"site": "nga.178.com", "name": "NGA"}, 
 	    {"site": "musicstax.com", "name": "Musicstax"}, 
 	    {"site": "web.dev", "name": "web.dev"}
 	]
