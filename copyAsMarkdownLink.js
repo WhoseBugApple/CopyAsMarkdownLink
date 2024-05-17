@@ -292,6 +292,11 @@ async function afterLoad() {
                         var authorText = document.querySelector("article span").innerText;
                         text = connectText(timeText, authorText);
                     } catch (e) {}
+                } else if (isThatSite(site, "youxiputao.com")) {
+                    try {
+	                    var titleText = document.querySelector("h2").innerText;
+                        text = titleText;
+                    } catch (e) {}
                 } 
                 else {
 	                text = h1Text;
