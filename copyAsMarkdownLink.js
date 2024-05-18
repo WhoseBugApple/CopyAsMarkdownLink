@@ -116,16 +116,36 @@ async function afterLoad() {
             return false;
         }
 
+		//  /video/   is /video/
+		//  /video    is /video/
+		//  /video/1  is /video/
+		//  /vide     is NOT /video/
+		//  /vide/1   is NOT /video/
+		//  /videos   is NOT /video/
+		//  /videos/1 is NOT /video/
         function isThatPath(thePath, isThatPath) {
-            var a = "";
             if (!thePath.startsWith("/")) thePath = "/" + thePath;
             if (!isThatPath.startsWith("/")) isThatPath = "/" + isThatPath;
-            if (isThatPath.endsWith("/")) isThatPath = isThatPath.substring(0, isThatPath.length-1);
+            if (!thePath.endsWith("/")) thePath = thePath + "/";
+            if (!isThatPath.endsWith("/")) isThatPath = isThatPath + "/";
             if (thePath.length >= isThatPath.length)
-                if ( thePath.length == isThatPath.length )
-                    return thePath == isThatPath;
-                else
-                    return thePath.startsWith(isThatPath + "/");
+                return thePath.startsWith(isThatPath);
+            return false;
+        }
+
+		// thatPath should NOT ends with /
+		//  /@1    continue /@
+		//  /@123  continue /@
+		//  /@/    NOT continue /@
+		//  /@/123 NOT continue /@
+		//  /@     NOT continue /@
+        function isContinueThatPathWithoutSplit(thePath, thatPath) {
+            if (!thePath.startsWith("/")) thePath = "/" + thePath;
+            if (!thatPath.startsWith("/")) thatPath = "/" + thatPath;
+            if (!thePath.endsWith("/")) thePath = thePath + "/";
+            if (thePath.length > thatPath.length && thePath.startsWith(thatPath))
+	            if (thePath[thatPath.length] != "/")
+		            return true;
             return false;
         }
 
@@ -259,10 +279,19 @@ async function afterLoad() {
                 } else if (isThatSite(site, "runoob.com")) {
                     var tutorialName = document.getElementsByTagName('h1')[1].innerText;
                     text = tutorialName;
-                } else if (isThatSite(site, "youtube.com")) {
-                    var vidioName = document.querySelector("#title > h1").innerText;
+                } else if (isThatSite(site, "youtube.com") && isThatPath(location.pathname, '/watch')) {
+                    var videoName = document.querySelector("#title > h1").innerText;
                     var authorName = document.querySelector("#text > a").innerText;
-                    text = connectText(vidioName, authorName);
+                    text = connectText(videoName, authorName);
+                } else if (isThatSite(site, "youtube.com") && isContinueThatPathWithoutSplit(location.pathname, '/@')) {
+                    var authorName = document.querySelector("#channel-name").innerText;
+                    var userSpaceMark = 'User Space';
+                    text = connectText(authorName, userSpaceMark);
+                } else if (isThatSite(site, "youtube.com") && isThatPath(location.pathname, '/playlist')) {
+                    var playListName = document.querySelector(".immersive-header-container #text").innerText;
+                    var authorName = document.querySelector(".immersive-header-container #owner-text").innerText;
+                    var playListMark = 'Playlist';
+                    text = connectText(connectText(playListName, authorName), playListMark);
                 } else if (isThatSite(site, "news.ycombinator.com")) {
                     var titleText = document.querySelector(".titleline").innerText;
                     text = titleText;
