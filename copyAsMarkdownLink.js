@@ -217,12 +217,12 @@ async function afterLoad() {
             try {
                 if (isThatSite(site, "zh.wikipedia.org")) {
 					var titleText;
-					if (!titleText || titleText == "") titleText = document.querySelector("#firstHeading")?.firstChild?.innerText;
-					if (!titleText || titleText == "") titleText = document.querySelector("#firstHeading")?.querySelector("span")?.innerText;
 					// XPATH
                 	// [XPath - MDN web docs](https://developer.mozilla.org/en-US/docs/Web/XPath)
                 	// [Document: evaluate() method - MDN web docs](https://developer.mozilla.org/en-US/docs/Web/API/Document/evaluate)
 					if (!titleText || titleText == "") titleText = document.evaluate("text()", document.querySelector("#firstHeading"), null, XPathResult.STRING_TYPE)?.stringValue;
+					if (!titleText || titleText == "") titleText = document.querySelector("#firstHeading")?.firstChild?.innerText;
+					if (!titleText || titleText == "") titleText = document.querySelector("#firstHeading")?.querySelector("span")?.innerText;
 					if (!titleText) titleText = "";
                     text = titleText;
                 } else if (isThatSite(site, "google.com") && isThatPath(location.pathname, '/search')) {
