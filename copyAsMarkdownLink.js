@@ -326,6 +326,11 @@ async function afterLoad() {
 	                    var titleText = document.querySelector("h2").innerText;
                         text = titleText;
                     } catch (e) {}
+                } else if (isThatSite(site, "gouhuo.qq.com")) {
+                    try {
+	                    var titleText = document.querySelector("h2").innerText;
+                        text = titleText;
+                    } catch (e) {}
                 } 
                 else {
 	                text = h1Text;
