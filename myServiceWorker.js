@@ -30,7 +30,7 @@ try {
                 if (request == okMark) {
                 	showCopySuccessNotice().then(id => {setTimeout(() => {chrome.notifications.clear(id)}, 1500);});
                 } else if (request.startsWith(badMark)) {
-                	showCopyFailNotice(request.substr(badMark.length)).then(id => {setTimeout(() => {chrome.notifications.clear(id)}, 10000);});
+                	showCopyFailNotice(request.substr(badMark.length)).then(id => {setTimeout(() => {chrome.notifications.clear(id)}, 3000);});
                 }
              } else {
                  // from service worker (the extension)
