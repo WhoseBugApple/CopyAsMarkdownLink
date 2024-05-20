@@ -66,6 +66,7 @@
 	    {"site": "gouhuo.qq.com", "name": "篝火营地"}, 
 	    {"site": "www.3dmgame.com", "name": "3DM Game"}, 
 	    {"site": "musicstax.com", "name": "Musicstax"}, 
+	    {"site": "apod.nasa.gov", "name": "Astronomy Picture of the Day"}, 
 	    {"site": "web.dev", "name": "web.dev"}
 	]
 }

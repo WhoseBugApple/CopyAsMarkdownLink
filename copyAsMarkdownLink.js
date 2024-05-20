@@ -331,6 +331,12 @@ async function afterLoad() {
 	                    var titleText = document.querySelector("h2").innerText;
                         text = titleText;
                     } catch (e) {}
+                } else if (isThatSite(site, "apod.nasa.gov") && isContinueThatPathWithoutSplit(location.pathname, '/apod/ap')) {
+                    try {
+	                    var titleText = document.querySelector("body > center:nth-child(2) > b:nth-child(1)").innerText;
+	                    var timeText = document.evaluate("../../text()", document.querySelector("img"), null, XPathResult.STRING_TYPE)?.stringValue;
+                        text = connectText(titleText, timeText);
+                    } catch (e) {}
                 } 
                 else {
 	                text = h1Text;
@@ -342,6 +348,8 @@ async function afterLoad() {
         }
 
 		function connectText(text1, text2) {
+			text1 = text1.trim();
+			text2 = text2.trim();
 			return	text1 == "" ? text2 : 
 					text2 == "" ? text1 : 
 					text1 + ' - ' + text2;
