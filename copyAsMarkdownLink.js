@@ -317,7 +317,7 @@ async function afterLoad() {
                         var authorText = document.querySelector(".authi").innerText;
                         text = connectText(titleText, authorText);
                     } catch (e) {}
-                } else if (isThatSite(site, "twitter.com")) {
+                } else if (isThatSite(site, "twitter.com") || isThatSite(site, "x.com")) {
                     try {
 	                    var timesInArticle = document.querySelector("article").querySelectorAll("time");
 	                    var time = timesInArticle[timesInArticle.length-1];

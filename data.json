@@ -54,6 +54,7 @@
 	    {"site": "www.huashijie.art", "name": "画世界"}, 
 	    {"site": "www.deviantart.com", "name": "Deviant Art"}, 
 	    {"site": "twitter.com", "name": "Twitter"}, 
+	    {"site": "x.com", "name": "Twitter"}, 
 	    {"site": "web.archive.org", "name": "Wayback Machine"}, 
 	    {"site": "gamer.com.tw", "name": "巴哈姆特"}, 
 	    {"site": "www.3blue1brown.com", "name": "3Blue1Brown"}, 
@@ -67,6 +68,7 @@
 	    {"site": "www.3dmgame.com", "name": "3DM Game"}, 
 	    {"site": "musicstax.com", "name": "Musicstax"}, 
 	    {"site": "apod.nasa.gov", "name": "Astronomy Picture of the Day"}, 
+	    {"site": "nicovideo.jp", "name": "Niconico"}, 
 	    {"site": "web.dev", "name": "web.dev"}
 	]
 }
