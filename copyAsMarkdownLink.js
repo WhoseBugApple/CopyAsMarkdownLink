@@ -292,6 +292,10 @@ async function afterLoad() {
                     var authorName = document.querySelector(".immersive-header-container #owner-text").innerText;
                     var playListMark = 'Playlist';
                     text = connectText(connectText(playListName, authorName), playListMark);
+                } else if (isThatSite(site, "youtube.com") && isThatPath(location.pathname, '/channel')) {
+                    var channelText = document.querySelector("#channel-name #text").innerText;
+                    var channelMark = 'Channel';
+                    text = connectText(channelText, channelMark);
                 } else if (isThatSite(site, "news.ycombinator.com")) {
                     var titleText = document.querySelector(".titleline").innerText;
                     text = titleText;
