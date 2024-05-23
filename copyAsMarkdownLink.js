@@ -251,14 +251,14 @@ async function afterLoad() {
                     var userName = document.querySelector("#h-name").innerText;
                     text = userName;
                 } else if (isThatSite(site, "bilibili.com") && isThatPath(location.pathname, '/video')) {
-	                var partText = '';
+	                var pageText = '';
 	                try {
-		                partText = document.querySelector(".watched").innerText;
+		                pageText = document.querySelector("#multi_page .watched").innerText;
 	                } catch(e) {}
 	                var titleText = document.querySelector(".video-title").innerText;
 	                try {
                         var authorText = document.querySelector(".up-info-container .up-name").innerText;
-                        text = connectText(connectText(partText, titleText), authorText);
+                        text = connectText(connectText(pageText, titleText), authorText);
                     } catch (e) {
                         try {
 	                        var authorTexts = '';
@@ -267,7 +267,7 @@ async function afterLoad() {
 		                        if (authorTexts != '') authorTexts += ' & ';
 		                        authorTexts += name;
 	                        });
-	                        text = connectText(connectText(partText, titleText), authorTexts);
+	                        text = connectText(connectText(pageText, titleText), authorTexts);
 	                    } catch (e) {
 		                    // ...
 	                    }
