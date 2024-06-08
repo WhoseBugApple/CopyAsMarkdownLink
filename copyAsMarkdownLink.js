@@ -253,7 +253,7 @@ async function afterLoad() {
 				} else if (isThatSite(site, "bilibili.com") && isThatPath(location.pathname, '/video')) {
 					var pageText = '';
 					try {
-						pageText = document.querySelector("#multi_page .watched").innerText;
+						pageText = document.querySelector("#multi_page .on").innerText;
 					} catch(e) {}
 					var titleText = document.querySelector(".video-title").innerText;
 					try {
