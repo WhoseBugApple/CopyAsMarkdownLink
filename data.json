@@ -71,6 +71,7 @@
 	    {"site": "musicstax.com", "name": "Musicstax"}, 
 	    {"site": "apod.nasa.gov", "name": "Astronomy Picture of the Day"}, 
 	    {"site": "nicovideo.jp", "name": "Niconico"}, 
+	    {"site": "igdshare.org", "name": "IGDShare"}, 
 	    {"site": "web.dev", "name": "web.dev"}
 	]
 }
