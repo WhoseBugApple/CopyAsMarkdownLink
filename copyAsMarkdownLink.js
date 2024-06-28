@@ -378,7 +378,16 @@ async function afterLoad() {
 						}
 						text = connectText(titleText, authorText);
 					} catch (e) {}
-				} 
+				} else if (		(isThatSite(site, "bangumi.tv") || isThatSite(site, "bgm.tv"))
+								&& isThatPath(location.pathname, '/user')) {
+					try {
+						var userNameText = document.querySelector(".name>:nth-child(1)").innerText;
+						var userIdText = document.querySelector(".name>:nth-child(2)").innerText;
+						var userText = connectText(userNameText, userIdText, ' ');
+						var userSpaceMark = 'User Space';
+						text = connectText(userText, userSpaceMark);
+					} catch (e) {}
+				}
 				else {
 					text = h1Text;
 				}
@@ -388,12 +397,12 @@ async function afterLoad() {
 			return text;
 		}
 
-		function connectText(text1, text2) {
+		function connectText(text1, text2, connectionMark = ' - ') {
 			text1 = text1.trim();
 			text2 = text2.trim();
 			return	text1 == "" ? text2 : 
 					text2 == "" ? text1 : 
-					text1 + ' - ' + text2;
+					text1 + connectionMark + text2;
 		}
 
 		async function getSuffix() {
