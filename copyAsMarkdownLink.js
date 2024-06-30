@@ -272,6 +272,9 @@ async function afterLoad() {
 							// ...
 						}
 					}
+				} else if (isThatSite(site, "bilibili.com") && isThatPath(location.pathname, '/audio')) {
+					var songNameText = document.querySelector('.song-title').innerText;
+					text = songNameText;
 				} else if (isThatSite(site, "weread.qq.com")) {
 					var bookName = document.getElementsByClassName("bookInfo_right_header_title")[0].innerText;
 					var authorName = document.getElementsByClassName("bookInfo_author link")[0].innerText;
