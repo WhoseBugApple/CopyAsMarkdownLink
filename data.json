@@ -73,6 +73,7 @@
 	    {"site": "apod.nasa.gov", "name": "Astronomy Picture of the Day"}, 
 	    {"site": "nicovideo.jp", "name": "Niconico"}, 
 	    {"site": "igdshare.org", "name": "IGDShare"}, 
+	    {"site": "rateyourmusic.com", "name": "Rate Your Music"}, 
 	    {"site": "web.dev", "name": "web.dev"}
 	]
 }
