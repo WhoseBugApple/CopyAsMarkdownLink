@@ -291,7 +291,13 @@ async function afterLoad() {
 					var authorName = document.querySelector("#text > a").innerText;
 					text = connectText(videoName, authorName);
 				} else if (isThatSite(site, "youtube.com") && isContinueThatPathWithoutSplit(location.pathname, '/@')) {
-					var authorName = document.querySelector("#channel-name").innerText;
+					var authorName = '';
+					if (!authorName || authorName == '') {
+						authorName = document.querySelector("#channel-name").innerText.trim();
+					}
+					if (!authorName || authorName == '') {
+						authorName = document.querySelector("#page-header h1").innerText.trim();
+					}
 					var userSpaceMark = 'User Space';
 					text = connectText(authorName, userSpaceMark);
 				} else if (isThatSite(site, "youtube.com") && isThatPath(location.pathname, '/playlist')) {
