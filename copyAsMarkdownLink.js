@@ -396,6 +396,11 @@ async function afterLoad() {
 						var userSpaceMark = 'User Space';
 						text = connectText(userText, userSpaceMark);
 					} catch (e) {}
+				} else if (isThatSite(site, "tieba.baidu.com") && isThatPath(location.pathname, '/p')) {
+					var titleText = document.querySelector('.core_title_txt').innerText;
+					var authorText = document.querySelector('.d_author .d_name').innerText;
+					var barText = document.querySelector('.card_title_fname').innerText;
+					text = connectText(connectText(titleText, authorText), barText);
 				}
 				else {
 					text = h1Text;
