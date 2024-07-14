@@ -23,6 +23,7 @@
 	    {"site": "blender.org", "name": "Blender"}, 
 	    {"site": "pdai.tech", "name": "Java 全栈知识体系"}, 
 	    {"site": "baike.baidu.com", "name": "百度百科"}, 
+	    {"site": "tieba.baidu.com", "name": "百度贴吧"}, 
 	    {"site": "baidu.com", "name": "百度"}, 
 	    {"site": "youtube.com", "name": "Youtube"}, 
 	    {"site": "apache.org", "name": "Apache"}, 
