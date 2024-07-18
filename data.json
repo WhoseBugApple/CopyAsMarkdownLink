@@ -75,6 +75,7 @@
 	    {"site": "nicovideo.jp", "name": "Niconico"}, 
 	    {"site": "igdshare.org", "name": "IGDShare"}, 
 	    {"site": "rateyourmusic.com", "name": "Rate Your Music"}, 
+	    {"site": "36kr.com", "name": "36KR"}, 
 	    {"site": "web.dev", "name": "web.dev"}
 	]
 }
