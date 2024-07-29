@@ -401,6 +401,24 @@ async function afterLoad() {
 					var authorText = document.querySelector('.d_author .d_name').innerText;
 					var barText = document.querySelector('.card_title_fname').innerText;
 					text = connectText(connectText(titleText, authorText), barText);
+				} else if (isThatSite(site, "soundcloud.com")) {
+					var emptyText = '';
+					var maybeText = emptyText;
+					if (maybeText == emptyText) {
+						try {
+							var authorText = document.querySelector('.profileHeaderInfo__userName').innerText;
+							var userSpaceMark = 'User Space';
+							maybeText = connectText(authorText, userSpaceMark);
+						} catch (e) {}
+					}
+					if (maybeText == emptyText) {
+						try {
+							var soundText = document.querySelector('.soundTitle__title').innerText;
+							var authorText = document.querySelector('.soundTitle__username').innerText;
+							maybeText = connectText(soundText, authorText);
+						} catch (e) {}
+					}
+					text = maybeText;
 				}
 				else {
 					text = h1Text;
