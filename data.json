@@ -78,6 +78,8 @@
 	    {"site": "soundcloud.com", "name": "SoundCloud"}, 
 	    {"site": "36kr.com", "name": "36KR"}, 
 	    {"site": "new.qq.com", "name": "腾讯新闻"}, 
+	    {"site": "wiki.mbalib.com", "name": "MBA智库百科"}, 
+	    {"site": "mbalib.com", "name": "MBA智库"}, 
 	    {"site": "web.dev", "name": "web.dev"}
 	]
 }
