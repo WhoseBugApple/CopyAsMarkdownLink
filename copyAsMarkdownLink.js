@@ -419,6 +419,9 @@ async function afterLoad() {
 						} catch (e) {}
 					}
 					text = maybeText;
+				} else if (isThatSite(site, "woshipm.com")) {
+					var titleText = document.querySelector('.article--title').innerText;
+					text = titleText;
 				}
 				else {
 					text = h1Text;
