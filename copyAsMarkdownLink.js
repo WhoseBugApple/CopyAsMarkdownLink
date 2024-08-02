@@ -422,6 +422,10 @@ async function afterLoad() {
 				} else if (isThatSite(site, "woshipm.com")) {
 					var titleText = document.querySelector('.article--title').innerText;
 					text = titleText;
+				} else if (isThatSite(site, "www.cnblogs.com")) {
+					var titleText = document.querySelector('.postTitle').innerText;
+					var authorText = document.querySelector('#profile_block>a').innerText;
+					text = connectText(titleText, authorText);
 				}
 				else {
 					text = h1Text;
