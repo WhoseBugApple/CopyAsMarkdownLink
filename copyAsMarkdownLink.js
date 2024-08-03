@@ -276,10 +276,16 @@ async function afterLoad() {
 					var songNameText = document.querySelector('.song-title').innerText;
 					text = songNameText;
 				} else if (isThatSite(site, "bilibili.com") && isThatPath(location.pathname, '/opus')) {
+					// 这是动态文章
 					var timeText = document.querySelector('.opus-module-author__pub').innerText;
 					var articleText = document.querySelector('.opus-module-content').innerText;
 					var authorText = document.querySelector('.opus-module-author__name').innerText;
 					text = connectText(timeText, connectText(articleText, authorText));
+				} else if (isThatSite(site, "bilibili.com") && isThatPath(location.pathname, '/read')) {
+					// 这是专栏文章
+					var titleText = document.querySelector('.title').innerText;
+					var authorText = document.querySelector('.up-name').innerText;
+					text = connectText(titleText, authorText);
 				} else if (isThatSite(site, "weread.qq.com")) {
 					var bookName = document.getElementsByClassName("bookInfo_right_header_title")[0].innerText;
 					var authorName = document.getElementsByClassName("bookInfo_author link")[0].innerText;
