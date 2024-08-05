@@ -85,6 +85,7 @@
 	    {"site": "myzaker.com", "name": "ZAKER"}, 
 	    {"site": "archlinux.org", "name": "Arch Linux"}, 
 	    {"site": "huxiu.com", "name": "虎嗅"}, 
+	    {"site": "shuge.org", "name": "书格"}, 
 	    {"site": "web.dev", "name": "web.dev"}
 	]
 }
