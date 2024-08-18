@@ -362,7 +362,20 @@ async function afterLoad() {
 				} else if (isThatSite(site, "apod.nasa.gov") && isContinueThatPathWithoutSplit(location.pathname, '/apod/ap')) {
 					try {
 						var titleText = document.querySelector("body > center:nth-child(2) > b:nth-child(1)").innerText;
-						var timeText = document.evaluate("../../text()", document.querySelector("img"), null, XPathResult.STRING_TYPE)?.stringValue;
+						var timeText = '';
+						if (timeText == '') {
+							try {
+								timeText = document.evaluate("../../text()", document.querySelector("img"), null, XPathResult.STRING_TYPE)?.stringValue;
+							} catch (e) {}
+						}
+						if (timeText == '') {
+							try {
+								timeText = document.evaluate("../text()", document.querySelector("iframe"), null, XPathResult.STRING_TYPE)?.stringValue;
+							} catch (e) {}
+						}
+						if (timeText == '') {
+							throw new Error('failed to get time from webpage');
+						}
 						text = connectText(titleText, timeText);
 					} catch (e) {}
 				} else if (isThatSite(site, "itch.io")) {
