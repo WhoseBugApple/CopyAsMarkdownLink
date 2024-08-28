@@ -250,7 +250,7 @@ async function afterLoad() {
 				} else if (isThatSite(site, "space.bilibili.com")) {
 					var userName = document.querySelector("#h-name").innerText;
 					text = userName;
-				} else if (isThatSite(site, "bilibili.com") && isThatPath(location.pathname, '/video')) {
+				} else if (isThatSite(site, "bilibili.com") && isThatPath(location.pathname, '/video/')) {
 					var pageText = '';
 					try {
 						pageText = document.querySelector("#multi_page .on").innerText;
@@ -272,19 +272,24 @@ async function afterLoad() {
 							// ...
 						}
 					}
-				} else if (isThatSite(site, "bilibili.com") && isThatPath(location.pathname, '/audio')) {
+				} else if (isThatSite(site, "bilibili.com") && isThatPath(location.pathname, '/audio/')) {
 					var songNameText = document.querySelector('.song-title').innerText;
 					text = songNameText;
-				} else if (isThatSite(site, "bilibili.com") && isThatPath(location.pathname, '/opus')) {
+				} else if (isThatSite(site, "bilibili.com") && isThatPath(location.pathname, '/opus/')) {
 					// 这是动态文章
 					var timeText = document.querySelector('.opus-module-author__pub').innerText;
 					var articleText = document.querySelector('.opus-module-content').innerText;
 					var authorText = document.querySelector('.opus-module-author__name').innerText;
 					text = connectText(timeText, connectText(articleText, authorText));
-				} else if (isThatSite(site, "bilibili.com") && isThatPath(location.pathname, '/read')) {
+				} else if (isThatSite(site, "bilibili.com") && isThatPath(location.pathname, '/read/readlist/')) {
+					// 这是专栏列表
+					var titleText = document.querySelector('.title').innerText;
+					var authorText = document.querySelector('.list-container .up-name').innerText;
+					text = connectText(titleText, authorText);
+				} else if (isThatSite(site, "bilibili.com") && isThatPath(location.pathname, '/read/')) {
 					// 这是专栏文章
 					var titleText = document.querySelector('.title').innerText;
-					var authorText = document.querySelector('.up-name').innerText;
+					var authorText = document.querySelector('.article-detail .up-name').innerText;
 					text = connectText(titleText, authorText);
 				} else if (isThatSite(site, "weread.qq.com")) {
 					var bookName = document.getElementsByClassName("bookInfo_right_header_title")[0].innerText;
