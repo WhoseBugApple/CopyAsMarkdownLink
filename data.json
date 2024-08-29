@@ -89,6 +89,7 @@
 	    {"site": "static.owspace.com", "name": "单读"}, 
 	    {"site": "www.xiaoyuzhoufm.com", "name": "小宇宙FM"}, 
 	    {"site": "danbooru.donmai.us", "name": "Danbooru"}, 
+	    {"site": "gelbooru.com", "name": "Gelbooru"}, 
 	    {"site": "web.dev", "name": "web.dev"}
 	]
 }
