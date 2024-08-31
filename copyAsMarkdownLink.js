@@ -334,6 +334,12 @@ async function afterLoad() {
 						var authorText = document.querySelector("aside h2").innerText;
 						text = connectText(titleText, authorText);
 					} catch (e) {}
+				} else if (isThatSite(site, "www.deviantart.com")) {
+					try {
+						var titleText = document.querySelector("h1").innerText;
+						var authorText = document.querySelector(".user-link > span:nth-of-type(1)").innerText;
+						text = connectText(titleText, authorText);
+					} catch (e) {}
 				} else if (isThatSite(site, "store.steampowered.com")) {
 					try {
 						var titleText = document.querySelector("#appHubAppName").innerText;
