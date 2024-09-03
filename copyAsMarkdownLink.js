@@ -86,15 +86,15 @@ function waitLoad() {
 async function afterLoad() {
 	try {
 		// infos
-		var site = location.hostname.toLowerCase();
+		let site = location.hostname.toLowerCase();
 		if (site.endsWith('/')) site = site.substring(0, site.length-1);
 
 		// copy content
-		var selected = getSelectionText();
-		var suffix = await getSuffix();
-		var url = getURL();
+		let selected = getSelectionText();
+		let suffix = await getSuffix();
+		let url = getURL();
 
-		var toCopy = `[${selected}${suffix}](${url})`;
+		let toCopy = `[${selected}${suffix}](${url})`;
 		
 		// console.log(toCopy);
 
@@ -175,12 +175,12 @@ async function afterLoad() {
 
 		// e.g. input | output \|
 		function toDisplayTextToSourceText(toDisplayText) {
-			var sourceText = "";
-			var i = 0;
-			var charsNeedBackslash = "\\|_*~#$%^&()<>";
+			let sourceText = "";
+			let i = 0;
+			let charsNeedBackslash = "\\|_*~#$%^&()<>";
 			for (; i<toDisplayText.length; i++) {
-				var c = toDisplayText.charAt(i);
-				var sourC = "";
+				let c = toDisplayText.charAt(i);
+				let sourC = "";
 				if (charsNeedBackslash.includes(c)) sourC = '\\' + c;
 				else sourC = c;
 				sourceText += sourC;
@@ -189,16 +189,16 @@ async function afterLoad() {
 		}
 
 		function getSelectionText() {
-			var text = "";
-			var windowSelected;
-			var documentSelected;
+			let text = "";
+			let windowSelected;
+			let documentSelected;
 			if (window.getSelection && (windowSelected=window.getSelection().toString()) != "") {
 				text = windowSelected;
 			} else if (document.selection && document.selection.type != "Control" && 
 									(documentSelected = document.selection.createRange().text) != "") {
 				text = documentSelected;
 			} else {
-				var autoChoosed = autoChooseText();
+				let autoChoosed = autoChooseText();
 				if (autoChoosed != "") text = autoChoosed;
 			}
 			text = removeGarbageCharacter(text);
@@ -207,16 +207,16 @@ async function afterLoad() {
 		}
 
 		function autoChooseText() {
-			var h1 = document.querySelector("h1");
-			var h1Text = "";
+			let h1 = document.querySelector("h1");
+			let h1Text = "";
 			if (h1) h1Text = h1.innerText;
 			
 			// set text
 			// lower case site needed
-			var text;
+			let text;
 			try {
 				if (isThatSite(site, "zh.wikipedia.org")) {
-					var titleText;
+					let titleText;
 					// XPATH
 					// [XPath - MDN web docs](https://developer.mozilla.org/en-US/docs/Web/XPath)
 					// [Document: evaluate() method - MDN web docs](https://developer.mozilla.org/en-US/docs/Web/API/Document/evaluate)
@@ -231,39 +231,39 @@ async function afterLoad() {
 					// generate by Dev Tool -> Elements -> Popup -> Copy -> Copy JSPath
 					// text = document.querySelector("#tsf > div:nth-child(1) > div.A8SBwf > div.RNNXgb > div > div.a4bIc > input").value;
 				} else if (isThatSite(site, "github.com")) {
-					var fileName;
+					let fileName;
 					if (!fileName || fileName == "") fileName = document.querySelector("#file-name-id")?.innerText;
 					if (!fileName || fileName == "") fileName = document.querySelector("#file-name-id-wide")?.innerText;
 					if (!fileName || fileName == "") fileName = "";
-					var repoName = document.querySelector(".AppHeader-context-full ul").querySelector("li+li>a").innerText;
-					var authorName = document.querySelector(".AppHeader-context-full ul").querySelector("li>a").innerText;
+					let repoName = document.querySelector(".AppHeader-context-full ul").querySelector("li+li>a").innerText;
+					let authorName = document.querySelector(".AppHeader-context-full ul").querySelector("li>a").innerText;
 					text = connectText(connectText(fileName, repoName), authorName);
 				} else if (isThatSite(site, "sspai.com")) {
 					text = document.querySelector(".title").innerText;
 				} else if (isThatSite(site, "zhuanlan.zhihu.com")) {
-					var authorText = document.getElementsByClassName("AuthorInfo-head")[0].innerText;
+					let authorText = document.getElementsByClassName("AuthorInfo-head")[0].innerText;
 					text = connectText(h1Text, authorText);
 				} else if (isThatSite(site, "daily.zhihu.com")) {
-					var titleText = document.querySelector(".DailyHeader-title").innerText;
-					var authorText = document.querySelector(".ZhihuDaily-Author").innerText;
+					let titleText = document.querySelector(".DailyHeader-title").innerText;
+					let authorText = document.querySelector(".ZhihuDaily-Author").innerText;
 					text = connectText(titleText, authorText);
 				} else if (isThatSite(site, "space.bilibili.com")) {
-					var userName = document.querySelector("#h-name").innerText;
+					let userName = document.querySelector("#h-name").innerText;
 					text = userName;
 				} else if (isThatSite(site, "bilibili.com") && isThatPath(location.pathname, '/video/')) {
-					var pageText = '';
+					let pageText = '';
 					try {
 						pageText = document.querySelector("#multi_page .on").innerText;
 					} catch(e) {}
-					var titleText = document.querySelector(".video-title").innerText;
+					let titleText = document.querySelector(".video-title").innerText;
 					try {
-						var authorText = document.querySelector(".up-info-container .up-name").innerText;
+						let authorText = document.querySelector(".up-info-container .up-name").innerText;
 						text = connectText(connectText(pageText, titleText), authorText);
 					} catch (e) {
 						try {
-							var authorTexts = '';
+							let authorTexts = '';
 							document.querySelectorAll(".container .staff-name").forEach(each => {
-								var name = each.innerText;
+								let name = each.innerText;
 								if (authorTexts != '') authorTexts += ' & ';
 								authorTexts += name;
 							});
@@ -273,107 +273,107 @@ async function afterLoad() {
 						}
 					}
 				} else if (isThatSite(site, "bilibili.com") && isThatPath(location.pathname, '/audio/')) {
-					var songNameText = document.querySelector('.song-title').innerText;
+					let songNameText = document.querySelector('.song-title').innerText;
 					text = songNameText;
 				} else if (isThatSite(site, "bilibili.com") && isThatPath(location.pathname, '/opus/')) {
 					// 这是动态文章
-					var timeText = document.querySelector('.opus-module-author__pub').innerText;
-					var articleText = document.querySelector('.opus-module-content').innerText;
-					var authorText = document.querySelector('.opus-module-author__name').innerText;
+					let timeText = document.querySelector('.opus-module-author__pub').innerText;
+					let articleText = document.querySelector('.opus-module-content').innerText;
+					let authorText = document.querySelector('.opus-module-author__name').innerText;
 					text = connectText(timeText, connectText(articleText, authorText));
 				} else if (isThatSite(site, "bilibili.com") && isThatPath(location.pathname, '/read/readlist/')) {
 					// 这是专栏列表
-					var titleText = document.querySelector('.title').innerText;
-					var authorText = document.querySelector('.list-container .up-name').innerText;
+					let titleText = document.querySelector('.title').innerText;
+					let authorText = document.querySelector('.list-container .up-name').innerText;
 					text = connectText(titleText, authorText);
 				} else if (isThatSite(site, "bilibili.com") && isThatPath(location.pathname, '/read/')) {
 					// 这是专栏文章
-					var titleText = document.querySelector('.title').innerText;
-					var authorText = document.querySelector('.article-detail .up-name').innerText;
+					let titleText = document.querySelector('.title').innerText;
+					let authorText = document.querySelector('.article-detail .up-name').innerText;
 					text = connectText(titleText, authorText);
 				} else if (isThatSite(site, "weread.qq.com")) {
-					var bookName = document.getElementsByClassName("bookInfo_right_header_title")[0].innerText;
-					var authorName = document.getElementsByClassName("bookInfo_author link")[0].innerText;
+					let bookName = document.getElementsByClassName("bookInfo_right_header_title")[0].innerText;
+					let authorName = document.getElementsByClassName("bookInfo_author link")[0].innerText;
 					text = connectText(bookName, authorName);
 				} else if (isThatSite(site, "book.douban.com")  && isThatPath(location.pathname, '/subject')) {
-					var bookName = h1Text;
-					var authorName = document.querySelector("#info > span:nth-child(1) > a").innerText;
+					let bookName = h1Text;
+					let authorName = document.querySelector("#info > span:nth-child(1) > a").innerText;
 					text = connectText(bookName, authorName);
 				} else if (isThatSite(site, "runoob.com")) {
-					var tutorialName = document.getElementsByTagName('h1')[1].innerText;
+					let tutorialName = document.getElementsByTagName('h1')[1].innerText;
 					text = tutorialName;
 				} else if (isThatSite(site, "youtube.com") && isThatPath(location.pathname, '/watch')) {
-					var videoName = document.querySelector("#title > h1").innerText;
-					var authorName = document.querySelector("#text > a").innerText;
+					let videoName = document.querySelector("#title > h1").innerText;
+					let authorName = document.querySelector("#text > a").innerText;
 					text = connectText(videoName, authorName);
 				} else if (isThatSite(site, "youtube.com") && isContinueThatPathWithoutSplit(location.pathname, '/@')) {
-					var authorName = '';
+					let authorName = '';
 					if (!authorName || authorName == '') {
 						authorName = document.querySelector("#channel-name").innerText.trim();
 					}
 					if (!authorName || authorName == '') {
 						authorName = document.querySelector("#page-header h1").innerText.trim();
 					}
-					var userSpaceMark = 'User Space';
+					let userSpaceMark = 'User Space';
 					text = connectText(authorName, userSpaceMark);
 				} else if (isThatSite(site, "youtube.com") && isThatPath(location.pathname, '/playlist')) {
-					var playListName = document.querySelector(".immersive-header-container #text").innerText;
-					var authorName = document.querySelector(".immersive-header-container #owner-text").innerText;
-					var playListMark = 'Playlist';
+					let playListName = document.querySelector(".immersive-header-container #text").innerText;
+					let authorName = document.querySelector(".immersive-header-container #owner-text").innerText;
+					let playListMark = 'Playlist';
 					text = connectText(connectText(playListName, authorName), playListMark);
 				} else if (isThatSite(site, "youtube.com") && isThatPath(location.pathname, '/channel')) {
-					var channelText = document.querySelector("#channel-name #text").innerText;
-					var channelMark = 'Channel';
+					let channelText = document.querySelector("#channel-name #text").innerText;
+					let channelMark = 'Channel';
 					text = connectText(channelText, channelMark);
 				} else if (isThatSite(site, "news.ycombinator.com")) {
-					var titleText = document.querySelector(".titleline").innerText;
+					let titleText = document.querySelector(".titleline").innerText;
 					text = titleText;
 				} else if (isThatSite(site, "www.pixiv.net")) {
 					try {
-						var titleText = document.querySelector("h1").innerText;
-						var authorText = document.querySelector("aside h2").innerText;
+						let titleText = document.querySelector("h1").innerText;
+						let authorText = document.querySelector("aside h2").innerText;
 						text = connectText(titleText, authorText);
 					} catch (e) {}
 				} else if (isThatSite(site, "www.deviantart.com")) {
 					try {
-						var titleText = document.querySelector("h1").innerText;
-						var authorText = document.querySelector(".user-link > span:nth-of-type(1)").innerText;
+						let titleText = document.querySelector("h1").innerText;
+						let authorText = document.querySelector(".user-link > span:nth-of-type(1)").innerText;
 						text = connectText(titleText, authorText);
 					} catch (e) {}
 				} else if (isThatSite(site, "store.steampowered.com")) {
 					try {
-						var titleText = document.querySelector("#appHubAppName").innerText;
-						var authorText = document.querySelector("#developers_list").innerText;
+						let titleText = document.querySelector("#appHubAppName").innerText;
+						let authorText = document.querySelector("#developers_list").innerText;
 						text = connectText(titleText, authorText);
 					} catch (e) {}
 				} else if (isThatSite(site, "keylol.com")) {
 					try {
-						var titleText = document.querySelector("#thread_subject").innerText;
-						var authorText = document.querySelector(".authi").innerText;
+						let titleText = document.querySelector("#thread_subject").innerText;
+						let authorText = document.querySelector(".authi").innerText;
 						text = connectText(titleText, authorText);
 					} catch (e) {}
 				} else if (isThatSite(site, "twitter.com") || isThatSite(site, "x.com")) {
 					try {
-						var timesInArticle = document.querySelector("article").querySelectorAll("time");
-						var time = timesInArticle[timesInArticle.length-1];
-						var timeText = time.innerText;
-						var authorText = document.querySelector("article span").innerText;
+						let timesInArticle = document.querySelector("article").querySelectorAll("time");
+						let time = timesInArticle[timesInArticle.length-1];
+						let timeText = time.innerText;
+						let authorText = document.querySelector("article span").innerText;
 						text = connectText(timeText, authorText);
 					} catch (e) {}
 				} else if (isThatSite(site, "youxiputao.com")) {
 					try {
-						var titleText = document.querySelector("h2").innerText;
+						let titleText = document.querySelector("h2").innerText;
 						text = titleText;
 					} catch (e) {}
 				} else if (isThatSite(site, "gouhuo.qq.com")) {
 					try {
-						var titleText = document.querySelector("h2").innerText;
+						let titleText = document.querySelector("h2").innerText;
 						text = titleText;
 					} catch (e) {}
 				} else if (isThatSite(site, "apod.nasa.gov") && isContinueThatPathWithoutSplit(location.pathname, '/apod/ap')) {
 					try {
-						var titleText = document.querySelector("body > center:nth-child(2) > b:nth-child(1)").innerText;
-						var timeText = '';
+						let titleText = document.querySelector("body > center:nth-child(2) > b:nth-child(1)").innerText;
+						let timeText = '';
 						if (timeText == '') {
 							try {
 								timeText = document.evaluate("../../text()", document.querySelector("img"), null, XPathResult.STRING_TYPE)?.stringValue;
@@ -391,10 +391,10 @@ async function afterLoad() {
 					} catch (e) {}
 				} else if (isThatSite(site, "itch.io")) {
 					try {
-						var titleText = document.querySelector(".game_title").innerText;
-						var infoTable = document.querySelector(".more_information_toggle table");
-						var infos = infoTable.querySelectorAll("tr");
-						var authorText = '';
+						let titleText = document.querySelector(".game_title").innerText;
+						let infoTable = document.querySelector(".more_information_toggle table");
+						let infos = infoTable.querySelectorAll("tr");
+						let authorText = '';
 						if (authorText == '') {
 							try {
 								// try to contact 6th row, if it's author info, get it, else do nothing
@@ -408,9 +408,9 @@ async function afterLoad() {
 						if (authorText == '') {
 							try {
 								// try to search all row, if meet author info, get it, else do nothing
-								var i = 0;
+								let i = 0;
 								for (i=0; i<infos.length; i++) {
-									var info = infos[i];
+									let info = infos[i];
 									if (info.querySelector("td:nth-child(1)").innerText.toLowerCase() == 'author') {
 										authorText = info.querySelector("td:nth-child(2)").innerText;
 										break;
@@ -425,41 +425,45 @@ async function afterLoad() {
 				} else if (		(isThatSite(site, "bangumi.tv") || isThatSite(site, "bgm.tv"))
 								&& isThatPath(location.pathname, '/user')) {
 					try {
-						var userNameText = document.querySelector(".name>:nth-child(1)").innerText;
-						var userIdText = document.querySelector(".name>:nth-child(2)").innerText;
-						var userText = connectText(userNameText, userIdText, ' ');
-						var userSpaceMark = 'User Space';
+						let userNameText = document.querySelector(".name>:nth-child(1)").innerText;
+						let userIdText = document.querySelector(".name>:nth-child(2)").innerText;
+						let userText = connectText(userNameText, userIdText, ' ');
+						let userSpaceMark = 'User Space';
 						text = connectText(userText, userSpaceMark);
 					} catch (e) {}
 				} else if (isThatSite(site, "tieba.baidu.com") && isThatPath(location.pathname, '/p')) {
-					var titleText = document.querySelector('.core_title_txt').innerText;
-					var authorText = document.querySelector('.d_author .d_name').innerText;
-					var barText = document.querySelector('.card_title_fname').innerText;
+					let titleText = document.querySelector('.core_title_txt').innerText;
+					let authorText = document.querySelector('.d_author .d_name').innerText;
+					let barText = document.querySelector('.card_title_fname').innerText;
 					text = connectText(connectText(titleText, authorText), barText);
 				} else if (isThatSite(site, "soundcloud.com")) {
-					var emptyText = '';
-					var maybeText = emptyText;
+					let emptyText = '';
+					let maybeText = emptyText;
 					if (maybeText == emptyText) {
 						try {
-							var authorText = document.querySelector('.profileHeaderInfo__userName').innerText;
-							var userSpaceMark = 'User Space';
+							let authorText = document.querySelector('.profileHeaderInfo__userName').innerText;
+							let userSpaceMark = 'User Space';
 							maybeText = connectText(authorText, userSpaceMark);
 						} catch (e) {}
 					}
 					if (maybeText == emptyText) {
 						try {
-							var soundText = document.querySelector('.soundTitle__title').innerText;
-							var authorText = document.querySelector('.soundTitle__username').innerText;
+							let soundText = document.querySelector('.soundTitle__title').innerText;
+							let authorText = document.querySelector('.soundTitle__username').innerText;
 							maybeText = connectText(soundText, authorText);
 						} catch (e) {}
 					}
 					text = maybeText;
 				} else if (isThatSite(site, "woshipm.com")) {
-					var titleText = document.querySelector('.article--title').innerText;
+					let titleText = document.querySelector('.article--title').innerText;
 					text = titleText;
 				} else if (isThatSite(site, "www.cnblogs.com")) {
-					var titleText = document.querySelector('.postTitle').innerText;
-					var authorText = document.querySelector('#profile_block>a').innerText;
+					let titleText = document.querySelector('.postTitle').innerText;
+					let authorText = document.querySelector('#profile_block>a').innerText;
+					text = connectText(titleText, authorText);
+				} else if (isThatSite(site, "bandcamp.com")) {
+					let titleText = document.querySelector('.trackTitle').innerText;
+					let authorText = document.querySelector('#band-name-location>.title').innerText;
 					text = connectText(titleText, authorText);
 				}
 				else {
@@ -480,13 +484,13 @@ async function afterLoad() {
 		}
 
 		async function getSuffix() {
-			var recognizedSite = await identifySite();
+			let recognizedSite = await identifySite();
 			if (recognizedSite == undefined || recognizedSite == "") return "";
 			return " - " + recognizedSite;
 		}
 
 		async function identifySite() {
-			var site;
+			let site;
 			site = await identifySiteByURL();
 			if ( site != "" ) return site;
 			// site = identifySiteByTitle();
@@ -497,10 +501,10 @@ async function afterLoad() {
 		async function identifySiteByURL() {
 			// lower case site needed
 			// frequently access site, put it at head
-			var response = await fetch(chrome.runtime.getURL('./data.json'));
-			var json = await response.json();
-			var knownSiteList = json.knownSiteList;
-			var result = knownSiteList.find(siteContainer => {
+			let response = await fetch(chrome.runtime.getURL('./data.json'));
+			let json = await response.json();
+			let knownSiteList = json.knownSiteList;
+			let result = knownSiteList.find(siteContainer => {
 				siteContainer.site = siteContainer.site.toLowerCase();
 				return isThatSite(site, siteContainer.site);
 				});
@@ -509,33 +513,33 @@ async function afterLoad() {
 		}
 
 		function identifySiteByTitle() {
-			var title = document.title;
-			var loweredTitle = title.toLowerCase();
-			var knownSiteNameList = [
+			let title = document.title;
+			let loweredTitle = title.toLowerCase();
+			let knownSiteNameList = [
 				'Stack Overflow', 'Github', 'V2EX', '阮一峰的网络日志', '知乎', 'Google'
 				];
-			var result = knownSiteNameList.find(element => loweredTitle.includes(element.toLowerCase()));
+			let result = knownSiteNameList.find(element => loweredTitle.includes(element.toLowerCase()));
 			if (result != undefined) return result;
 			return "";
 		}
 
 		function getURL() {
 			if (isThatSite(site, "bilibili.com") && isThatPath(location.pathname, '/video')) {
-				var res = '';
+				let res = '';
 				res += location.origin + location.pathname;
 				// try find p=... in params, assign to pBody if p exist
-				var params = location.search;
-				var pBody = findParamInParams('p', params);
+				let params = location.search;
+				let pBody = findParamInParams('p', params);
 				if (pBody != '')
 					res += '?' + pBody;
 				res = urlEncodeRoundBrackets(res);
 				return res;
 			} else if (isThatSite(site, "bilibili.com")) {
-				var res = location.origin + location.pathname + removeParamInParams("spm_id_from", location.search);
+				let res = location.origin + location.pathname + removeParamInParams("spm_id_from", location.search);
 				res = urlEncodeRoundBrackets(res);
 				return res;
 			} else {
-				var res = location.href;
+				let res = location.href;
 				res = urlEncodeRoundBrackets(res);
 				return res;
 			}
@@ -550,19 +554,19 @@ async function afterLoad() {
 			if (params[0] != '?') {
 				params = '?' + params;
 			}
-			var paramAndEqualMark = param.endsWith('=') ? param : param + '=';
-			var cursor = 0;
+			let paramAndEqualMark = param.endsWith('=') ? param : param + '=';
+			let cursor = 0;
 			while(true) {
 				if (cursor >= params.length) return '';  // NOT found
-				var curChar = params[cursor];
+				let curChar = params[cursor];
 				if (curChar != '?' && curChar != '&') 
 					throw new Error('URL params format error, expect start mark, but NOT');
-				var startMark = curChar;
-				var bodyStartIndex = cursor + 1;
-				var bodyEndIndex = getIndexOfEndExclusiveFromString(params, bodyStartIndex, '&');
-				var bodyLen = bodyEndIndex - bodyStartIndex;
+				let startMark = curChar;
+				let bodyStartIndex = cursor + 1;
+				let bodyEndIndex = getIndexOfEndExclusiveFromString(params, bodyStartIndex, '&');
+				let bodyLen = bodyEndIndex - bodyStartIndex;
 				if (bodyLen >= paramAndEqualMark.length + 1) {
-					var partOfBody = params.substr(bodyStartIndex, paramAndEqualMark.length);
+					let partOfBody = params.substr(bodyStartIndex, paramAndEqualMark.length);
 					if (partOfBody == paramAndEqualMark) {
 						return params.substr(bodyStartIndex, bodyLen);  // found
 					}
@@ -580,9 +584,9 @@ async function afterLoad() {
 			if (params[0] != '?') {
 				params = '?' + params;
 			}
-			var paramAndEqualMark = param.endsWith('=') ? param : param + '=';
-			var cursor = 0;
-			var result = '';
+			let paramAndEqualMark = param.endsWith('=') ? param : param + '=';
+			let cursor = 0;
+			let result = '';
 			while(true) {
 				// 1. check if there is more work to do
 				// 2. try locate the param
@@ -592,26 +596,26 @@ async function afterLoad() {
 				
 				if (cursor >= params.length) break;  // no more work
 
-				var partOfResultStartIndex = cursor;
-				var partOfResultEndIndex;
+				let partOfResultStartIndex = cursor;
+				let partOfResultEndIndex;
 				while(true) {
 					if (cursor >= params.length) {
 						partOfResultEndIndex = params.length;
 						break;
 					}
 					
-					var curChar = params[cursor];
+					let curChar = params[cursor];
 					if (curChar != '?' && curChar != '&') 
 						throw new Error('URL params format error, expect start mark, but NOT');
-					var startMark = curChar;
-					var startIndex = cursor;
-					var bodyStartIndex = startIndex + 1;
-					var bodyEndIndex = getIndexOfEndExclusiveFromString(params, bodyStartIndex, '&');
+					let startMark = curChar;
+					let startIndex = cursor;
+					let bodyStartIndex = startIndex + 1;
+					let bodyEndIndex = getIndexOfEndExclusiveFromString(params, bodyStartIndex, '&');
 					if (bodyEndIndex <= cursor) 
 						throw new Error('expect cursor increment, but NOT');
-					var bodyLen = bodyEndIndex - bodyStartIndex;
+					let bodyLen = bodyEndIndex - bodyStartIndex;
 					
-					var partOfBody = params.substr(bodyStartIndex, paramAndEqualMark.length);
+					let partOfBody = params.substr(bodyStartIndex, paramAndEqualMark.length);
 					if (partOfBody == paramAndEqualMark) {
 						partOfResultEndIndex = startIndex;
 						cursor = bodyEndIndex;
@@ -621,7 +625,7 @@ async function afterLoad() {
 					cursor = bodyEndIndex;
 				}
 
-				var partOfResultLength = partOfResultEndIndex - partOfResultStartIndex;
+				let partOfResultLength = partOfResultEndIndex - partOfResultStartIndex;
 				result += params.substr(partOfResultStartIndex, partOfResultLength);
 			}
 			
@@ -638,11 +642,11 @@ async function afterLoad() {
 		}
 
 		function getIndexOfEndExclusiveFromString(str, startIndex, endChar) {
-			var endIndexExclusive = str.length;
-			var cursor = startIndex;
+			let endIndexExclusive = str.length;
+			let cursor = startIndex;
 			while(true) {
 				if (cursor >= str.length) break;
-				var cur = str[cursor];
+				let cur = str[cursor];
 				if (cur == endChar) {
 					endIndexExclusive = cursor;
 					break;
