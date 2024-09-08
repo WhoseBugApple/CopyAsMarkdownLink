@@ -96,6 +96,8 @@
 	    {"site": "www.chinawriter.com.cn", "name": "中国作家协会"}, 
 	    {"site": "www.caa1993.org.cn", "name": "中国探险协会"}, 
 	    {"site": "aesthetics.fandom.com", "name": "Aesthetics Wiki"}, 
+	    {"site": "www.guinnessworldrecords.cn", "name": "Guinness World Records"}, 
+	    {"site": "www.guinnessworldrecords.com", "name": "Guinness World Records"}, 
 	    {"site": "web.dev", "name": "web.dev"}
 	]
 }
