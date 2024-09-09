@@ -100,6 +100,8 @@
 	    {"site": "guinnessworldrecords.cn", "name": "Guinness World Records"}, 
 	    {"site": "worldrecordcertification.com", "name": "World Record Certification"}, 
 	    {"site": "wrcachina.com", "name": "World Record Certification"}, 
+	    {"site": "reaper.fm", "name": "REAPER DAW"}, 
+	    {"site": "reaper.blog", "name": "REAPER DAW"}, 
 	    {"site": "web.dev", "name": "web.dev"}
 	]
 }
