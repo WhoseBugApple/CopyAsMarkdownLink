@@ -113,6 +113,8 @@
 	    {"site": "chinafactcheck.com", "name": "有据"}, 
 	    {"site": "huijiwiki.com", "name": "灰机 Wiki"}, 
 	    {"site": "www.legis-pedia.com", "name": "legispedia"}, 
+	    {"site": "www.st.com", "name": "ST Company"}, 
+	    {"site": "www.st.com.cn", "name": "ST Company CN"}, 
 	    {"site": "web.dev", "name": "web.dev"}
 	]
 }
