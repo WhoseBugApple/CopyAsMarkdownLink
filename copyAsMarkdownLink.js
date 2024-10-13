@@ -465,6 +465,10 @@ async function afterLoad() {
 					let titleText = document.querySelector('.trackTitle').innerText;
 					let authorText = document.querySelector('#band-name-location>.title').innerText;
 					text = connectText(titleText, authorText);
+				} else if (isThatSite(site, "bbs.oldmantvg.net")) {
+					let titleText = document.querySelector('h4').innerText;
+					let authorText = document.querySelector('.card-user-info h5').innerText;
+					text = connectText(titleText, authorText);
 				}
 				else {
 					text = h1Text;
