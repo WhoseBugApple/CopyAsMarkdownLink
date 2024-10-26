@@ -117,6 +117,7 @@
 	    {"site": "www.st.com", "name": "ST Company"}, 
 	    {"site": "www.st.com.cn", "name": "ST Company CN"}, 
 	    {"site": "zol.com.cn", "name": "中关村在线"}, 
+	    {"site": "aliyun.com", "name": "阿里"}, 
 	    {"site": "web.dev", "name": "web.dev"}
 	]
 }
