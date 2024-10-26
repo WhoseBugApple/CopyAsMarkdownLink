@@ -118,6 +118,7 @@
 	    {"site": "www.st.com.cn", "name": "ST Company CN"}, 
 	    {"site": "zol.com.cn", "name": "中关村在线"}, 
 	    {"site": "aliyun.com", "name": "阿里云"}, 
+	    {"site": "alibabacloud.com", "name": "阿里巴巴云"}, 
 	    {"site": "cloud.tencent.com", "name": "腾讯云"}, 
 	    {"site": "web.dev", "name": "web.dev"}
 	]
