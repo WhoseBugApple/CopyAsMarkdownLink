@@ -121,6 +121,7 @@
 	    {"site": "alibabacloud.com", "name": "阿里巴巴云"}, 
 	    {"site": "cloud.tencent.com", "name": "腾讯云"}, 
 	    {"site": "huaweicloud.com", "name": "华为云"}, 
+	    {"site": "facebook.com", "name": "Facebook"}, 
 	    {"site": "web.dev", "name": "web.dev"}
 	]
 }

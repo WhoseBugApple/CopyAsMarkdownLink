@@ -116,6 +116,7 @@ async function afterLoad() {
 			return false;
 		}
 
+		//  preprocess: if that path /video then change to /video/
 		//  /video/   is /video/
 		//  /video	is /video/
 		//  /video/1  is /video/
@@ -139,7 +140,7 @@ async function afterLoad() {
 		//  /@/	NOT continue /@
 		//  /@/123 NOT continue /@
 		//  /@	 NOT continue /@
-		function isContinueThatPathWithoutSplit(thePath, thatPath) {
+		function isContinueThatPathBeforeSplit(thePath, thatPath) {
 			if (!thePath.startsWith("/")) thePath = "/" + thePath;
 			if (!thatPath.startsWith("/")) thatPath = "/" + thatPath;
 			if (!thePath.endsWith("/")) thePath = thePath + "/";
@@ -225,7 +226,7 @@ async function afterLoad() {
 					if (!titleText || titleText == "") titleText = document.querySelector("#firstHeading")?.querySelector("span")?.innerText;
 					if (!titleText) titleText = "";
 					text = titleText;
-				} else if (isThatSite(site, "google.com") && isThatPath(location.pathname, '/search')) {
+				} else if (isThatSite(site, "google.com") && isThatPath(location.pathname, '/search/')) {
 					// my selector
 					text = document.querySelector("textarea").value;
 					// generate by Dev Tool -> Elements -> Popup -> Copy -> Copy JSPath
@@ -235,8 +236,8 @@ async function afterLoad() {
 					if (!fileName || fileName == "") fileName = document.querySelector("#file-name-id")?.innerText;
 					if (!fileName || fileName == "") fileName = document.querySelector("#file-name-id-wide")?.innerText;
 					if (!fileName || fileName == "") fileName = "";
-					let repoName = document.querySelector(".AppHeader-context-full ul").querySelector("li+li>a").innerText;
-					let authorName = document.querySelector(".AppHeader-context-full ul").querySelector("li>a").innerText;
+					let repoName = document.querySelector("#repository-container-header [itemprop=\"name\"]").innerText;
+					let authorName = document.querySelector("#repository-container-header [itemprop=\"author\"]").innerText;
 					text = connectText(connectText(fileName, repoName), authorName);
 				} else if (isThatSite(site, "sspai.com")) {
 					text = document.querySelector(".title").innerText;
@@ -295,18 +296,18 @@ async function afterLoad() {
 					let bookName = document.getElementsByClassName("bookInfo_right_header_title")[0].innerText;
 					let authorName = document.getElementsByClassName("bookInfo_author link")[0].innerText;
 					text = connectText(bookName, authorName);
-				} else if (isThatSite(site, "book.douban.com")  && isThatPath(location.pathname, '/subject')) {
+				} else if (isThatSite(site, "book.douban.com")  && isThatPath(location.pathname, '/subject/')) {
 					let bookName = h1Text;
 					let authorName = document.querySelector("#info > span:nth-child(1) > a").innerText;
 					text = connectText(bookName, authorName);
 				} else if (isThatSite(site, "runoob.com")) {
 					let tutorialName = document.getElementsByTagName('h1')[1].innerText;
 					text = tutorialName;
-				} else if (isThatSite(site, "youtube.com") && isThatPath(location.pathname, '/watch')) {
+				} else if (isThatSite(site, "youtube.com") && isThatPath(location.pathname, '/watch/')) {
 					let videoName = document.querySelector("#title > h1").innerText;
 					let authorName = document.querySelector("#text > a").innerText;
 					text = connectText(videoName, authorName);
-				} else if (isThatSite(site, "youtube.com") && isContinueThatPathWithoutSplit(location.pathname, '/@')) {
+				} else if (isThatSite(site, "youtube.com") && isContinueThatPathBeforeSplit(location.pathname, '/@')) {
 					let authorName = '';
 					if (!authorName || authorName == '') {
 						authorName = document.querySelector("#channel-name").innerText.trim();
@@ -316,12 +317,12 @@ async function afterLoad() {
 					}
 					let userSpaceMark = 'User Space';
 					text = connectText(authorName, userSpaceMark);
-				} else if (isThatSite(site, "youtube.com") && isThatPath(location.pathname, '/playlist')) {
+				} else if (isThatSite(site, "youtube.com") && isThatPath(location.pathname, '/playlist/')) {
 					let playListName = document.querySelector(".immersive-header-container #text").innerText;
 					let authorName = document.querySelector(".immersive-header-container #owner-text").innerText;
 					let playListMark = 'Playlist';
 					text = connectText(connectText(playListName, authorName), playListMark);
-				} else if (isThatSite(site, "youtube.com") && isThatPath(location.pathname, '/channel')) {
+				} else if (isThatSite(site, "youtube.com") && isThatPath(location.pathname, '/channel/')) {
 					let channelText = document.querySelector("#channel-name #text").innerText;
 					let channelMark = 'Channel';
 					text = connectText(channelText, channelMark);
@@ -370,7 +371,7 @@ async function afterLoad() {
 						let titleText = document.querySelector("h2").innerText;
 						text = titleText;
 					} catch (e) {}
-				} else if (isThatSite(site, "apod.nasa.gov") && isContinueThatPathWithoutSplit(location.pathname, '/apod/ap')) {
+				} else if (isThatSite(site, "apod.nasa.gov") && isContinueThatPathBeforeSplit(location.pathname, '/apod/ap')) {
 					try {
 						let titleText = document.querySelector("body > center:nth-child(2) > b:nth-child(1)").innerText;
 						let timeText = '';
@@ -423,7 +424,7 @@ async function afterLoad() {
 						text = connectText(titleText, authorText);
 					} catch (e) {}
 				} else if (		(isThatSite(site, "bangumi.tv") || isThatSite(site, "bgm.tv"))
-								&& isThatPath(location.pathname, '/user')) {
+								&& isThatPath(location.pathname, '/user/')) {
 					try {
 						let userNameText = document.querySelector(".name>:nth-child(1)").innerText;
 						let userIdText = document.querySelector(".name>:nth-child(2)").innerText;
@@ -431,7 +432,7 @@ async function afterLoad() {
 						let userSpaceMark = 'User Space';
 						text = connectText(userText, userSpaceMark);
 					} catch (e) {}
-				} else if (isThatSite(site, "tieba.baidu.com") && isThatPath(location.pathname, '/p')) {
+				} else if (isThatSite(site, "tieba.baidu.com") && isThatPath(location.pathname, '/p/')) {
 					let titleText = document.querySelector('.core_title_txt').innerText;
 					let authorText = document.querySelector('.d_author .d_name').innerText;
 					let barText = document.querySelector('.card_title_fname').innerText;
@@ -469,6 +470,11 @@ async function afterLoad() {
 					let titleText = document.querySelector('h4').innerText;
 					let authorText = document.querySelector('.card-user-info h5').innerText;
 					text = connectText(titleText, authorText);
+				} else if (isThatSite(site, "reddit.com") && isThatPath(location.pathname, '/r/')) {
+					let titleText = document.querySelector('h1').innerText;
+					let authorText = document.querySelector('.author-name').innerText;
+					let subredditText = document.querySelector('.subreddit-name').innerText;
+					text = connectText(connectText(titleText, authorText), subredditText);
 				}
 				else {
 					text = h1Text;
@@ -508,6 +514,7 @@ async function afterLoad() {
 			let response = await fetch(chrome.runtime.getURL('./data.json'));
 			let json = await response.json();
 			let knownSiteList = json.knownSiteList;
+			knownSiteList = knownSiteList.sort((a, b) => b.site.length - a.site.length);
 			let result = knownSiteList.find(siteContainer => {
 				siteContainer.site = siteContainer.site.toLowerCase();
 				return isThatSite(site, siteContainer.site);
