@@ -122,6 +122,7 @@
 	    {"site": "cloud.tencent.com", "name": "腾讯云"}, 
 	    {"site": "huaweicloud.com", "name": "华为云"}, 
 	    {"site": "facebook.com", "name": "Facebook"}, 
+	    {"site": "tvtropes.org", "name": "TV Tropes"}, 
 	    {"site": "web.dev", "name": "web.dev"}
 	]
 }
