@@ -124,6 +124,7 @@
 	    {"site": "facebook.com", "name": "Facebook"}, 
 	    {"site": "tvtropes.org", "name": "TV Tropes"}, 
 	    {"site": "thepaper.cn", "name": "澎湃新闻"}, 
+	    {"site": "gov.cn", "name": "中国政府网"}, 
 	    {"site": "web.dev", "name": "web.dev"}
 	]
 }
