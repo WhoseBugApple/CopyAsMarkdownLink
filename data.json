@@ -123,6 +123,7 @@
 	    {"site": "huaweicloud.com", "name": "华为云"}, 
 	    {"site": "facebook.com", "name": "Facebook"}, 
 	    {"site": "tvtropes.org", "name": "TV Tropes"}, 
+	    {"site": "thepaper.cn", "name": "澎湃新闻"}, 
 	    {"site": "web.dev", "name": "web.dev"}
 	]
 }
