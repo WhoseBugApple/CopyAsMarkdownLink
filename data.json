@@ -125,6 +125,11 @@
 	    {"site": "tvtropes.org", "name": "TV Tropes"}, 
 	    {"site": "thepaper.cn", "name": "澎湃新闻"}, 
 	    {"site": "gov.cn", "name": "中国政府网"}, 
+	    {"site": "dxy.cn", "name": "丁香园"}, 
+	    {"site": "drugs.dxy.cn", "name": "丁香园用药助手"}, 
+	    {"site": "y.dxy.cn", "name": "丁香园医院汇"}, 
+	    {"site": "dxy.com", "name": "丁香医生"}, 
+	    {"site": "haodf.com", "name": "好大夫在线"}, 
 	    {"site": "web.dev", "name": "web.dev"}
 	]
 }
