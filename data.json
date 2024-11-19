@@ -132,6 +132,9 @@
 	    {"site": "dxy.com", "name": "丁香医生"}, 
 	    {"site": "haodf.com", "name": "好大夫在线"}, 
 	    {"site": "jandan.net", "name": "煎蛋网"}, 
+	    {"site": "xygalgame.com", "name": "初音的青葱发布站"}, 
+	    {"site": "fufugal.com", "name": "初音的青葱"}, 
+	    {"site": "ffgal.com", "name": "初音的青葱"}, 
 	    {"site": "web.dev", "name": "web.dev"}
 	]
 }
