@@ -137,6 +137,7 @@
 	    {"site": "ffgal.com", "name": "初音的青葱"}, 
 	    {"site": "coolapk.com", "name": "酷安"}, 
 	    {"site": "gsxt.gov.cn", "name": "中国国家企业信息公示系统"}, 
+	    {"site": "jd.com", "name": "京东"}, 
 	    {"site": "web.dev", "name": "web.dev"}
 	]
 }
