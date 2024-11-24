@@ -1,6 +1,7 @@
 {
 	"knownSiteList": [
 	    {"site": "google.com", "name": "Google"}, 
+	    {"site": "artsandculture.google.com", "name": "Google Art and Culture"}, 
 	    {"site": "zh.wikipedia.org", "name": "维基百科"}, 
 	    {"site": "wikipedia.org", "name": "wikipedia"}, 
 	    {"site": "stackoverflow.com", "name": "Stack Overflow"}, 
