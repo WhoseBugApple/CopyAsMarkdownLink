@@ -208,9 +208,22 @@ async function afterLoad() {
 		}
 
 		function autoChooseText() {
-			let h1 = document.querySelector("h1");
-			let h1Text = "";
-			if (h1) h1Text = h1.innerText;
+			let firstVisualH1Text = "";
+			{
+				let h1s = document.querySelectorAll("h1");
+				let i = 0;
+				for (i=0; i<h1s.length; i++) {
+					let h1 = h1s[i];
+					let styles = h1.computedStyleMap();
+					let displayStyle = styles.get("display").value;
+					if (displayStyle == "none") continue;
+					let h1Text = h1.outerText;
+					let h1TrimedText = h1Text.trim();
+					if (h1TrimedText == "") continue;
+					firstVisualH1Text = h1Text;
+					break;
+				}
+			}
 			
 			// set text
 			// lower case site needed
@@ -222,8 +235,8 @@ async function afterLoad() {
 					// [XPath - MDN web docs](https://developer.mozilla.org/en-US/docs/Web/XPath)
 					// [Document: evaluate() method - MDN web docs](https://developer.mozilla.org/en-US/docs/Web/API/Document/evaluate)
 					if (!titleText || titleText == "") titleText = document.evaluate("text()", document.querySelector("#firstHeading"), null, XPathResult.STRING_TYPE)?.stringValue;
-					if (!titleText || titleText == "") titleText = document.querySelector("#firstHeading")?.firstChild?.innerText;
-					if (!titleText || titleText == "") titleText = document.querySelector("#firstHeading")?.querySelector("span")?.innerText;
+					if (!titleText || titleText == "") titleText = document.querySelector("#firstHeading")?.firstChild?.outerText;
+					if (!titleText || titleText == "") titleText = document.querySelector("#firstHeading")?.querySelector("span")?.outerText;
 					if (!titleText) titleText = "";
 					text = titleText;
 				} else if (isThatSite(site, "google.com") && isThatPath(location.pathname, '/search/')) {
@@ -233,38 +246,38 @@ async function afterLoad() {
 					// text = document.querySelector("#tsf > div:nth-child(1) > div.A8SBwf > div.RNNXgb > div > div.a4bIc > input").value;
 				} else if (isThatSite(site, "github.com")) {
 					let fileName;
-					if (!fileName || fileName == "") fileName = document.querySelector("#file-name-id")?.innerText;
-					if (!fileName || fileName == "") fileName = document.querySelector("#file-name-id-wide")?.innerText;
+					if (!fileName || fileName == "") fileName = document.querySelector("#file-name-id")?.outerText;
+					if (!fileName || fileName == "") fileName = document.querySelector("#file-name-id-wide")?.outerText;
 					if (!fileName || fileName == "") fileName = "";
-					let repoName = document.querySelector("#repository-container-header [itemprop=\"name\"]").innerText;
-					let authorName = document.querySelector("#repository-container-header [itemprop=\"author\"]").innerText;
+					let repoName = document.querySelector("#repository-container-header [itemprop=\"name\"]").outerText;
+					let authorName = document.querySelector("#repository-container-header [itemprop=\"author\"]").outerText;
 					text = connectText(connectText(fileName, repoName), authorName);
 				} else if (isThatSite(site, "sspai.com")) {
-					text = document.querySelector(".title").innerText;
+					text = document.querySelector(".title").outerText;
 				} else if (isThatSite(site, "zhuanlan.zhihu.com")) {
-					let authorText = document.getElementsByClassName("AuthorInfo-head")[0].innerText;
+					let authorText = document.getElementsByClassName("AuthorInfo-head")[0].outerText;
 					text = connectText(h1Text, authorText);
 				} else if (isThatSite(site, "daily.zhihu.com")) {
-					let titleText = document.querySelector(".DailyHeader-title").innerText;
-					let authorText = document.querySelector(".ZhihuDaily-Author").innerText;
+					let titleText = document.querySelector(".DailyHeader-title").outerText;
+					let authorText = document.querySelector(".ZhihuDaily-Author").outerText;
 					text = connectText(titleText, authorText);
 				} else if (isThatSite(site, "space.bilibili.com")) {
-					let userName = document.querySelector("#h-name").innerText;
+					let userName = document.querySelector("#h-name").outerText;
 					text = userName;
 				} else if (isThatSite(site, "bilibili.com") && isThatPath(location.pathname, '/video/')) {
 					let pageText = '';
 					try {
-						pageText = document.querySelector("#multi_page .on").innerText;
+						pageText = document.querySelector("#multi_page .on").outerText;
 					} catch(e) {}
-					let titleText = document.querySelector(".video-title").innerText;
+					let titleText = document.querySelector(".video-title").outerText;
 					try {
-						let authorText = document.querySelector(".up-info-container .up-name").innerText;
+						let authorText = document.querySelector(".up-info-container .up-name").outerText;
 						text = connectText(connectText(pageText, titleText), authorText);
 					} catch (e) {
 						try {
 							let authorTexts = '';
 							document.querySelectorAll(".container .staff-name").forEach(each => {
-								let name = each.innerText;
+								let name = each.outerText;
 								if (authorTexts != '') authorTexts += ' & ';
 								authorTexts += name;
 							});
@@ -274,106 +287,106 @@ async function afterLoad() {
 						}
 					}
 				} else if (isThatSite(site, "bilibili.com") && isThatPath(location.pathname, '/audio/')) {
-					let songNameText = document.querySelector('.song-title').innerText;
+					let songNameText = document.querySelector('.song-title').outerText;
 					text = songNameText;
 				} else if (isThatSite(site, "bilibili.com") && isThatPath(location.pathname, '/opus/')) {
 					// 这是动态文章
-					let timeText = document.querySelector('.opus-module-author__pub').innerText;
-					let articleText = document.querySelector('.opus-module-content').innerText;
-					let authorText = document.querySelector('.opus-module-author__name').innerText;
+					let timeText = document.querySelector('.opus-module-author__pub').outerText;
+					let articleText = document.querySelector('.opus-module-content').outerText;
+					let authorText = document.querySelector('.opus-module-author__name').outerText;
 					text = connectText(timeText, connectText(articleText, authorText));
 				} else if (isThatSite(site, "bilibili.com") && isThatPath(location.pathname, '/read/readlist/')) {
 					// 这是专栏列表
-					let titleText = document.querySelector('.title').innerText;
-					let authorText = document.querySelector('.list-container .up-name').innerText;
+					let titleText = document.querySelector('.title').outerText;
+					let authorText = document.querySelector('.list-container .up-name').outerText;
 					text = connectText(titleText, authorText);
 				} else if (isThatSite(site, "bilibili.com") && isThatPath(location.pathname, '/read/')) {
 					// 这是专栏文章
-					let titleText = document.querySelector('.title').innerText;
-					let authorText = document.querySelector('.article-detail .up-name').innerText;
+					let titleText = document.querySelector('.title').outerText;
+					let authorText = document.querySelector('.article-detail .up-name').outerText;
 					text = connectText(titleText, authorText);
 				} else if (isThatSite(site, "weread.qq.com")) {
-					let bookName = document.getElementsByClassName("bookInfo_right_header_title")[0].innerText;
-					let authorName = document.getElementsByClassName("bookInfo_author link")[0].innerText;
+					let bookName = document.getElementsByClassName("bookInfo_right_header_title")[0].outerText;
+					let authorName = document.getElementsByClassName("bookInfo_author link")[0].outerText;
 					text = connectText(bookName, authorName);
 				} else if (isThatSite(site, "book.douban.com")  && isThatPath(location.pathname, '/subject/')) {
 					let bookName = h1Text;
-					let authorName = document.querySelector("#info > span:nth-child(1) > a").innerText;
+					let authorName = document.querySelector("#info > span:nth-child(1) > a").outerText;
 					text = connectText(bookName, authorName);
 				} else if (isThatSite(site, "runoob.com")) {
-					let tutorialName = document.getElementsByTagName('h1')[1].innerText;
+					let tutorialName = document.getElementsByTagName('h1')[1].outerText;
 					text = tutorialName;
 				} else if (isThatSite(site, "youtube.com") && isThatPath(location.pathname, '/watch/')) {
-					let videoName = document.querySelector("#title > h1").innerText;
-					let authorName = document.querySelector("#text > a").innerText;
+					let videoName = document.querySelector("#title > h1").outerText;
+					let authorName = document.querySelector("#text > a").outerText;
 					text = connectText(videoName, authorName);
 				} else if (isThatSite(site, "youtube.com") && isContinueThatPathBeforeSplit(location.pathname, '/@')) {
 					let authorName = '';
 					if (!authorName || authorName == '') {
-						authorName = document.querySelector("#channel-name").innerText.trim();
+						authorName = document.querySelector("#channel-name").outerText.trim();
 					}
 					if (!authorName || authorName == '') {
-						authorName = document.querySelector("#page-header h1").innerText.trim();
+						authorName = document.querySelector("#page-header h1").outerText.trim();
 					}
 					let userSpaceMark = 'User Space';
 					text = connectText(authorName, userSpaceMark);
 				} else if (isThatSite(site, "youtube.com") && isThatPath(location.pathname, '/playlist/')) {
-					let playListName = document.querySelector(".immersive-header-container #text").innerText;
-					let authorName = document.querySelector(".immersive-header-container #owner-text").innerText;
+					let playListName = document.querySelector(".immersive-header-container #text").outerText;
+					let authorName = document.querySelector(".immersive-header-container #owner-text").outerText;
 					let playListMark = 'Playlist';
 					text = connectText(connectText(playListName, authorName), playListMark);
 				} else if (isThatSite(site, "youtube.com") && isThatPath(location.pathname, '/channel/')) {
-					let channelText = document.querySelector("#channel-name #text").innerText;
+					let channelText = document.querySelector("#channel-name #text").outerText;
 					let channelMark = 'Channel';
 					text = connectText(channelText, channelMark);
 				} else if (isThatSite(site, "news.ycombinator.com")) {
-					let titleText = document.querySelector(".titleline").innerText;
+					let titleText = document.querySelector(".titleline").outerText;
 					text = titleText;
 				} else if (isThatSite(site, "www.pixiv.net")) {
 					try {
-						let titleText = document.querySelector("h1").innerText;
-						let authorText = document.querySelector("aside h2").innerText;
+						let titleText = document.querySelector("h1").outerText;
+						let authorText = document.querySelector("aside h2").outerText;
 						text = connectText(titleText, authorText);
 					} catch (e) {}
 				} else if (isThatSite(site, "www.deviantart.com")) {
 					try {
-						let titleText = document.querySelector("h1").innerText;
-						let authorText = document.querySelector(".user-link > span:nth-of-type(1)").innerText;
+						let titleText = document.querySelector("h1").outerText;
+						let authorText = document.querySelector(".user-link > span:nth-of-type(1)").outerText;
 						text = connectText(titleText, authorText);
 					} catch (e) {}
 				} else if (isThatSite(site, "store.steampowered.com")) {
 					try {
-						let titleText = document.querySelector("#appHubAppName").innerText;
-						let authorText = document.querySelector("#developers_list").innerText;
+						let titleText = document.querySelector("#appHubAppName").outerText;
+						let authorText = document.querySelector("#developers_list").outerText;
 						text = connectText(titleText, authorText);
 					} catch (e) {}
 				} else if (isThatSite(site, "keylol.com")) {
 					try {
-						let titleText = document.querySelector("#thread_subject").innerText;
-						let authorText = document.querySelector(".authi").innerText;
+						let titleText = document.querySelector("#thread_subject").outerText;
+						let authorText = document.querySelector(".authi").outerText;
 						text = connectText(titleText, authorText);
 					} catch (e) {}
 				} else if (isThatSite(site, "twitter.com") || isThatSite(site, "x.com")) {
 					try {
 						let timesInArticle = document.querySelector("article").querySelectorAll("time");
 						let time = timesInArticle[timesInArticle.length-1];
-						let timeText = time.innerText;
-						let authorText = document.querySelector("article span").innerText;
+						let timeText = time.outerText;
+						let authorText = document.querySelector("article span").outerText;
 						text = connectText(timeText, authorText);
 					} catch (e) {}
 				} else if (isThatSite(site, "youxiputao.com")) {
 					try {
-						let titleText = document.querySelector("h2").innerText;
+						let titleText = document.querySelector("h2").outerText;
 						text = titleText;
 					} catch (e) {}
 				} else if (isThatSite(site, "gouhuo.qq.com")) {
 					try {
-						let titleText = document.querySelector("h2").innerText;
+						let titleText = document.querySelector("h2").outerText;
 						text = titleText;
 					} catch (e) {}
 				} else if (isThatSite(site, "apod.nasa.gov") && isContinueThatPathBeforeSplit(location.pathname, '/apod/ap')) {
 					try {
-						let titleText = document.querySelector("body > center:nth-child(2) > b:nth-child(1)").innerText;
+						let titleText = document.querySelector("body > center:nth-child(2) > b:nth-child(1)").outerText;
 						let timeText = '';
 						if (timeText == '') {
 							try {
@@ -392,15 +405,15 @@ async function afterLoad() {
 					} catch (e) {}
 				} else if (isThatSite(site, "itch.io")) {
 					try {
-						let titleText = document.querySelector(".game_title").innerText;
+						let titleText = document.querySelector(".game_title").outerText;
 						let infoTable = document.querySelector(".more_information_toggle table");
 						let infos = infoTable.querySelectorAll("tr");
 						let authorText = '';
 						if (authorText == '') {
 							try {
 								// try to contact 6th row, if it's author info, get it, else do nothing
-								if (infos[5].querySelector("td:nth-child(1)").innerText.toLowerCase() == 'author') {
-									authorText = infos[5].querySelector("td:nth-child(2)").innerText;
+								if (infos[5].querySelector("td:nth-child(1)").outerText.toLowerCase() == 'author') {
+									authorText = infos[5].querySelector("td:nth-child(2)").outerText;
 								}
 							} catch (e) {
 								authorText = '';
@@ -412,8 +425,8 @@ async function afterLoad() {
 								let i = 0;
 								for (i=0; i<infos.length; i++) {
 									let info = infos[i];
-									if (info.querySelector("td:nth-child(1)").innerText.toLowerCase() == 'author') {
-										authorText = info.querySelector("td:nth-child(2)").innerText;
+									if (info.querySelector("td:nth-child(1)").outerText.toLowerCase() == 'author') {
+										authorText = info.querySelector("td:nth-child(2)").outerText;
 										break;
 									}
 								}
@@ -426,58 +439,58 @@ async function afterLoad() {
 				} else if (		(isThatSite(site, "bangumi.tv") || isThatSite(site, "bgm.tv"))
 								&& isThatPath(location.pathname, '/user/')) {
 					try {
-						let userNameText = document.querySelector(".name>:nth-child(1)").innerText;
-						let userIdText = document.querySelector(".name>:nth-child(2)").innerText;
+						let userNameText = document.querySelector(".name>:nth-child(1)").outerText;
+						let userIdText = document.querySelector(".name>:nth-child(2)").outerText;
 						let userText = connectText(userNameText, userIdText, ' ');
 						let userSpaceMark = 'User Space';
 						text = connectText(userText, userSpaceMark);
 					} catch (e) {}
 				} else if (isThatSite(site, "tieba.baidu.com") && isThatPath(location.pathname, '/p/')) {
-					let titleText = document.querySelector('.core_title_txt').innerText;
-					let authorText = document.querySelector('.d_author .d_name').innerText;
-					let barText = document.querySelector('.card_title_fname').innerText;
+					let titleText = document.querySelector('.core_title_txt').outerText;
+					let authorText = document.querySelector('.d_author .d_name').outerText;
+					let barText = document.querySelector('.card_title_fname').outerText;
 					text = connectText(connectText(titleText, authorText), barText);
 				} else if (isThatSite(site, "soundcloud.com")) {
 					let emptyText = '';
 					let maybeText = emptyText;
 					if (maybeText == emptyText) {
 						try {
-							let authorText = document.querySelector('.profileHeaderInfo__userName').innerText;
+							let authorText = document.querySelector('.profileHeaderInfo__userName').outerText;
 							let userSpaceMark = 'User Space';
 							maybeText = connectText(authorText, userSpaceMark);
 						} catch (e) {}
 					}
 					if (maybeText == emptyText) {
 						try {
-							let soundText = document.querySelector('.soundTitle__title').innerText;
-							let authorText = document.querySelector('.soundTitle__username').innerText;
+							let soundText = document.querySelector('.soundTitle__title').outerText;
+							let authorText = document.querySelector('.soundTitle__username').outerText;
 							maybeText = connectText(soundText, authorText);
 						} catch (e) {}
 					}
 					text = maybeText;
 				} else if (isThatSite(site, "woshipm.com")) {
-					let titleText = document.querySelector('.article--title').innerText;
+					let titleText = document.querySelector('.article--title').outerText;
 					text = titleText;
 				} else if (isThatSite(site, "www.cnblogs.com")) {
-					let titleText = document.querySelector('.postTitle').innerText;
-					let authorText = document.querySelector('#profile_block>a').innerText;
+					let titleText = document.querySelector('.postTitle').outerText;
+					let authorText = document.querySelector('#profile_block>a').outerText;
 					text = connectText(titleText, authorText);
 				} else if (isThatSite(site, "bandcamp.com")) {
-					let titleText = document.querySelector('.trackTitle').innerText;
-					let authorText = document.querySelector('#band-name-location>.title').innerText;
+					let titleText = document.querySelector('.trackTitle').outerText;
+					let authorText = document.querySelector('#band-name-location>.title').outerText;
 					text = connectText(titleText, authorText);
 				} else if (isThatSite(site, "bbs.oldmantvg.net")) {
-					let titleText = document.querySelector('h4').innerText;
-					let authorText = document.querySelector('.card-user-info h5').innerText;
+					let titleText = document.querySelector('h4').outerText;
+					let authorText = document.querySelector('.card-user-info h5').outerText;
 					text = connectText(titleText, authorText);
 				} else if (isThatSite(site, "reddit.com") && isThatPath(location.pathname, '/r/')) {
-					let titleText = document.querySelector('h1').innerText;
-					let authorText = document.querySelector('.author-name').innerText;
-					let subredditText = document.querySelector('.subreddit-name').innerText;
+					let titleText = document.querySelector('h1').outerText;
+					let authorText = document.querySelector('.author-name').outerText;
+					let subredditText = document.querySelector('.subreddit-name').outerText;
 					text = connectText(connectText(titleText, authorText), subredditText);
 				}
 				else {
-					text = h1Text;
+					text = firstVisualH1Text;
 				}
 			} catch (e) {console.log('content script autoChooseText() error\n', e);}
 
