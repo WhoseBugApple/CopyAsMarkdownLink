@@ -488,6 +488,9 @@ async function afterLoad() {
 					let authorText = document.querySelector('.author-name').outerText;
 					let subredditText = document.querySelector('.subreddit-name').outerText;
 					text = connectText(connectText(titleText, authorText), subredditText);
+				} else if (isThatSite(site, "jandan.net")) {
+					let titleText = document.querySelector('#body h1').outerText;
+					text = titleText;
 				}
 				else {
 					text = firstVisualH1Text;
