@@ -51,6 +51,7 @@
 	    {"site": "store.steampowered.com", "name": "Steam"}, 
 	    {"site": "steamcommunity.com", "name": "Steam Community"}, 
 	    {"site": "steamdb.info", "name": "SteamDB"}, 
+	    {"site": "gog.com", "name": "GOG"}, 
 	    {"site": "indienova.com", "name": "INDIE NOVA"}, 
 	    {"site": "www.cnblogs.com", "name": "博客园"}, 
 	    {"site": "mp.weixin.qq.com", "name": "微信"}, 
