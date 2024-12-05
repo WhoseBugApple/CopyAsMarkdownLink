@@ -140,6 +140,7 @@
 	    {"site": "coolapk.com", "name": "酷安"}, 
 	    {"site": "gsxt.gov.cn", "name": "中国国家企业信息公示系统"}, 
 	    {"site": "jd.com", "name": "京东"}, 
+	    {"site": "archive.org", "name": "Internet Archive"}, 
 	    {"site": "web.dev", "name": "web.dev"}
 	]
 }
