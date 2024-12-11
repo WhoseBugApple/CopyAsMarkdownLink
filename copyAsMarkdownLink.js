@@ -249,8 +249,14 @@ async function afterLoad() {
 					if (!fileName || fileName == "") fileName = document.querySelector("#file-name-id")?.outerText;
 					if (!fileName || fileName == "") fileName = document.querySelector("#file-name-id-wide")?.outerText;
 					if (!fileName || fileName == "") fileName = "";
-					let repoName = document.querySelector("#repository-container-header [itemprop=\"name\"]").outerText;
-					let authorName = document.querySelector("#repository-container-header [itemprop=\"author\"]").outerText;
+					let repoName;
+					if (!repoName || repoName == "") repoName = document.querySelector('#repository-container-header [itemprop="name"]')?.outerText;
+					if (!repoName || repoName == "") repoName = document.querySelector('[role="navigation"] > ul > li:nth-of-type(2) > a')?.outerText;
+					if (!repoName || repoName == "") repoName = "";
+					let authorName;
+					if (!authorName || authorName == "") authorName = document.querySelector("#repository-container-header [itemprop=\"author\"]")?.outerText;
+					if (!authorName || authorName == "") authorName = document.querySelector('[role="navigation"] > ul > li:nth-of-type(1) > a')?.outerText;
+					if (!authorName || authorName == "") authorName = "";
 					text = connectText(connectText(fileName, repoName), authorName);
 				} else if (isThatSite(site, "sspai.com")) {
 					text = document.querySelector(".title").outerText;
