@@ -15,6 +15,7 @@
 	    {"site": "zhihu.com", "name": "知乎"}, 
 	    {"site": "weread.qq.com", "name": "微信读书"}, 
 	    {"site": "douban.com", "name": "豆瓣"}, 
+	    {"site": "goodreads.com", "name": "Good Reads"}, 
 	    {"site": "runoob.com", "name": "菜鸟教程"}, 
 	    {"site": "cppreference.com", "name": "cppreference"}, 
 	    {"site": "cplusplus.com", "name": "cplusplus"}, 
