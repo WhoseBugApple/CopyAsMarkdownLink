@@ -147,6 +147,7 @@
 	    {"site": "archive.org", "name": "Internet Archive"}, 
 	    {"site": "threads.net", "name": "Threads Community"}, 
 	    {"site": "weibo.com", "name": "微博"}, 
+	    {"site": "xiaohongshu.com", "name": "小红书"}, 
 	    {"site": "web.dev", "name": "web.dev"}
 	]
 }

@@ -497,7 +497,7 @@ async function afterLoad() {
 				} else if (isThatSite(site, "jandan.net")) {
 					let titleText = document.querySelector('#body h1').outerText;
 					text = titleText;
-				}
+				} 
 				else {
 					text = firstVisualH1Text;
 				}
