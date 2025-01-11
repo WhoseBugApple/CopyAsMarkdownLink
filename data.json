@@ -146,6 +146,7 @@
 	    {"site": "jd.com", "name": "京东"}, 
 	    {"site": "archive.org", "name": "Internet Archive"}, 
 	    {"site": "threads.net", "name": "Threads Community"}, 
+	    {"site": "weibo.com", "name": "微博"}, 
 	    {"site": "web.dev", "name": "web.dev"}
 	]
 }
