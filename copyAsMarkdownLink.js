@@ -271,15 +271,27 @@ async function afterLoad() {
 					let userName = document.querySelector("#h-name").outerText;
 					text = userName;
 				} else if (isThatSite(site, "bilibili.com") && isThatPath(location.pathname, '/video/')) {
+					// let params = location.search;
+					// let pBody = findParamInParams('p', params);
 					let pageText = '';
-					try {
-						pageText = document.querySelector("#multi_page .on").outerText;
-					} catch(e) {}
+					if (pageText == '' || pageText == null) {
+						try {
+							pageText = document.querySelector("#multi_page .on").outerText;
+						} catch(e) { pageText = ''; }
+					}
+					if (pageText == '' || pageText == null) {
+						try {
+							pageText = document.querySelector(".right-container .active").outerText;
+						} catch(e) { pageText = ''; }
+					}
 					let titleText = document.querySelector(".video-title").outerText;
-					try {
-						let authorText = document.querySelector(".up-info-container .up-name").outerText;
-						text = connectText(connectText(pageText, titleText), authorText);
-					} catch (e) {
+					let authorText = '';
+					if (authorText == '' || authorText == null) {
+						try {
+							authorText = document.querySelector(".up-info-container .up-name").outerText;
+						} catch(e) { authorText = ''; }
+					}
+					if (authorText == '' || authorText == null) {
 						try {
 							let authorTexts = '';
 							document.querySelectorAll(".container .staff-name").forEach(each => {
@@ -287,11 +299,10 @@ async function afterLoad() {
 								if (authorTexts != '') authorTexts += ' & ';
 								authorTexts += name;
 							});
-							text = connectText(connectText(pageText, titleText), authorTexts);
-						} catch (e) {
-							// ...
-						}
+							authorText = authorTexts;
+						} catch(e) { authorText = ''; }
 					}
+					text = connectText(connectText(pageText, titleText), authorText);
 				} else if (isThatSite(site, "bilibili.com") && isThatPath(location.pathname, '/audio/')) {
 					let songNameText = document.querySelector('.song-title').outerText;
 					text = songNameText;
