@@ -149,6 +149,7 @@
 	    {"site": "weibo.com", "name": "微博"}, 
 	    {"site": "xiaohongshu.com", "name": "小红书"}, 
 	    {"site": "metal-archives.com", "name": "The Metal Archives"}, 
+	    {"site": "juce.com", "name": "JUCE audio"}, 
 	    {"site": "web.dev", "name": "web.dev"}
 	]
 }
