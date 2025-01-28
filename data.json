@@ -151,6 +151,7 @@
 	    {"site": "metal-archives.com", "name": "The Metal Archives"}, 
 	    {"site": "juce.com", "name": "JUCE for audio"}, 
 	    {"site": "gamedeveloper.com", "name": "Game Developer dot com"}, 
+	    {"site": "moepedia.net", "name": "moepedia"}, 
 	    {"site": "web.dev", "name": "web.dev"}
 	]
 }
