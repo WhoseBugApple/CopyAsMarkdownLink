@@ -154,6 +154,7 @@
 	    {"site": "gamedeveloper.com", "name": "Game Developer dot com"}, 
 	    {"site": "moepedia.net", "name": "moepedia"}, 
 	    {"site": "xiph.org", "name": "Xiph ORG"}, 
+	    {"site": "linux.do", "name": "LINUX DO"}, 
 	    {"site": "web.dev", "name": "web.dev"}
 	]
 }
