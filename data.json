@@ -155,7 +155,7 @@
 	    {"site": "moepedia.net", "name": "moepedia"}, 
 	    {"site": "xiph.org", "name": "Xiph ORG"}, 
 	    {"site": "linux.do", "name": "LINUX DO"}, 
-	    {"site": "openstd.samr.gov.cn", "name": "公开中国国家标准"}, 
+	    {"site": "openstd.samr.gov.cn", "name": "公开中国标准"}, 
 	    {"site": "web.dev", "name": "web.dev"}
 	]
 }
