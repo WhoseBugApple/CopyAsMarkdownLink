@@ -208,21 +208,23 @@ async function afterLoad() {
 		}
 
 		function autoChooseText() {
-			let firstVisualH1Text = "";
+			let firstVisualH1Text = '';
 			{
-				let h1s = document.querySelectorAll("h1");
-				let i = 0;
-				for (i=0; i<h1s.length; i++) {
-					let h1 = h1s[i];
-					let styles = h1.computedStyleMap();
-					let displayStyle = styles.get("display").value;
-					if (displayStyle == "none") continue;
-					let h1Text = h1.outerText;
-					let h1TrimedText = h1Text.trim();
-					if (h1TrimedText == "") continue;
-					firstVisualH1Text = h1Text;
-					break;
-				}
+				try {
+					let h1s = document.querySelectorAll("h1");
+					let i = 0;
+					for (i=0; i<h1s.length; i++) {
+						let h1 = h1s[i];
+						let styles = h1.computedStyleMap();
+						let displayStyle = styles.get("display").value;
+						if (displayStyle == "none") continue;
+						let h1Text = h1.outerText;
+						let h1TrimedText = h1Text.trim();
+						if (h1TrimedText == "") continue;
+						firstVisualH1Text = h1TrimedText;
+						break;
+					}
+				} catch (e) {}
 			}
 			
 			// set text
@@ -262,13 +264,13 @@ async function afterLoad() {
 					text = document.querySelector(".title").outerText;
 				} else if (isThatSite(site, "zhuanlan.zhihu.com")) {
 					let authorText = document.getElementsByClassName("AuthorInfo-head")[0].outerText;
-					text = connectText(h1Text, authorText);
+					text = connectText(firstVisualH1Text, authorText);
 				} else if (isThatSite(site, "daily.zhihu.com")) {
 					let titleText = document.querySelector(".DailyHeader-title").outerText;
 					let authorText = document.querySelector(".ZhihuDaily-Author").outerText;
 					text = connectText(titleText, authorText);
 				} else if (isThatSite(site, "space.bilibili.com")) {
-					let userName = document.querySelector("#h-name").outerText;
+					let userName = document.querySelector('.nickname').outerText;
 					text = userName;
 				} else if (isThatSite(site, "bilibili.com") && isThatPath(location.pathname, '/video/')) {
 					// let params = location.search;
@@ -327,8 +329,18 @@ async function afterLoad() {
 					let authorName = document.getElementsByClassName("bookInfo_author link")[0].outerText;
 					text = connectText(bookName, authorName);
 				} else if (isThatSite(site, "book.douban.com")  && isThatPath(location.pathname, '/subject/')) {
-					let bookName = h1Text;
-					let authorName = document.querySelector("#info > span:nth-child(1) > a").outerText;
+					let bookName = firstVisualH1Text;
+					let authorName = '';
+					(() => {
+						try {
+							authorName = document.querySelector("#info > span:nth-child(1) > a").outerText.trim();
+						} catch (e) {}
+						if (authorName != '') return;
+						try {
+							authorName = document.querySelector("#info > span:nth-child(1) > a").outerText.trim();
+						} catch (e) {}
+						if (authorName != '') return;
+					}).call();
 					text = connectText(bookName, authorName);
 				} else if (isThatSite(site, "runoob.com")) {
 					let tutorialName = document.getElementsByTagName('h1')[1].outerText;
