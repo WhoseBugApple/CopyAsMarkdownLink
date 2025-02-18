@@ -333,11 +333,9 @@ async function afterLoad() {
 					let authorName = '';
 					(() => {
 						try {
-							authorName = document.querySelector("#info > span:nth-child(1) > a").outerText.trim();
-						} catch (e) {}
-						if (authorName != '') return;
-						try {
-							authorName = document.querySelector("#info > span:nth-child(1) > a").outerText.trim();
+							if (document.querySelector("#info > span:nth-child(1)").outerText.trim().startsWith('作者')) {
+								authorName = document.querySelector("#info > span:nth-child(1) > a").outerText.trim();
+							}
 						} catch (e) {}
 						if (authorName != '') return;
 					}).call();
