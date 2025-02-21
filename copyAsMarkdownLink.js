@@ -276,17 +276,27 @@ async function afterLoad() {
 					// let params = location.search;
 					// let pBody = findParamInParams('p', params);
 					let pageText = '';
-					if (pageText == '' || pageText == null) {
+					(() => {
 						try {
-							pageText = document.querySelector("#multi_page .on").outerText;
-						} catch(e) { pageText = ''; }
-					}
-					if (pageText == '' || pageText == null) {
+							pageText = document.querySelector("#multi_page .on").outerText.trim();
+						} catch (e) {}
+						if (pageText && pageText != '') return;
+						else pageText = '';
 						try {
-							pageText = document.querySelector(".right-container .active").outerText;
-						} catch(e) { pageText = ''; }
-					}
+							pageText = document.querySelector(".right-container .active").outerText.trim();
+						} catch (e) {}
+						if (pageText && pageText != '') return;
+						else pageText = '';
+					})();
 					let titleText = document.querySelector(".video-title").outerText;
+					let collectionText = '';
+					(() => {
+						try {
+							collectionText = document.querySelector(".header-top > .left > a").outerText.trim();
+						} catch (e) {}
+						if (collectionText && collectionText != '') return;
+						else collectionText = '';
+					})();
 					let authorText = '';
 					if (authorText == '' || authorText == null) {
 						try {
@@ -304,7 +314,13 @@ async function afterLoad() {
 							authorText = authorTexts;
 						} catch(e) { authorText = ''; }
 					}
-					text = connectText(connectText(pageText, titleText), authorText);
+					if (
+						(pageText && pageText != '') && (collectionText && collectionText != '')
+					) {
+						text = connectText(connectText(pageText, collectionText), authorText);
+					} else {
+						text = connectText(connectText(pageText, titleText), authorText);
+					}
 				} else if (isThatSite(site, "bilibili.com") && isThatPath(location.pathname, '/audio/')) {
 					let songNameText = document.querySelector('.song-title').outerText;
 					text = songNameText;
