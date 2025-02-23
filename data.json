@@ -164,6 +164,8 @@
 	    {"site": "twfan.net", "name": "twfan"}, 
 	    {"site": "modian.com", "name": "摩点众筹"}, 
 	    {"site": "behindthename.com", "name": "Behind The Name"}, 
+	    {"site": "poets.org", "name": "poets"}, 
+	    {"site": "poetryfoundation.org", "name": "poetry foundation"}, 
 	    {"site": "web.dev", "name": "web.dev"}
 	]
 }
