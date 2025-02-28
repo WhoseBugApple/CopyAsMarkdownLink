@@ -173,6 +173,7 @@
 	    {"site": "behindthename.com", "name": "Behind The Name"}, 
 	    {"site": "poets.org", "name": "poets"}, 
 	    {"site": "poetryfoundation.org", "name": "poetry foundation"}, 
+	    {"site": "bookmeter.com", "name": "bookmeter"}, 
 	    {"site": "web.dev", "name": "web.dev"}
 	]
 }
