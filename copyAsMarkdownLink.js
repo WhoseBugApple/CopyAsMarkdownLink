@@ -534,7 +534,15 @@ async function afterLoad() {
 				} else if (isThatSite(site, "jandan.net")) {
 					let titleText = document.querySelector('#body h1').outerText;
 					text = titleText;
-				} 
+				} else if (isThatSite(site, "danbooru.donmai.us")) {
+					let idText = document.querySelector('meta[name="post-id"]').getAttribute('content');
+					let copyrightSides = Array.from(document.querySelectorAll('ul.copyright-tag-list a.search-tag')).map(each => each.outerText);
+					let copyrightSidesText = connectTexts(copyrightSides, ', ');
+					let authors = Array.from(document.querySelectorAll('ul.artist-tag-list a.search-tag')).map(each => each.outerText);
+					let authorsText = connectTexts(authors, ', ');
+					let titleText = connectTexts([idText, copyrightSidesText, authorsText]);
+					text = titleText;
+				}
 				else {
 					text = firstVisualH1Text;
 				}
@@ -551,7 +559,27 @@ async function afterLoad() {
 					text2 == "" ? text1 : 
 					text1 + connectionMark + text2;
 		}
-
+		
+		function connectTexts(texts, connectionMark = " - ") {
+			if (!texts || texts == "") return "";
+			if (!Array.isArray(texts)) texts = Array.from(texts);
+			if (!texts || texts.length == 0) return "";
+			if (texts.length == 1) {
+				let text = texts.pop();
+				if (!text) text = "";
+				return text.trim();
+			}
+			let text2 = texts.pop();
+			if (!text2) text2 = "";
+			text2 = text2.trim();
+			let text1 = connectTexts(texts, connectionMark);
+			if (!text1) text1 = "";
+			text1 = text1.trim();
+			return	text1 == "" ? text2 : 
+					text2 == "" ? text1 : 
+					text1 + connectionMark + text2;
+		}
+		
 		async function getSuffix() {
 			let recognizedSite = await identifySite();
 			if (recognizedSite == undefined || recognizedSite == "") return "";
