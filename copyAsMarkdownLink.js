@@ -410,13 +410,39 @@ async function afterLoad() {
 						text = connectText(titleText, authorText);
 					} catch (e) {}
 				} else if (isThatSite(site, "twitter.com") || isThatSite(site, "x.com")) {
-					try {
-						let timesInArticle = document.querySelector("article").querySelectorAll("time");
-						let time = timesInArticle[timesInArticle.length-1];
-						let timeText = time.outerText;
-						let authorText = document.querySelector("article span").outerText;
-						text = connectText(timeText, authorText);
-					} catch (e) {}
+					(() => {
+						try {
+							let findUserSpaceMark = false;
+							if (document.querySelector('div[data-testid="UserName"]')) findUserSpaceMark = true;
+							let isUserSpace = findUserSpaceMark;
+							if (isUserSpace) {
+								let userInfos = document.querySelector('div[data-testid="UserName"]').outerText.split('\n');
+								if (userInfos.length >= 3) {throw new Error('user info >= 3')};
+								let userDisplayName = userInfos[0];
+								let userIdName = userInfos[1];
+								text = connectText(
+									connectText(userDisplayName, userIdName, ' '), 
+									'User Space'
+								);
+								return;
+							}
+						} catch (e) {}
+						
+						try {
+							let findPostMark = false;
+							if (document.querySelector('main[role=main] div[data-testid=primaryColumn] h2[role=heading]').outerText.trim().toLowerCase() == 'post') {
+								findPostMark = true;
+							}
+							if (findPostMark) {
+								let timesInArticle = document.querySelector("article").querySelectorAll("time");
+								let time = timesInArticle[timesInArticle.length-1];
+								let timeText = time.outerText;
+								let authorText = document.querySelector("article span").outerText;
+								text = connectText(timeText, authorText);
+								return;
+							}
+						} catch (e) {}
+					})();
 				} else if (isThatSite(site, "youxiputao.com")) {
 					try {
 						let titleText = document.querySelector("h2").outerText;
