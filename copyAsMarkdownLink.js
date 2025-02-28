@@ -536,11 +536,13 @@ async function afterLoad() {
 					text = titleText;
 				} else if (isThatSite(site, "danbooru.donmai.us")) {
 					let idText = document.querySelector('meta[name="post-id"]').getAttribute('content');
+					let characters = Array.from(document.querySelectorAll('ul.character-tag-list a.search-tag')).map(each => each.outerText);
+					let charactersText = connectTexts(characters, ', ');
 					let copyrightSides = Array.from(document.querySelectorAll('ul.copyright-tag-list a.search-tag')).map(each => each.outerText);
 					let copyrightSidesText = connectTexts(copyrightSides, ', ');
 					let authors = Array.from(document.querySelectorAll('ul.artist-tag-list a.search-tag')).map(each => each.outerText);
 					let authorsText = connectTexts(authors, ', ');
-					let titleText = connectTexts([idText, copyrightSidesText, authorsText]);
+					let titleText = connectTexts([idText, charactersText, copyrightSidesText, authorsText]);
 					text = titleText;
 				}
 				else {
