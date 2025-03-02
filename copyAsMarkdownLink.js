@@ -346,16 +346,25 @@ async function afterLoad() {
 					text = connectText(bookName, authorName);
 				} else if (isThatSite(site, "book.douban.com")  && isThatPath(location.pathname, '/subject/')) {
 					let bookName = firstVisualH1Text;
+					let publisherName = '';
+					(() => {
+						try {
+							if (document.querySelector("#info > span:nth-of-type(2)").outerText.trim().startsWith('出版社')) {
+								publisherName = document.querySelector("#info > span:nth-of-type(2)").nextElementSibling.outerText.trim();
+							}
+						} catch (e) {}
+						if (isBlackString(publisherName)) return;
+					})();
 					let authorName = '';
 					(() => {
 						try {
-							if (document.querySelector("#info > span:nth-child(1)").outerText.trim().startsWith('作者')) {
-								authorName = document.querySelector("#info > span:nth-child(1) > a").outerText.trim();
+							if (document.querySelector("#info > span:nth-of-type(1)").outerText.trim().startsWith('作者')) {
+								authorName = document.querySelector("#info > span:nth-of-type(1) > a").outerText.trim();
 							}
 						} catch (e) {}
-						if (authorName != '') return;
-					}).call();
-					text = connectText(bookName, authorName);
+						if (isBlackString(authorName)) return;
+					})();
+					text = connectTexts([bookName, publisherName, authorName]);
 				} else if (isThatSite(site, "runoob.com")) {
 					let tutorialName = document.getElementsByTagName('h1')[1].outerText;
 					text = tutorialName;
@@ -580,7 +589,30 @@ async function afterLoad() {
 			return text;
 		}
 
+		function isString(maybeStr) {
+			if (maybeStr && (
+				String.prototype.isPrototypeOf(maybeStr) || typeof(maybeStr) == 'string'
+			)) return true;
+			return false;
+		}
+
+		function isNotString(maybeStr) {
+			return !isString(maybeStr);
+		}
+
+		function isWhiteString(maybeStr) {
+			if (isNotString(maybeStr)) return false;
+			maybeStr = maybeStr.trim();
+			return maybeStr == '';
+		}
+
+		function isBlackString(maybeStr) {
+			return !isWhiteString(maybeStr);
+		}
+
 		function connectText(text1, text2, connectionMark = ' - ') {
+			text1 = removeGarbageCharacter(text1);
+			text2 = removeGarbageCharacter(text2);
 			text1 = text1.trim();
 			text2 = text2.trim();
 			return	text1 == "" ? text2 : 
@@ -592,14 +624,11 @@ async function afterLoad() {
 			if (!texts || texts == "") return "";
 			if (!Array.isArray(texts)) texts = Array.from(texts);
 			if (!texts || texts.length == 0) return "";
-			if (texts.length == 1) {
-				let text = texts.pop();
-				if (!text) text = "";
-				return text.trim();
-			}
 			let text2 = texts.pop();
 			if (!text2) text2 = "";
+			text2 = removeGarbageCharacter(text2);
 			text2 = text2.trim();
+			if (texts.length == 0) return text2;
 			let text1 = connectTexts(texts, connectionMark);
 			if (!text1) text1 = "";
 			text1 = text1.trim();
