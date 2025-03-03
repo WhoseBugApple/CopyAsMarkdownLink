@@ -175,6 +175,7 @@
 	    {"site": "poetryfoundation.org", "name": "poetry foundation"}, 
 	    {"site": "bookmeter.com", "name": "bookmeter"}, 
 	    {"site": "bsky.app", "name": "Bluesky SNS"}, 
+	    {"site": "booklog.jp", "name": "Booklog"}, 
 	    {"site": "web.dev", "name": "web.dev"}
 	]
 }
