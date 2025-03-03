@@ -346,25 +346,57 @@ async function afterLoad() {
 					text = connectText(bookName, authorName);
 				} else if (isThatSite(site, "book.douban.com")  && isThatPath(location.pathname, '/subject/')) {
 					let bookName = firstVisualH1Text;
+					let secondaryPublisherName = '';
+					(() => {
+						try {
+							let keyNodeOrNull = Array.from(document.querySelectorAll("#info > span")).find(one => one.outerText.trim().startsWith('出品方'));
+							if (keyNodeOrNull) {
+								let keyNode = keyNodeOrNull;
+								secondaryPublisherName = keyNode.nextElementSibling.outerText.trim();
+							}
+						} catch (e) {}
+						if (isBlackString(secondaryPublisherName)) return;
+					})();
 					let publisherName = '';
 					(() => {
 						try {
-							if (document.querySelector("#info > span:nth-of-type(2)").outerText.trim().startsWith('出版社')) {
-								publisherName = document.querySelector("#info > span:nth-of-type(2)").nextElementSibling.outerText.trim();
+							let keyNodeOrNull = Array.from(document.querySelectorAll("#info > span")).find(one => one.outerText.trim().startsWith('出版社'));
+							if (keyNodeOrNull) {
+								let keyNode = keyNodeOrNull;
+								publisherName = keyNode.nextElementSibling.outerText.trim();
 							}
 						} catch (e) {}
 						if (isBlackString(publisherName)) return;
 					})();
+					let translatorName = '';
+					(() => {
+						try {
+							let nodeOrNull = Array.from(document.querySelectorAll("#info > span")).find(one => one.outerText.trim().startsWith('译者'));
+							if (nodeOrNull) {
+								let node = nodeOrNull;
+								translatorName = node.querySelector("a").outerText.trim();
+							}
+						} catch (e) {}
+						if (isBlackString(translatorName)) return;
+					})();
 					let authorName = '';
 					(() => {
 						try {
-							if (document.querySelector("#info > span:nth-of-type(1)").outerText.trim().startsWith('作者')) {
-								authorName = document.querySelector("#info > span:nth-of-type(1) > a").outerText.trim();
+							let nodeOrNull = Array.from(document.querySelectorAll("#info > span")).find(one => one.outerText.trim().startsWith('作者'));
+							if (nodeOrNull) {
+								let node = nodeOrNull;
+								authorName = node.querySelector("a").outerText.trim();
 							}
 						} catch (e) {}
 						if (isBlackString(authorName)) return;
 					})();
-					text = connectTexts([bookName, publisherName, authorName]);
+					text = connectTexts([
+						bookName, 
+						secondaryPublisherName, 
+						publisherName, 
+						connectText(translatorName, '译', ' '), 
+						authorName
+						]);
 				} else if (isThatSite(site, "runoob.com")) {
 					let tutorialName = document.getElementsByTagName('h1')[1].outerText;
 					text = tutorialName;
