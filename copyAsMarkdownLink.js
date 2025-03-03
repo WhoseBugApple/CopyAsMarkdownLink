@@ -379,13 +379,15 @@ async function afterLoad() {
 						} catch (e) {}
 						if (isBlackString(translatorName)) return;
 					})();
+					let translatorText = isBlackString(translatorName) ? connectText(translatorName, '译', ' ') : '';
 					let authorName = '';
 					(() => {
 						try {
 							let nodeOrNull = Array.from(document.querySelectorAll("#info > span")).find(one => one.outerText.trim().startsWith('作者'));
 							if (nodeOrNull) {
 								let node = nodeOrNull;
-								authorName = node.querySelector("a").outerText.trim();
+								authorNames = Array.from(node.querySelectorAll("a")).map(one => one.outerText.trim());
+								authorName = connectTexts(authorNames, ' AND ');
 							}
 						} catch (e) {}
 						if (isBlackString(authorName)) return;
@@ -394,7 +396,7 @@ async function afterLoad() {
 						bookName, 
 						secondaryPublisherName, 
 						publisherName, 
-						connectText(translatorName, '译', ' '), 
+						translatorText, 
 						authorName
 						]);
 				} else if (isThatSite(site, "runoob.com")) {
@@ -639,6 +641,7 @@ async function afterLoad() {
 		}
 
 		function isBlackString(maybeStr) {
+			if (isNotString(maybeStr)) return false;
 			return !isWhiteString(maybeStr);
 		}
 
