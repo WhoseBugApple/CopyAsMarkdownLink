@@ -378,6 +378,14 @@ async function afterLoad() {
 							}
 						} catch (e) {}
 						if (isBlackString(translatorName)) return;
+						try {
+							let keyNodeOrNull = Array.from(document.querySelectorAll("#info > span")).find(one => one.outerText.trim().startsWith('译者'));
+							if (keyNodeOrNull) {
+								let keyNode = keyNodeOrNull;
+								translatorName = keyNode.nextElementSibling.outerText.trim();
+							}
+						} catch (e) {}
+						if (isBlackString(translatorName)) return;
 					})();
 					let translatorText = isBlackString(translatorName) ? connectText(translatorName, '译', ' ') : '';
 					let authorName = '';
