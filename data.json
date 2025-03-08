@@ -177,6 +177,7 @@
 	    {"site": "bsky.app", "name": "Bluesky SNS"}, 
 	    {"site": "booklog.jp", "name": "Booklog"}, 
 	    {"site": "qiuwenbaike.cn", "name": "求闻百科"}, 
+	    {"site": "hellogithub.com", "name": "HelloGithub"}, 
 	    {"site": "web.dev", "name": "web.dev"}
 	]
 }
