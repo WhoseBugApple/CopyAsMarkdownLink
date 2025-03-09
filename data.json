@@ -176,9 +176,11 @@
 	    {"site": "bookmeter.com", "name": "bookmeter"}, 
 	    {"site": "bsky.app", "name": "Bluesky SNS"}, 
 	    {"site": "booklog.jp", "name": "Booklog"}, 
+	    {"site": "hellogithub.com", "name": "HelloGithub"}, 
 	    {"site": "qiuwenbaike.cn", "name": "求闻百科"}, 
 	    {"site": "baike.com", "name": "字节跳动百科"}, 
-	    {"site": "hellogithub.com", "name": "HelloGithub"}, 
+	    {"site": "everything2.com", "name": "Everything2 wiki"}, 
+	    {"site": "newworldencyclopedia.org", "name": "New World Encyclopedia"}, 
 	    {"site": "web.dev", "name": "web.dev"}
 	]
 }
