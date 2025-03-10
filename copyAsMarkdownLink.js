@@ -346,17 +346,6 @@ async function afterLoad() {
 					text = connectText(bookName, authorName);
 				} else if (isThatSite(site, "book.douban.com")  && isThatPath(location.pathname, '/subject/')) {
 					let bookName = firstVisualH1Text;
-					let secondaryPublisherName = '';
-					(() => {
-						try {
-							let keyNodeOrNull = Array.from(document.querySelectorAll("#info > span")).find(one => one.outerText.trim().startsWith('出品方'));
-							if (keyNodeOrNull) {
-								let keyNode = keyNodeOrNull;
-								secondaryPublisherName = keyNode.nextElementSibling.outerText.trim();
-							}
-						} catch (e) {}
-						if (isBlackString(secondaryPublisherName)) return;
-					})();
 					let publisherName = '';
 					(() => {
 						try {
@@ -367,6 +356,17 @@ async function afterLoad() {
 							}
 						} catch (e) {}
 						if (isBlackString(publisherName)) return;
+					})();
+					let secondaryPublisherName = '';
+					(() => {
+						try {
+							let keyNodeOrNull = Array.from(document.querySelectorAll("#info > span")).find(one => one.outerText.trim().startsWith('出品方'));
+							if (keyNodeOrNull) {
+								let keyNode = keyNodeOrNull;
+								secondaryPublisherName = keyNode.nextElementSibling.outerText.trim();
+							}
+						} catch (e) {}
+						if (isBlackString(secondaryPublisherName)) return;
 					})();
 					let translatorName = '';
 					(() => {
@@ -402,8 +402,8 @@ async function afterLoad() {
 					})();
 					text = connectTexts([
 						bookName, 
-						secondaryPublisherName, 
 						publisherName, 
+						secondaryPublisherName, 
 						translatorText, 
 						authorName
 						]);
