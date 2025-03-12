@@ -178,7 +178,7 @@ async function afterLoad() {
 		function toDisplayTextToSourceText(toDisplayText) {
 			let sourceText = "";
 			let i = 0;
-			let charsNeedBackslash = "\\|_*~#$%^&()<>";
+			let charsNeedBackslash = "\\|_*~#$%^&()<>`";
 			for (; i<toDisplayText.length; i++) {
 				let c = toDisplayText.charAt(i);
 				let sourC = "";
