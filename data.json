@@ -181,6 +181,8 @@
 	    {"site": "baike.com", "name": "字节跳动百科"}, 
 	    {"site": "everything2.com", "name": "Everything2 wiki"}, 
 	    {"site": "newworldencyclopedia.org", "name": "New World Encyclopedia"}, 
+	    {"site": "musicbrainz.org", "name": "MusicBrainz"}, 
+	    {"site": "vgmdb.net", "name": "VGMdb"}, 
 	    {"site": "web.dev", "name": "web.dev"}
 	]
 }
