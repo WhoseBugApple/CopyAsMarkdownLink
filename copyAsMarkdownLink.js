@@ -596,8 +596,10 @@ async function afterLoad() {
 					let authorText = document.querySelector('#profile_block>a').outerText;
 					text = connectText(titleText, authorText);
 				} else if (isThatSite(site, "bandcamp.com")) {
-					let titleText = document.querySelector('.trackTitle').outerText;
-					let authorText = document.querySelector('#band-name-location>.title').outerText;
+					let titleText;
+					try {titleText = toGoodString(document.querySelector('.trackTitle').outerText)} catch(e) {}
+					let authorText;
+					try {authorText = toGoodString(document.querySelector('#band-name-location>.title').outerText)} catch(e) {}
 					text = connectText(titleText, authorText);
 				} else if (isThatSite(site, "bbs.oldmantvg.net")) {
 					let titleText = document.querySelector('h4').outerText;
@@ -631,6 +633,33 @@ async function afterLoad() {
 			return text;
 		}
 
+		function toGoodBlackString(maybeStr) {
+			let goodString = toGoodString(maybeStr);
+			if (!isBlackString(goodString)) throw new Error(`can't turn "${maybeStr}" into good black string`);
+			return goodString;
+		}
+
+		function toGoodString(maybeStr) {
+			let goodString;
+			try {
+				if (isNotString(maybeStr)) {  // be string
+					try {
+						maybeStr = maybeStr.toString();
+					} catch (e) {}
+					if (isNotString(maybeStr)) {
+						maybeStr = '';
+					}
+				}
+				let str = maybeStr;
+				str = removeGarbageCharacter(str);
+				str = str.trim();
+				goodString = str;
+			} catch(e) {
+				goodString = '';
+			}
+			return goodString;
+		}
+
 		function isString(maybeStr) {
 			if (maybeStr && (
 				String.prototype.isPrototypeOf(maybeStr) || typeof(maybeStr) == 'string'
@@ -654,10 +683,8 @@ async function afterLoad() {
 		}
 
 		function connectText(text1, text2, connectionMark = ' - ') {
-			text1 = removeGarbageCharacter(text1);
-			text2 = removeGarbageCharacter(text2);
-			text1 = text1.trim();
-			text2 = text2.trim();
+			text1 = toGoodString(text1);
+			text2 = toGoodString(text2);
 			return	text1 == "" ? text2 : 
 					text2 == "" ? text1 : 
 					text1 + connectionMark + text2;
@@ -669,12 +696,9 @@ async function afterLoad() {
 			if (!texts || texts.length == 0) return "";
 			let text2 = texts.pop();
 			if (!text2) text2 = "";
-			text2 = removeGarbageCharacter(text2);
-			text2 = text2.trim();
+			text2 = toGoodString(text2);
 			if (texts.length == 0) return text2;
 			let text1 = connectTexts(texts, connectionMark);
-			if (!text1) text1 = "";
-			text1 = text1.trim();
 			return	text1 == "" ? text2 : 
 					text2 == "" ? text1 : 
 					text1 + connectionMark + text2;
