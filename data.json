@@ -30,6 +30,7 @@
 	    {"site": "tieba.baidu.com", "name": "百度贴吧"}, 
 	    {"site": "baidu.com", "name": "百度"}, 
 	    {"site": "youtube.com", "name": "Youtube"}, 
+	    {"site": "music.youtube.com", "name": "Youtube Music"}, 
 	    {"site": "apache.org", "name": "Apache"}, 
 	    {"site": "spring.io", "name": "Spring"}, 
 	    {"site": "vuejs.org", "name": "Vue"}, 
