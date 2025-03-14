@@ -188,6 +188,7 @@
 	    {"site": "vgmdb.net", "name": "VGMdb"}, 
 	    {"site": "spotify.com", "name": "Spotify"}, 
 	    {"site": "indie.cn", "name": "雀乐"}, 
+	    {"site": "lobste.rs", "name": "Lobsters News"}, 
 	    {"site": "web.dev", "name": "web.dev"}
 	]
 }
