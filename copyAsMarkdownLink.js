@@ -202,6 +202,7 @@ async function afterLoad() {
 		}
 
 		function getUserSelectionText(window, document, searchDepth) {
+			if (!window || !document) return "";
 			if (searchDepth <= 0) return "";
 			let text = "";
 			let windowSelected;
