@@ -55,7 +55,7 @@ async function main_noTimeLimit() {
 	try {
 		console.log("CopyAsMarkdownLink: start");
 		await idle();
-		await waitLoad();
+		await waitLoad();  // 部分 DOM 内容可能位于 iframe 中
 		await afterLoad();
 		const response = await chrome.runtime.sendMessage("copy success");
 	} catch (e) {
@@ -191,19 +191,53 @@ async function afterLoad() {
 
 		function getSelectionText() {
 			let text = "";
-			let windowSelected;
-			let documentSelected;
-			if (window.getSelection && (windowSelected=window.getSelection().toString()) != "") {
-				text = windowSelected;
-			} else if (document.selection && document.selection.type != "Control" && 
-									(documentSelected = document.selection.createRange().text) != "") {
-				text = documentSelected;
+			let userSelectionText;
+			if (!isEmptyString(userSelectionText = getUserSelectionText(window, document, 2))) {
+				text = userSelectionText;
 			} else {
 				let autoChoosed = autoChooseText();
-				if (autoChoosed != "") text = autoChoosed;
+				if (isBlackString(autoChoosed)) text = autoChoosed;
 			}
-			text = removeGarbageCharacter(text);
-			text = toDisplayTextToSourceText(text);
+			return text;
+		}
+
+		function getUserSelectionText(window, document, searchDepth) {
+			if (searchDepth <= 0) return "";
+			let text = "";
+			let windowSelected;
+			let documentSelected;
+			let documentSelected2;
+			if (window.getSelection && !isEmptyString(windowSelected=window.getSelection().toString())) {
+				text = windowSelected;
+			} else if (document.getSelection && !isEmptyString(documentSelected = document.getSelection().toString())) {
+				text = documentSelected;
+			} else if (document.selection && document.selection.type != "Control" && 
+									!isEmptyString((documentSelected2 = document.selection.createRange().text))) {
+				text = documentSelected2;
+			} else {
+				let found = false;
+				// try get from subdocument
+				if (searchDepth >= 2) {
+					// try get from subdocument from iframe
+					{
+						let iframes = Array.from(document.querySelectorAll('iframe'));
+						let result;
+						for(let i=0; i<iframes.length; i++) {
+							let iframe = iframes[i];
+							let subtext = getUserSelectionText(iframe.contentWindow, iframe.contentDocument, searchDepth-1);
+							if (!isEmptyString(subtext)) {
+								found = true;
+								result = subtext;
+								break;
+							}
+						}
+						if (found) {
+							text = result;
+						}
+					}
+				}
+			}
+			text = toGoodString(text);
 			return text;
 		}
 
@@ -680,6 +714,10 @@ async function afterLoad() {
 		function isBlackString(maybeStr) {
 			if (isNotString(maybeStr)) return false;
 			return !isWhiteString(maybeStr);
+		}
+
+		function isEmptyString(maybeStr) {
+			return maybeStr == '';
 		}
 
 		function connectText(text1, text2, connectionMark = ' - ') {

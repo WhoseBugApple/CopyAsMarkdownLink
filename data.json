@@ -187,6 +187,7 @@
 	    {"site": "musicbrainz.org", "name": "MusicBrainz"}, 
 	    {"site": "vgmdb.net", "name": "VGMdb"}, 
 	    {"site": "spotify.com", "name": "Spotify"}, 
+	    {"site": "indie.cn", "name": "雀乐"}, 
 	    {"site": "web.dev", "name": "web.dev"}
 	]
 }
