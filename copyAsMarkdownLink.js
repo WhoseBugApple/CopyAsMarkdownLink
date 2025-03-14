@@ -318,7 +318,7 @@ async function afterLoad() {
 						if (pageText && pageText != '') return;
 						else pageText = '';
 						try {
-							pageText = document.querySelector(".right-container .active").outerText.trim();
+							pageText = document.querySelector(".right-container .pod-item .active").outerText.trim();
 						} catch (e) {}
 						if (pageText && pageText != '') return;
 						else pageText = '';
