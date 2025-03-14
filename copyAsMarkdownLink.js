@@ -198,6 +198,7 @@ async function afterLoad() {
 				let autoChoosed = autoChooseText();
 				if (isBlackString(autoChoosed)) text = autoChoosed;
 			}
+			text = toGoodString(text);
 			return text;
 		}
 
@@ -238,7 +239,6 @@ async function afterLoad() {
 					}
 				}
 			}
-			text = toGoodString(text);
 			return text;
 		}
 
