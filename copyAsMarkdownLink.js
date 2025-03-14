@@ -199,6 +199,7 @@ async function afterLoad() {
 				if (isBlackString(autoChoosed)) text = autoChoosed;
 			}
 			text = toGoodString(text);
+			text = toDisplayTextToSourceText(text);
 			return text;
 		}
 
