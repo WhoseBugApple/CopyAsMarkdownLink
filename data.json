@@ -190,6 +190,7 @@
 	    {"site": "indie.cn", "name": "雀乐"}, 
 	    {"site": "lobste.rs", "name": "Lobsters News"}, 
 	    {"site": "yuque.com", "name": "语雀"}, 
+	    {"site": "qzone.qq.com", "name": "QQ空间"}, 
 	    {"site": "web.dev", "name": "web.dev"}
 	]
 }
