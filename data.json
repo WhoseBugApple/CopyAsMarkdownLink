@@ -192,6 +192,8 @@
 	    {"site": "yuque.com", "name": "语雀"}, 
 	    {"site": "qzone.qq.com", "name": "QQ空间"}, 
 	    {"site": "artstation.com", "name": "Art Station"}, 
+	    {"site": "gametechwiki.com", "name": "Game Tech Wiki"}, 
+	    {"site": "emulation.gametechwiki.com", "name": "Emulation General Wiki"}, 
 	    {"site": "web.dev", "name": "web.dev"}
 	]
 }
