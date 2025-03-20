@@ -194,6 +194,7 @@
 	    {"site": "artstation.com", "name": "Art Station"}, 
 	    {"site": "gametechwiki.com", "name": "Game Tech Wiki"}, 
 	    {"site": "emulation.gametechwiki.com", "name": "Emulation General Wiki"}, 
+	    {"site": "otomad.wiki", "name": "otomad wiki"}, 
 	    {"site": "web.dev", "name": "web.dev"}
 	]
 }
