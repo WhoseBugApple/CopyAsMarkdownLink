@@ -199,7 +199,7 @@
 	    {"site": "osdev.org", "name": "OSDev"}, 
 	    {"site": "wiki.osdev.org", "name": "OSDev Wiki"}, 
 	    {"site": "forum.osdev.org", "name": "OSDev SNS"}, 
-	    {"site": "wikibooks.org", "name": "Wikibooks"}, 
+	    {"site": "wikibooks.org", "name": "wikibooks"}, 
 	    {"site": "web.dev", "name": "web.dev"}
 	]
 }
