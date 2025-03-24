@@ -102,7 +102,11 @@ async function afterLoad() {
 		// write to clipboard
 		// only HTTPS could use this API
 		// check is HTTPS with window.isSecureContext
-		await navigator.clipboard.writeText(toCopy);
+		if (location.protocol == 'http:' || location.protocol == 'http') {
+			alert(toCopy);
+		} else {
+			await navigator.clipboard.writeText(toCopy);
+		}
 
 
 
