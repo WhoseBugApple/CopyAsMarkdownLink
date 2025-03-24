@@ -204,6 +204,9 @@
 	    {"site": "justsolve.archiveteam.org", "name": "FileFormatsArchiveTeam"}, 
 	    {"site": "aldeid.com", "name": "Aldeid Wiki"}, 
 	    {"site": "handwiki.org", "name": "HandWiki"}, 
+	    {"site": "hex-rays.com", "name": "HexRays"}, 
+	    {"site": "docs.hex-rays.com", "name": "HexRays Docs"}, 
+	    {"site": "community.hex-rays.com", "name": "HexRays Community"}, 
 	    {"site": "web.dev", "name": "web.dev"}
 	]
 }
