@@ -200,6 +200,7 @@
 	    {"site": "wiki.osdev.org", "name": "OSDev Wiki"}, 
 	    {"site": "forum.osdev.org", "name": "OSDev SNS"}, 
 	    {"site": "wikibooks.org", "name": "wikibooks"}, 
+	    {"site": "fileformats.archiveteam.org", "name": "FileFormatsArchiveTeam"}, 
 	    {"site": "web.dev", "name": "web.dev"}
 	]
 }
