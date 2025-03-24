@@ -203,6 +203,7 @@
 	    {"site": "fileformats.archiveteam.org", "name": "FileFormatsArchiveTeam"}, 
 	    {"site": "justsolve.archiveteam.org", "name": "FileFormatsArchiveTeam"}, 
 	    {"site": "aldeid.com", "name": "Aldeid Wiki"}, 
+	    {"site": "handwiki.org", "name": "HandWiki"}, 
 	    {"site": "web.dev", "name": "web.dev"}
 	]
 }
