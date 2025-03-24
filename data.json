@@ -207,6 +207,7 @@
 	    {"site": "hex-rays.com", "name": "HexRays"}, 
 	    {"site": "docs.hex-rays.com", "name": "HexRays Docs"}, 
 	    {"site": "community.hex-rays.com", "name": "HexRays Community"}, 
+	    {"site": "docs.fileformat.com", "name": "FileFormatDocs"}, 
 	    {"site": "web.dev", "name": "web.dev"}
 	]
 }
