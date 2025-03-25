@@ -209,6 +209,8 @@
 	    {"site": "community.hex-rays.com", "name": "HexRays Community"}, 
 	    {"site": "docs.fileformat.com", "name": "FileFormatDocs"}, 
 	    {"site": "moondroplab.com", "name": "水月雨"}, 
+	    {"site": "gitbook.com", "name": "GitBook"}, 
+	    {"site": "gitbook.io", "name": "GitBook IO"}, 
 	    {"site": "web.dev", "name": "web.dev"}
 	]
 }
