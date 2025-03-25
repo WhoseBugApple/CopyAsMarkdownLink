@@ -211,6 +211,7 @@
 	    {"site": "moondroplab.com", "name": "水月雨"}, 
 	    {"site": "gitbook.com", "name": "GitBook"}, 
 	    {"site": "gitbook.io", "name": "GitBook IO"}, 
+	    {"site": "feishu.cn", "name": "FeiShu Doc"}, 
 	    {"site": "web.dev", "name": "web.dev"}
 	]
 }
