@@ -216,6 +216,8 @@
 	    {"site": "bookstack.cn", "name": "bookstack"}, 
 	    {"site": "wiki.y.qq.com", "name": "QQ音乐百科"}, 
 	    {"site": "newton.com.tw", "name": "Newton中文百科"}, 
+	    {"site": "rutracker.org", "name": "rutracker"}, 
+	    {"site": "rutracker.net", "name": "rutracker"}, 
 	    {"site": "web.dev", "name": "web.dev"}
 	]
 }
