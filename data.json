@@ -215,6 +215,7 @@
 	    {"site": "feishu.cn", "name": "FeiShu Doc"}, 
 	    {"site": "bookstack.cn", "name": "bookstack"}, 
 	    {"site": "wiki.y.qq.com", "name": "QQ音乐百科"}, 
+	    {"site": "newton.com.tw", "name": "Newton中文百科"}, 
 	    {"site": "web.dev", "name": "web.dev"}
 	]
 }
