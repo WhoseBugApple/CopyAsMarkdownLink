@@ -219,6 +219,10 @@
 	    {"site": "newton.com.tw", "name": "Newton中文百科"}, 
 	    {"site": "rutracker.org", "name": "rutracker"}, 
 	    {"site": "rutracker.net", "name": "rutracker"}, 
+	    {"site": "pages.github.com", "name": "GitHubPages"}, 
+	    {"site": "github.io", "name": "GitHub IO"}, 
+	    {"site": "readthedocs.com", "name": "ReadTheDocs"}, 
+	    {"site": "readthedocs.io", "name": "ReadTheDocs IO"}, 
 	    {"site": "web.dev", "name": "web.dev"}
 	]
 }
