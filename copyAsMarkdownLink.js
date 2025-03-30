@@ -327,6 +327,11 @@ async function afterLoad() {
 						} catch (e) {}
 						if (pageText && pageText != '') return;
 						else pageText = '';
+						try {
+							pageText = document.querySelector(".right-container .video-pod__item .active").outerText.trim();
+						} catch (e) {}
+						if (pageText && pageText != '') return;
+						else pageText = '';
 					})();
 					let titleText = document.querySelector(".video-title").outerText;
 					let collectionText = '';
