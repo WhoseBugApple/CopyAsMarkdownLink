@@ -266,6 +266,24 @@ async function afterLoad() {
 					}
 				} catch (e) {}
 			}
+			let documentTitle = '';
+			{
+				try {
+					if (isBlackString(document.title)) {
+						documentTitle = document.title;
+					}
+				} catch (e) {}
+			}
+			let smartChooseText = '';
+			{
+				try {
+					if (isBlackString(firstVisualH1Text)) {
+						smartChooseText = firstVisualH1Text;
+					} else if (isBlackString(documentTitle)) {
+						smartChooseText = documentTitle;
+					}
+				} catch (e) {}
+			}
 			
 			// set text
 			// lower case site needed
@@ -304,7 +322,7 @@ async function afterLoad() {
 					text = document.querySelector(".title").outerText;
 				} else if (isThatSite(site, "zhuanlan.zhihu.com")) {
 					let authorText = document.getElementsByClassName("AuthorInfo-head")[0].outerText;
-					text = connectText(firstVisualH1Text, authorText);
+					text = connectText(smartChooseText, authorText);
 				} else if (isThatSite(site, "daily.zhihu.com")) {
 					let titleText = document.querySelector(".DailyHeader-title").outerText;
 					let authorText = document.querySelector(".ZhihuDaily-Author").outerText;
@@ -670,7 +688,7 @@ async function afterLoad() {
 					text = titleText;
 				}
 				else {
-					text = firstVisualH1Text;
+					text = smartChooseText;
 				}
 			} catch (e) {console.log('content script autoChooseText() error\n', e);}
 
