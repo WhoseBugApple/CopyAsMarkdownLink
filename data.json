@@ -223,6 +223,8 @@
 	    {"site": "github.io", "name": "GitHub IO"}, 
 	    {"site": "readthedocs.com", "name": "ReadTheDocs"}, 
 	    {"site": "readthedocs.io", "name": "ReadTheDocs IO"}, 
+	    {"site": "tutorialspoint.com", "name": "TutorialsPoint"}, 
+	    {"site": "theartstory.org", "name": "TheArtStory"}, 
 	    {"site": "web.dev", "name": "web.dev"}
 	]
 }
