@@ -233,7 +233,7 @@ async function afterLoad() {
 							let iframe = iframes[i];
 							// 如果非同源, 出于安全考虑, chrome不让我访问document
 							let subWindow = iframe.contentWindow;
-							let subDocument = iframe.contentDocument ? iframe.contentDocument : iframe.contentWindow.document;
+							let subDocument = iframe.contentDocument;
 							let subtext = getUserSelectionText(subWindow, subDocument, searchDepth-1);
 							if (!isEmptyString(subtext)) {
 								found = true;
