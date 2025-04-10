@@ -226,6 +226,7 @@
 	    {"site": "tutorialspoint.com", "name": "TutorialsPoint"}, 
 	    {"site": "theartstory.org", "name": "TheArtStory"}, 
 	    {"site": "ear0.com", "name": "耳聆网"}, 
+	    {"site": "mdwiki.org", "name": "WikiProjectMed"}, 
 	    {"site": "web.dev", "name": "web.dev"}
 	]
 }
