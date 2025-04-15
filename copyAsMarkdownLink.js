@@ -394,6 +394,8 @@ async function afterLoad() {
 					// 这是动态文章
 					let timeText = document.querySelector('.opus-module-author__pub').outerText;
 					let articleText = document.querySelector('.opus-module-content').outerText;
+					let lenLimit = 100;
+					if (articleText.length > lenLimit) articleText = articleText.substring(0, lenLimit) + '...';
 					let authorText = document.querySelector('.opus-module-author__name').outerText;
 					text = connectText(timeText, connectText(articleText, authorText));
 				} else if (isThatSite(site, "bilibili.com") && isThatPath(location.pathname, '/read/readlist/')) {
