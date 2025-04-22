@@ -227,6 +227,8 @@
 	    {"site": "theartstory.org", "name": "TheArtStory"}, 
 	    {"site": "ear0.com", "name": "耳聆网"}, 
 	    {"site": "mdwiki.org", "name": "WikiProjectMed"}, 
+	    {"site": "rpg.blue", "name": "RPGBlueProject1"}, 
+	    {"site": "aurorayh.asia", "name": "理理的茶馆"}, 
 	    {"site": "web.dev", "name": "web.dev"}
 	]
 }
