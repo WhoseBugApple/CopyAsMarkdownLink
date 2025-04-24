@@ -232,6 +232,8 @@
 	    {"site": "khinsider.com", "name": "KHInsider"}, 
 	    {"site": "touhoudb.com", "name": "TouHouDB"}, 
 	    {"site": "thwiki.cc", "name": "THBWiki"}, 
+	    {"site": "music.163.com", "name": "网易云音乐"}, 
+	    {"site": "y.qq.com", "name": "QQ音乐"}, 
 	    {"site": "web.dev", "name": "web.dev"}
 	]
 }
