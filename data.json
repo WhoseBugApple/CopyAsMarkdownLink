@@ -230,6 +230,8 @@
 	    {"site": "rpg.blue", "name": "RPGBlueProject1"}, 
 	    {"site": "aurorayh.asia", "name": "理理的茶馆"}, 
 	    {"site": "khinsider.com", "name": "KHInsider"}, 
+	    {"site": "touhoudb.com", "name": "TouHouDB"}, 
+	    {"site": "thwiki.cc", "name": "THBWiki"}, 
 	    {"site": "web.dev", "name": "web.dev"}
 	]
 }
