@@ -235,6 +235,7 @@
 	    {"site": "music.163.com", "name": "网易云音乐"}, 
 	    {"site": "y.qq.com", "name": "QQ音乐"}, 
 	    {"site": "dayi.org.cn", "name": "中国医药信息查询平台"}, 
+	    {"site": "sohu.com", "name": "搜狐"}, 
 	    {"site": "web.dev", "name": "web.dev"}
 	]
 }
