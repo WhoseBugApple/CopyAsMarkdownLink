@@ -237,6 +237,7 @@
 	    {"site": "dayi.org.cn", "name": "中国医药信息查询平台"}, 
 	    {"site": "sohu.com", "name": "搜狐"}, 
 	    {"site": "baike.sogou.com", "name": "搜狗百科"}, 
+	    {"site": "mathsisfun.com", "name": "MathIsFunWiki"}, 
 	    {"site": "web.dev", "name": "web.dev"}
 	]
 }
