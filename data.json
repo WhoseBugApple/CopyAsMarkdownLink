@@ -238,6 +238,8 @@
 	    {"site": "sohu.com", "name": "搜狐"}, 
 	    {"site": "baike.sogou.com", "name": "搜狗百科"}, 
 	    {"site": "mathsisfun.com", "name": "MathIsFunWiki"}, 
+	    {"site": "mathworld.wolfram.com", "name": "Wolfram MathWorld"}, 
+	    {"site": "encyclopediaofmath.org", "name": "Encyclopedia of Mathematics"}, 
 	    {"site": "web.dev", "name": "web.dev"}
 	]
 }
