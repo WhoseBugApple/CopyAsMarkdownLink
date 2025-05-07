@@ -241,6 +241,7 @@
 	    {"site": "mathworld.wolfram.com", "name": "Wolfram MathWorld"}, 
 	    {"site": "encyclopediaofmath.org", "name": "Encyclopedia of Mathematics"}, 
 	    {"site": "planetmath.org", "name": "PlanetMathWiki"}, 
+	    {"site": "wiki.archiveteam.org", "name": "ArchiveTeamWiki"}, 
 	    {"site": "web.dev", "name": "web.dev"}
 	]
 }
