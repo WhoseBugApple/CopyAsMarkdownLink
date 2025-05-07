@@ -691,6 +691,17 @@ async function afterLoad() {
 					let authorsText = connectTexts(authors, ', ');
 					let titleText = connectTexts([idText, charactersText, copyrightSidesText, authorsText]);
 					text = titleText;
+				} else if (isThatSite(site, "downloads.khinsider.com")) {
+					let songText = '';
+					if (document.evaluate("text()[2]", document.querySelector("#pageContent>p:nth-of-type(3)"), null, XPathResult.STRING_TYPE)?.stringValue?.replace('\n', '')?.trim()?.toLowerCase()?.startsWith('song name')) {
+						songText = document.querySelector('#pageContent>p:nth-of-type(3)>b:nth-of-type(2)').outerText;
+						if (!songText) {
+							songText = unescape(location.pathname).match(/\/[^/]+[/]{0,1}$/)[0].replace(/^\//, '').replace(/\/$/, '').replace(/\.(mp3|flac)/, '');
+						}
+					}
+					let albumText = document.querySelector('#pageContent h2').outerText;
+					let titleText = connectTexts([songText, albumText]);
+					text = titleText;
 				}
 				else {
 					text = smartChooseText;
