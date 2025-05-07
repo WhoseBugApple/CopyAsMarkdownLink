@@ -243,6 +243,7 @@
 	    {"site": "planetmath.org", "name": "PlanetMathWiki"}, 
 	    {"site": "wiki.archiveteam.org", "name": "ArchiveTeamWiki"}, 
 	    {"site": "animemusicvideos.org", "name": "AnimeMusicVideosORG"}, 
+	    {"site": "modarchive.org", "name": "TheModArchive"}, 
 	    {"site": "web.dev", "name": "web.dev"}
 	]
 }
