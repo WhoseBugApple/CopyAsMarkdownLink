@@ -244,6 +244,8 @@
 	    {"site": "wiki.archiveteam.org", "name": "ArchiveTeamWiki"}, 
 	    {"site": "animemusicvideos.org", "name": "AnimeMusicVideosORG"}, 
 	    {"site": "modarchive.org", "name": "TheModArchive"}, 
+	    {"site": "midifan.com", "name": "Midifan"}, 
+	    {"site": "audioapp.cn", "name": "音频应用网"}, 
 	    {"site": "web.dev", "name": "web.dev"}
 	]
 }
