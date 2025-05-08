@@ -843,6 +843,13 @@ async function afterLoad() {
 				let res = location.origin + location.pathname + removeParamInParams("spm_id_from", location.search);
 				res = urlEncodeRoundBrackets(res);
 				return res;
+			} else if (isThatSite(site, "baike.com")) {
+				let params = location.search;
+				params = removeParamInParams("source", params);
+				params = removeParamInParams("anchor", params);
+				let res = location.origin + location.pathname + params;
+				res = urlEncodeRoundBrackets(res);
+				return res;
 			} else {
 				let res = location.href;
 				res = urlEncodeRoundBrackets(res);
