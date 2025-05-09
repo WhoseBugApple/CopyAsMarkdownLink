@@ -93,8 +93,8 @@ async function afterLoad() {
 		let selected = getSelectionText();
 		let suffix = await getSuffix();
 		let url = getURL();
-
-		let toCopy = `[${selected}${suffix}](${url})`;
+		
+		let toCopy = `[${selected}${selected.endsWith(suffix) ? '' : suffix}](${url})`;
 		
 		// console.log(toCopy);
 
@@ -166,13 +166,13 @@ async function afterLoad() {
 			text = text.replace(/[\[\]]/g, ' ');
 			// handle new line
 			// remove new line at head
-			text = text.replace(/^[ \t]*(?:(?:\r\n)|(?:\n))(?:(?:(?:\r\n)|(?:\n))|[ \t])*/g, "");
+			text = text.replace(/^[\s]*(?:(?:\r\n)|(?:\n))(?:(?:(?:\r\n)|(?:\n))|[\s])*/g, "");
 			// remove new line at tail
-			text = text.replace(/[ \t]*(?:(?:\r\n)|(?:\n))(?:(?:(?:\r\n)|(?:\n))|[ \t])*$/g, "");
+			text = text.replace(/[\s]*(?:(?:\r\n)|(?:\n))(?:(?:(?:\r\n)|(?:\n))|[\s])*$/g, "");
 			// replace remain new line to ~
-			text = text.replace(/[ \t]*(?:(?:\r\n)|(?:\n))(?:(?:(?:\r\n)|(?:\n))|[ \t])*/g, " ~ ");
+			text = text.replace(/[\s]*(?:(?:\r\n)|(?:\n))(?:(?:(?:\r\n)|(?:\n))|[\s])*/g, " ~ ");
 			// n space to 1 space
-			text = text.replace(/[ \t]+/g, " ");
+			text = text.replace(/[\s]+/g, " ");
 			// remove leading and following whitespace
 			text = text.trim();
 			return text;
