@@ -249,6 +249,7 @@
 	    {"site": "soundeffectssearch.com", "name": "SoundEffectsSearch"}, 
 	    {"site": "imdb.com", "name": "Internet Movie Database"}, 
 	    {"site": "whosampled.com", "name": "WhoSampled"}, 
+	    {"site": "last.fm", "name": "LastFM"}, 
 	    {"site": "web.dev", "name": "web.dev"}
 	]
 }
