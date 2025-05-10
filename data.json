@@ -248,6 +248,7 @@
 	    {"site": "audioapp.cn", "name": "音频应用网"}, 
 	    {"site": "soundeffectssearch.com", "name": "SoundEffectsSearch"}, 
 	    {"site": "imdb.com", "name": "Internet Movie Database"}, 
+	    {"site": "whosampled.com", "name": "WhoSampled"}, 
 	    {"site": "web.dev", "name": "web.dev"}
 	]
 }
