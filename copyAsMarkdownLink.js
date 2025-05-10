@@ -94,7 +94,7 @@ async function afterLoad() {
 		let suffix = await getSuffix();
 		let url = getURL();
 		
-		let toCopy = `[${selected}${selected.endsWith(suffix) ? '' : suffix}](${url})`;
+		let toCopy = `[${selected.substring(selected.length - suffix.length).toLowerCase() == suffix.toLowerCase() ? selected.substring(0, selected.length - suffix.length) : selected}${suffix}](${url})`;
 		
 		// console.log(toCopy);
 
