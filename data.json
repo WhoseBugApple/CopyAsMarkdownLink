@@ -250,6 +250,7 @@
 	    {"site": "imdb.com", "name": "Internet Movie Database"}, 
 	    {"site": "whosampled.com", "name": "WhoSampled"}, 
 	    {"site": "last.fm", "name": "LastFM"}, 
+	    {"site": "kvraudio.com", "name": "KVR Audio"}, 
 	    {"site": "web.dev", "name": "web.dev"}
 	]
 }
