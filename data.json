@@ -251,6 +251,7 @@
 	    {"site": "whosampled.com", "name": "WhoSampled"}, 
 	    {"site": "last.fm", "name": "LastFM"}, 
 	    {"site": "kvraudio.com", "name": "KVR Audio"}, 
+	    {"site": "gamemaking.tools", "name": "GameMakingToolsWiki"}, 
 	    {"site": "web.dev", "name": "web.dev"}
 	]
 }
