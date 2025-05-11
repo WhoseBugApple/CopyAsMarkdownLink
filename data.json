@@ -252,6 +252,7 @@
 	    {"site": "last.fm", "name": "LastFM"}, 
 	    {"site": "kvraudio.com", "name": "KVR Audio"}, 
 	    {"site": "gamemaking.tools", "name": "GameMakingToolsWiki"}, 
+	    {"site": "namu.wiki", "name": "NamuWiki"}, 
 	    {"site": "web.dev", "name": "web.dev"}
 	]
 }
