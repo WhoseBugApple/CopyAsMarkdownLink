@@ -254,6 +254,7 @@
 	    {"site": "gamemaking.tools", "name": "GameMakingToolsWiki"}, 
 	    {"site": "namu.wiki", "name": "NamuWiki"}, 
 	    {"site": "aigei.com", "name": "爱给网"}, 
+	    {"site": "mail.qq.com", "name": "QQ邮箱"}, 
 	    {"site": "web.dev", "name": "web.dev"}
 	]
 }
