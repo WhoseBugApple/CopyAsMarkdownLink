@@ -317,6 +317,7 @@ async function afterLoad() {
 					if (!repoName || repoName == "") repoName = document.querySelector('[role="navigation"] > ul > li:nth-of-type(2) > a')?.outerText;
 					if (!repoName || repoName == "") repoName = "";
 					let authorName;
+					if (!authorName || authorName == "") authorName = document.querySelector('[role="navigation"] [role="list"]>*:nth-child(1)>*:nth-child(1)').outerText;
 					if (!authorName || authorName == "") authorName = document.querySelector("#repository-container-header [itemprop=\"author\"]")?.outerText;
 					if (!authorName || authorName == "") authorName = document.querySelector('[role="navigation"] > ul > li:nth-of-type(1) > a')?.outerText;
 					if (!authorName || authorName == "") authorName = "";
