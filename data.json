@@ -266,6 +266,8 @@
 		{"site": "pcgamingwiki.com", "name": "PCGamingWiki"}, 
 		{"site": "rekowiki.org", "name": "REKoWiki"}, 
 		{"site": "dic.pixiv.net", "name": "PixivDic"}, 
+		{"site": "dic.pixiv.net", "name": "PixivDic"}, 
+		{"site": "wiki.biligame.com", "name": "BiliGame Wiki"}, 
 		{"site": "web.dev", "name": "web.dev"}
 	]
 }
