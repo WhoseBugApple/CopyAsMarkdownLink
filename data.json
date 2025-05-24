@@ -5,6 +5,8 @@
 	    {"site": "artsandculture.google.com", "name": "Google Art and Culture"}, 
 	    {"site": "zh.wikipedia.org", "name": "维基百科"}, 
 	    {"site": "wikipedia.org", "name": "wikipedia"}, 
+	    {"site": "en.wikipedia.org", "name": "wikipedia en"}, 
+	    {"site": "ja.wikipedia.org", "name": "wikipedia ja"}, 
 	    {"site": "wikidata.org", "name": "wikidata"}, 
 	    {"site": "stackoverflow.com", "name": "Stack Overflow"}, 
 	    {"site": "github.com", "name": "Github"}, 
