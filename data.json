@@ -263,6 +263,7 @@
 	    {"site": "wangdoc.com", "name": "阮一峰 WangDoc"}, 
 	    {"site": "pcgamingwiki.com", "name": "PCGamingWiki"}, 
 	    {"site": "rekowiki.org", "name": "REKoWiki"}, 
+	    {"site": "dic.pixiv.net", "name": "PixivDic"}, 
 	    {"site": "web.dev", "name": "web.dev"}
 	]
 }
