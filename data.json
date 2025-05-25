@@ -269,6 +269,7 @@
 		{"site": "dic.pixiv.net", "name": "PixivDic"}, 
 		{"site": "wiki.biligame.com", "name": "BiliGame Wiki"}, 
 		{"site": "yinglong.org", "name": "鳞目界域"}, 
+		{"site": "books.com.tw", "name": "博客来"}, 
 		{"site": "web.dev", "name": "web.dev"}
 	]
 }
