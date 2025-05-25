@@ -703,6 +703,8 @@ async function afterLoad() {
 					let albumText = document.querySelector('#pageContent h2').outerText;
 					let titleText = connectTexts([songText, albumText]);
 					text = titleText;
+				} else if (isThatSite(site, "music.163.com")) {
+					text = document.title;
 				}
 				else {
 					text = smartChooseText;
