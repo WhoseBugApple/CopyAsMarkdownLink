@@ -278,6 +278,7 @@
 		{"site": "cflac.org.cn", "name": "中国文艺网"}, 
 		{"site": "zgwypl.com", "name": "中国文艺评论网"}, 
 		{"site": "chinesethought.cn", "name": "中华思想文化术语"}, 
+		{"site": "docs.qq.com", "name": "腾讯文档"}, 
 		{"site": "web.dev", "name": "web.dev"}
 	]
 }
