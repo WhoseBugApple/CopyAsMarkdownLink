@@ -705,6 +705,8 @@ async function afterLoad() {
 					text = titleText;
 				} else if (isThatSite(site, "music.163.com")) {
 					text = document.title;
+				} else if (isThatSite(site, "vndb.org")) {
+					text = document.querySelector('article > h1').outerText;
 				}
 				else {
 					text = smartChooseText;
