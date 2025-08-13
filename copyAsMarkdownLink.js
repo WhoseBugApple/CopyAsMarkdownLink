@@ -855,6 +855,15 @@ async function afterLoad() {
 				let res = location.origin + location.pathname + params;
 				res = urlEncodeRoundBrackets(res);
 				return res;
+			} else if (isThatSite(site, "music.163.com")) {
+				if (location.hash.startsWith('#/song?')) {
+					let params = location.hash.substr(6);
+					params = removeParamInParams("uct2", params);
+					return location.origin + '/#/song' + params;
+				} else {
+					return location.href;
+				}
+				return res;
 			} else {
 				let res = location.href;
 				res = urlEncodeRoundBrackets(res);
