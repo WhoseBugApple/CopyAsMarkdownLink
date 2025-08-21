@@ -283,6 +283,7 @@
 		{"site": "wiki.x266.mov", "name": "CodecWiki"}, 
 		{"site": "kepuchina.cn", "name": "科普中国"}, 
 		{"site": "baike.c114.com.cn", "name": "通信百科"}, 
+		{"site": "lkong.com", "name": "龙空论坛"}, 
 		{"site": "web.dev", "name": "web.dev"}
 	]
 }
