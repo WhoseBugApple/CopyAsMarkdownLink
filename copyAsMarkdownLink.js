@@ -156,8 +156,10 @@ async function afterLoad() {
 
 		function removeGarbageCharacter(text) {
 			if (text == undefined) return "";
-			// remove link symbol emoji the char of unicode codepoint 128279 0x1F517 UTF16 BE D83D DD17
+			// remove link symbol emoji, unicode codepoint 128279 0x1F517, UTF16 BE codepoint D83D DD17
 			text = text.replace(/\uD83D\uDD17/g, '');
+			// remove link symbol char ¶ , UTF16 BE codepoint 00B6
+			text = text.replace(/\u00B6/g, '');
 			// remove emoji
 			text = text.replace(/[\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2580-\u27BF]|\uD83E[\uDD10-\uDDFF]/g, ' ? ');
 			// remove Zero-Width Char
