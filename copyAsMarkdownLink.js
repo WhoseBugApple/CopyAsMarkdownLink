@@ -858,13 +858,20 @@ async function afterLoad() {
 				res = urlEncodeRoundBrackets(res);
 				return res;
 			} else if (isThatSite(site, "music.163.com")) {
+				let res;
 				if (location.hash.startsWith('#/song?')) {
 					let params = location.hash.substr(6);
 					params = removeParamInParams("uct2", params);
-					return location.origin + '/#/song' + params;
+					res = location.origin + '/#/song' + params;
 				} else {
-					return location.href;
+					res = location.href;
 				}
+				return res;
+			} else if (isThatSite(site, "downloads.khinsider.com")) {
+				let params = location.search;
+				params = removeParamInParams("from", params);
+				let res = location.origin + location.pathname + params;
+				res = urlEncodeRoundBrackets(res);
 				return res;
 			} else {
 				let res = location.href;
