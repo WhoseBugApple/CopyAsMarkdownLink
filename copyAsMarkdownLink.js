@@ -466,6 +466,32 @@ async function afterLoad() {
 							if (nodeOrNull) {
 								let node = nodeOrNull;
 								authorNames = Array.from(node.querySelectorAll("a")).map(one => one.outerText.trim());
+								if (!authorNames || authorNames.length == 0) {
+									let authorNamesSource = [];
+									let curNode = node.nextSibling;
+									// fill authorNamesSource
+									while(true) {
+										if (!curNode) break;
+										let curNodeName = curNode?.nodeName?.toLowerCase();
+										if (!curNodeName || curNodeName == "") break;
+										if (curNodeName != "a" && curNodeName != "#text") break;
+										// main
+										authorNamesSource.push(curNode);
+										// next
+										curNode = curNode.nextSibling;
+									}
+									authorNames = authorNamesSource.flatMap(one => {
+										let name;
+										if (one.nodeName.toLowerCase() == "a") {
+											name = one.outerText;
+										} else {
+											name = one.textContent;
+										}
+										name = name.trim();
+										if (!name || name == "") return [];
+										return name;
+									});
+								}
 								authorName = connectTexts(authorNames, ' AND ');
 							}
 						} catch (e) {}
