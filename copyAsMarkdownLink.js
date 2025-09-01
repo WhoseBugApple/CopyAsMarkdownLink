@@ -164,8 +164,9 @@ async function afterLoad() {
 			text = text.replace(/[\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2580-\u27BF]|\uD83E[\uDD10-\uDDFF]/g, ' ? ');
 			// remove Zero-Width Char
 			text = text.replace(/[\u200B-\u200D\uFEFF]/g, '');
-			// remove [ ]
-			text = text.replace(/[\[\]]/g, ' ');
+			// replace [ ] to ( )
+			text = text.replace(/\[/g, '(');
+			text = text.replace(/\]/g, ')');
 			// handle new line
 			// remove new line at head
 			text = text.replace(/^[\s]*(?:(?:\r\n)|(?:\n))(?:(?:(?:\r\n)|(?:\n))|[\s])*/g, "");
