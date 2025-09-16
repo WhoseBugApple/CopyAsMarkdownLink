@@ -900,6 +900,12 @@ async function afterLoad() {
 				let res = location.origin + location.pathname + params;
 				res = urlEncodeRoundBrackets(res);
 				return res;
+			} else if (isThatSite(site, "store.steampowered.com")) {
+				let params = location.search;
+				params = removeParamInParams("curator_clanid", params);
+				let res = location.origin + location.pathname + params;
+				res = urlEncodeRoundBrackets(res);
+				return res;
 			} else {
 				let res = location.href;
 				res = urlEncodeRoundBrackets(res);
