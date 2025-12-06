@@ -290,6 +290,7 @@
 		{"site": "nicechord.com", "name": "NiceChord"}, 
 		{"site": "dtmwiki.cn", "name": "DTMwiki"}, 
 		{"site": "cfsn.cn", "name": "中国食品安全网"}, 
+		{"site": "news.cn", "name": "新华网"}, 
 		{"site": "web.dev", "name": "web.dev"}
 	]
 }
