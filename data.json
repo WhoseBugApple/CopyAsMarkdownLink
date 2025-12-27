@@ -292,6 +292,7 @@
 		{"site": "cfsn.cn", "name": "中国食品安全网"}, 
 		{"site": "news.cn", "name": "新华网"}, 
 		{"site": "chinanews.com", "name": "中国新闻网"}, 
+		{"site": "conceptartworld.com", "name": "ConceptArtWorld"}, 
 		{"site": "web.dev", "name": "web.dev"}
 	]
 }
