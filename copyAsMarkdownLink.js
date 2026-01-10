@@ -903,6 +903,7 @@ async function afterLoad() {
 			} else if (isThatSite(site, "store.steampowered.com")) {
 				let params = location.search;
 				params = removeParamInParams("curator_clanid", params);
+				params = removeParamInParams("curator_listid", params);
 				let res = location.origin + location.pathname + params;
 				res = urlEncodeRoundBrackets(res);
 				return res;
