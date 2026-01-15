@@ -311,20 +311,27 @@ async function afterLoad() {
 					// generate by Dev Tool -> Elements -> Popup -> Copy -> Copy JSPath
 					// text = document.querySelector("#tsf > div:nth-child(1) > div.A8SBwf > div.RNNXgb > div > div.a4bIc > input").value;
 				} else if (isThatSite(site, "github.com")) {
-					let fileName;
-					if (!fileName || fileName == "") fileName = document.querySelector("#file-name-id")?.outerText;
-					if (!fileName || fileName == "") fileName = document.querySelector("#file-name-id-wide")?.outerText;
-					if (!fileName || fileName == "") fileName = "";
-					let repoName;
-					if (!repoName || repoName == "") repoName = document.querySelector('#repository-container-header [itemprop="name"]')?.outerText;
-					if (!repoName || repoName == "") repoName = document.querySelector('[role="navigation"] > ul > li:nth-of-type(2) > a')?.outerText;
-					if (!repoName || repoName == "") repoName = "";
-					let authorName;
-					if (!authorName || authorName == "") authorName = document.querySelector('[role="navigation"] [role="list"]>*:nth-child(1)>*:nth-child(1)').outerText;
-					if (!authorName || authorName == "") authorName = document.querySelector("#repository-container-header [itemprop=\"author\"]")?.outerText;
-					if (!authorName || authorName == "") authorName = document.querySelector('[role="navigation"] > ul > li:nth-of-type(1) > a')?.outerText;
-					if (!authorName || authorName == "") authorName = "";
-					text = connectText(connectText(fileName, repoName), authorName);
+					try {
+						let fileName;
+						if (!fileName || fileName == "") fileName = document.querySelector("#file-name-id")?.outerText;
+						if (!fileName || fileName == "") fileName = document.querySelector("#file-name-id-wide")?.outerText;
+						if (!fileName || fileName == "") fileName = "";
+						let repoName;
+						if (!repoName || repoName == "") repoName = document.querySelector('#repository-container-header [itemprop="name"]')?.outerText;
+						if (!repoName || repoName == "") repoName = document.querySelector('[role="navigation"] > ul > li:nth-of-type(2) > a')?.outerText;
+						if (!repoName || repoName == "") repoName = "";
+						let authorName;
+						if (!authorName || authorName == "") authorName = document.querySelector('[role="navigation"] [role="list"]>*:nth-child(1)>*:nth-child(1)').outerText;
+						if (!authorName || authorName == "") authorName = document.querySelector("#repository-container-header [itemprop=\"author\"]")?.outerText;
+						if (!authorName || authorName == "") authorName = document.querySelector('[role="navigation"] > ul > li:nth-of-type(1) > a')?.outerText;
+						if (!authorName || authorName == "") authorName = "";
+						text = connectText(connectText(fileName, repoName), authorName);
+					} catch (e) {
+						text = "";
+					}
+					if (text == "") {
+						text = document.title;
+					}
 				} else if (isThatSite(site, "sspai.com")) {
 					text = document.querySelector(".title").outerText;
 				} else if (isThatSite(site, "zhuanlan.zhihu.com")) {
