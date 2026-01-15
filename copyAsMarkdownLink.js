@@ -330,6 +330,17 @@ async function afterLoad() {
 						text = "";
 					}
 					if (text == "") {
+						try {
+							let matched = document.title.match(/Github - ([^\/]+)\/([^:]+):/i);
+							text = connectTexts([
+								matched[2], 
+								matched[1]
+							]);	
+						} catch (e) {
+							text = "";
+						}
+					}
+					if (text == "") {
 						text = document.title;
 					}
 				} else if (isThatSite(site, "sspai.com")) {
