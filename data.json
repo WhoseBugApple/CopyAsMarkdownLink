@@ -293,6 +293,7 @@
 		{"site": "news.cn", "name": "新华网"}, 
 		{"site": "chinanews.com", "name": "中国新闻网"}, 
 		{"site": "conceptartworld.com", "name": "ConceptArtWorld"}, 
+		{"site": "chiphell.com", "name": "Chiphell"}, 
 		{"site": "web.dev", "name": "web.dev"}
 	]
 }
