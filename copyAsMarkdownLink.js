@@ -754,6 +754,8 @@ async function afterLoad() {
 					text = document.title;
 				} else if (isThatSite(site, "vndb.org")) {
 					text = document.querySelector('article > h1').outerText;
+				} else if (isThatSite(site, "chinawriter.com.cn")) {
+					text = document.querySelector('#newstit').outerText;
 				}
 				else {
 					text = smartChooseText;
