@@ -343,6 +343,7 @@ async function afterLoad() {
 					if (text == "") {
 						text = document.title;
 					}
+					text = lengthLimit(text, 100);
 				} else if (isThatSite(site, "sspai.com")) {
 					text = document.querySelector(".title").outerText;
 				} else if (isThatSite(site, "zhuanlan.zhihu.com")) {
@@ -416,8 +417,7 @@ async function afterLoad() {
 					// 这是动态文章
 					let timeText = document.querySelector('.opus-module-author__pub').outerText;
 					let articleText = document.querySelector('.opus-module-content').outerText;
-					let lenLimit = 100;
-					if (articleText.length > lenLimit) articleText = articleText.substring(0, lenLimit) + '...';
+					articleText = lengthLimit(articleText, 100);
 					let authorText = document.querySelector('.opus-module-author__name').outerText;
 					text = connectText(timeText, connectText(articleText, authorText));
 				} else if (isThatSite(site, "bilibili.com") && isThatPath(location.pathname, '/read/readlist/')) {
@@ -1043,6 +1043,12 @@ async function afterLoad() {
 				cursor++;
 			}
 			return endIndexExclusive;
+		}
+
+		function lengthLimit(text, lenLimit, overflowMark = '...') {
+			let res = text;
+			if (text.length > lenLimit) res = text.substring(0, lenLimit) + overflowMark;
+			return res;
 		}
 	} catch (e) {
 		// console.log('content script error\n', e); 
