@@ -431,9 +431,22 @@ async function afterLoad() {
 					let authorText = document.querySelector('.article-detail .up-name').outerText;
 					text = connectText(titleText, authorText);
 				} else if (isThatSite(site, "weread.qq.com")) {
-					let bookName = document.getElementsByClassName("bookInfo_right_header_title")[0].outerText;
-					let authorName = document.getElementsByClassName("bookInfo_author link")[0].outerText;
-					text = connectText(bookName, authorName);
+					try {
+						let bookName = document.querySelector('.readerCatalog_bookInfo_title_txt').outerText;
+						let authorName = document.querySelector('.readerCatalog_bookInfo_author').outerText;
+						text = connectText(bookName, authorName);
+					} catch (e) {
+						text = '';
+					}
+					if (text != '') {} else {
+						try {
+							let bookName = document.getElementsByClassName("bookInfo_right_header_title")[0].outerText;
+							let authorName = document.getElementsByClassName("bookInfo_author link")[0].outerText;
+							text = connectText(bookName, authorName);
+						} catch (e) {
+							text = ''
+						}
+					}
 				} else if (isThatSite(site, "book.douban.com")  && isThatPath(location.pathname, '/subject/')) {
 					let bookName = firstVisualH1Text;
 					let publisherName = '';
