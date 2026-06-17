@@ -769,6 +769,18 @@ async function afterLoad() {
 					text = document.querySelector('article > h1').outerText;
 				} else if (isThatSite(site, "chinawriter.com.cn")) {
 					text = document.querySelector('#newstit').outerText;
+				} else if (isThatSite(site, "mp.weixin.qq.com")) {
+					let t = '';
+					try {
+						let title = firstVisualH1Text;
+						let author = document.querySelector('#js_name').outerText;
+						t = connectTexts([title, author]);
+					} catch (e) { t = ''; }
+					if (t == '') {
+						let title = firstVisualH1Text;
+						t = title;
+					}
+					text = t;
 				}
 				else {
 					text = smartChooseText;
